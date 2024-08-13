@@ -2,11 +2,8 @@
 import { MAX_LAYOUT_WIDTH } from '@/shared/constants'
 import { ProjectCard } from './ProjectCard'
 import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef, useState } from 'react'
 import { EXPERIENCES } from '@/data/projects'
-
-gsap.registerPlugin(ScrollTrigger)
 
 export const ProjectsList = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -18,33 +15,34 @@ export const ProjectsList = () => {
   }, [])
 
   useEffect(() => {
-    const container = containerRef.current
-    const horizontalScroll = horizontalScrollRef.current
+    const ctx = gsap.context(() => {
+      const container = containerRef.current
+      const horizontalScroll = horizontalScrollRef.current
 
-    if (!container || !horizontalScroll) {
-      return
-    }
-
-    const horizontalScrollLength = horizontalScroll.scrollWidth - container.offsetWidth
-
-    gsap.to(horizontalScroll, {
-      x: -horizontalScrollLength,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: container,
-        start: '-5% top',
-        end: () => `+=${horizontalScrollLength}`,
-        scrub: true,
-        pin: true,
-        anticipatePin: 1,
-        invalidateOnRefresh: true
+      if (!container || !horizontalScroll) {
+        return
       }
-    })
 
+      const horizontalScrollLength = horizontalScroll.scrollWidth - container.offsetWidth
+
+      gsap.to(horizontalScroll, {
+        x: -horizontalScrollLength,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: container,
+          start: '-5% top',
+          end: () => `+=${horizontalScrollLength}`,
+          scrub: true,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true
+        }
+      })
+    })
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      ctx.revert()
     }
-  }, [])
+  })
 
   return (
     <div ref={containerRef} style={{ height: '100vh', overflow: 'hidden' }}>
