@@ -133,7 +133,7 @@ main {
     background: #ff2828;
     text-decoration: none;
     cursor: pointer;
-    padding: 2px 24px 2px 13px;
+    padding: 2px 13px;
     display: flex;
     height: fit-content;
     color: white;
@@ -148,19 +148,6 @@ main {
     transition: transform 0.3s ease;
     &:hover {
       transform: scale(1.05);
-    }
-
-    &::before {
-      position: absolute;
-      z-index: 2;
-      content: '';
-      width: 4px;
-      height: 4px;
-      background-color: white;
-      right: 13px;
-      top: 50%;
-      border-radius: 9999px;
-      transform: translateY(-50%);
     }
   }
 
