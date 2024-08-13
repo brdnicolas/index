@@ -1,24 +1,16 @@
-'use client'
 import { SEOHead } from '@/components/atoms/SEOHead'
 import { EXPERIENCES } from '@/data/projects'
-import { ProjectContainer } from '@/pages/project/ProjectContainer'
-import { usePathname } from 'next/navigation'
+import { ProjectContainer } from '@/containers/project/ProjectContainer'
 
-export const getStaticPaths = async () => {
-  const paths = EXPERIENCES.map((experience) => ({ slug: experience.slug }))
+export const dynamicParams = false
 
-  return { paths, fallback: false }
+export async function generateStaticParams() {
+  return EXPERIENCES.map((experience) => ({ slug: experience.slug }))
 }
 
-export default function ProjectPage() {
-  const pathName = usePathname()
-  const splitSlug = pathName?.split('/') || []
-  const project = EXPERIENCES.find(({ slug }) => slug === splitSlug[1] || slug === splitSlug[2])
-
-  if (!project) {
-    window.location.href = '/'
-    return <></>
-  }
+export default function ProjectPage({ params }: { params: { slug: string } }) {
+  const pathName = params.slug
+  const project = EXPERIENCES.find(({ slug }) => slug === pathName)!
 
   return (
     <main className="bg-black">
