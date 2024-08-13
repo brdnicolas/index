@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { Header } from '@/components/Header'
+import { ReactLenis } from '@/components/libs/lenis'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-black text-white font-inter">{children}</body>
+      <body className="bg-black text-white font-inter">
+        <ReactLenis root>
+          <Header />
+          {children}
+        </ReactLenis>
+      </body>
     </html>
   )
 }

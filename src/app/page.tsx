@@ -1,20 +1,19 @@
-import { Header } from '@/components/Header'
-import { AboutMe } from '@/sections/aboutMe/AboutMe'
-import { Introduction } from '@/sections/introduction/Introduction'
-import { Landing } from '@/sections/landing/Landing'
-import { Marquee } from '@/sections/marquee/Marquee'
-import { Projects } from '@/sections/projects/Projects'
+import { AboutMe } from '@/pages/landing/sections/aboutMe/AboutMe'
+import { AwardsList } from '@/pages/landing/sections/awardsList/AwardsList'
+import { Introduction } from '@/pages/landing/sections/introduction/Introduction'
+import { Marquee } from '@/pages/landing/sections/marquee/Marquee'
+import { Presentation } from '@/pages/landing/sections/presentation/Presentation'
+import { Projects } from '@/pages/landing/sections/projects/Projects'
 
 export default function Home() {
   return (
     <main className="bg-black">
-      <Header />
-      <Landing />
+      <Presentation />
       <Introduction />
       <AboutMe />
       <Marquee />
       <Projects />
-      <AboutMe />
+      <AwardsList />
     </main>
   )
 }
