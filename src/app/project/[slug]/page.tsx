@@ -4,6 +4,12 @@ import { EXPERIENCES } from '@/data/projects'
 import { ProjectContainer } from '@/pages/project/ProjectContainer'
 import { usePathname } from 'next/navigation'
 
+export const getStaticPaths = async () => {
+  const paths = EXPERIENCES.map((experience) => ({ slug: experience.slug }))
+
+  return { paths, fallback: false }
+}
+
 export default function ProjectPage() {
   const pathName = usePathname()
   const splitSlug = pathName?.split('/') || []
@@ -25,10 +31,4 @@ export default function ProjectPage() {
       <ProjectContainer project={project} />
     </main>
   )
-}
-
-export async function getStaticPaths() {
-  const paths = EXPERIENCES.map((experience) => ({ slug: experience.slug }))
-
-  return { paths, fallback: false }
 }
