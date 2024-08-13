@@ -35,6 +35,10 @@ export const ProjectsList = () => {
           scrub: true,
           pin: true,
           anticipatePin: 1,
+          snap: {
+            snapTo: 1 / (EXPERIENCES.length - 1),
+            duration: 0.75
+          },
           invalidateOnRefresh: true
         }
       })
@@ -48,7 +52,7 @@ export const ProjectsList = () => {
     <div ref={containerRef} style={{ height: '100vh', overflow: 'hidden' }}>
       <div
         ref={horizontalScrollRef}
-        className="flex items-center gap-8 h-screen"
+        className="flex items-center gap-8 h-screen snap-x"
         style={{ paddingLeft: firstPaddingCard }}
       >
         {EXPERIENCES.map((project) => (
