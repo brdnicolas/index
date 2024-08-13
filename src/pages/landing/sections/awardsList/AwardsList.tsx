@@ -1,8 +1,24 @@
+'use client'
 import './awardsList.scss'
 import { SectionLayout } from '@/components/SectionLayout'
 import { Award } from './components/Award'
+import { AWARDS } from '@/data/awards'
+import { useMemo, useState } from 'react'
+
+const DEFAULT_NUMBER_OF_DISPLAYED_AWARDS = 5
 
 export const AwardsList = () => {
+  const [numberOfDisplayedAwards, setNumberOfDisplayedAwards] = useState(DEFAULT_NUMBER_OF_DISPLAYED_AWARDS)
+  const shouldShowHideAwards = useMemo(() => numberOfDisplayedAwards === AWARDS.length, [numberOfDisplayedAwards])
+
+  const handleDisplayAll = () => {
+    setNumberOfDisplayedAwards(AWARDS.length)
+  }
+
+  const handleHideExtraAwards = () => {
+    setNumberOfDisplayedAwards(DEFAULT_NUMBER_OF_DISPLAYED_AWARDS)
+  }
+
   return (
     <div className="relative overflow-x-clip">
       <SectionLayout>
@@ -11,12 +27,25 @@ export const AwardsList = () => {
         <h2 className="text-20 font-semibold text-center">Awards</h2>
         <p className="mt-8 text-dark-300 text-center">Great achievements are born from great challenges</p>
         <div className="flex flex-col gap-11 items-center mt-[112px]">
-          <Award />
-          <Award />
-          <Award />
-          <Award />
-          <Award />
-          <p className="underline text-5 uppercase underline-offset-4 text-normal cursor-pointer">+3 others</p>
+          {AWARDS.slice(0, numberOfDisplayedAwards).map((award) => (
+            <Award delivredBy={award.delivredBy} title={award.title} year={award.year} />
+          ))}
+
+          {shouldShowHideAwards ? (
+            <button
+              onClick={handleHideExtraAwards}
+              className="underline text-5 uppercase underline-offset-4 text-normal cursor-pointer"
+            >
+              Hide, too much for me
+            </button>
+          ) : (
+            <button
+              onClick={handleDisplayAll}
+              className="underline text-5 uppercase underline-offset-4 text-normal cursor-pointer"
+            >
+              +{AWARDS.length - numberOfDisplayedAwards} others
+            </button>
+          )}
         </div>
       </SectionLayout>
     </div>

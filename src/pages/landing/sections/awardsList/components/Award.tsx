@@ -1,13 +1,17 @@
-export const Award = () => {
-  const word = '**React Author** top each week'
+interface AwardProps {
+  delivredBy: string
+  title: string
+  year: number
+}
 
-  const parts = word.split(/(\*\*[^*]+\*\*)/).map((part) => part.replace(/\*\*/g, ''))
+export const Award = ({ delivredBy, title, year }: AwardProps) => {
+  const splitedTitle = title.split(/(\*\*[^*]+\*\*)/).map((part) => part.replace(/\*\*/g, ''))
 
   return (
     <div className="flex rounded-full w-full items-center bg-[#141414] py-6 px-8 border-[1px] border-[#2E2A2A]">
-      <p className="uppercase text-5 w-[200px]">DEV.TO</p>
+      <p className="uppercase text-5 w-[200px]">{delivredBy}</p>
       <div className="flex items-center gap-2">
-        {parts.map((word, index) => {
+        {splitedTitle.map((word, index) => {
           if (word) {
             return (
               <p
@@ -20,7 +24,7 @@ export const Award = () => {
           }
         })}
       </div>
-      <p className="uppercase text-5 ml-auto">2024</p>
+      <p className="uppercase text-5 ml-auto">{year}</p>
     </div>
   )
 }
