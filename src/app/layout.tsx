@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import 'atropos/css'
 import { Header } from '@/components/Header'
 import { ReactLenis } from '@/components/libs/lenis'
 import { Footer } from '@/components/molecules/Footer'
@@ -17,11 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white font-inter">
-        <ReactLenis root>
-          <Header />
-          {children}
-          <Footer />
-        </ReactLenis>
+        {/* <ReactLenis root> */}
+        <Header />
+        {children}
+        <Footer />
+        {/* </ReactLenis> */}
       </body>
     </html>
   )
