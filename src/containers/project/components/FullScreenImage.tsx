@@ -19,7 +19,7 @@ export const FullScreenImage = ({ imageUrl, onClickOutside }: FullScreenImagePro
   }, [])
 
   return (
-    <div className="fullscreen-image">
+    <div className="fullscreen-image z-50">
       <div onClick={onClickOutside} className="backdrop" />
       <div className="img-container">
         <Image fill src={imageUrl} alt="" />
