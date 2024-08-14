@@ -15,9 +15,6 @@ const Loader: React.FC<LoaderProps> = ({ children }) => {
       return new Promise((resolve) => {
         if (image.complete) {
           resolve()
-        } else {
-          image.onload = resolve
-          image.onerror = resolve // En cas d'échec de chargement, résoudre quand même
         }
       })
     })
@@ -35,8 +32,10 @@ const Loader: React.FC<LoaderProps> = ({ children }) => {
           opacity: 0,
           duration: 1,
           onComplete: () => {
-            const loaderElement = document.querySelector('.loader')
-            if (loaderElement) loaderElement.style.display = 'none'
+            const loaderElement = document.querySelector('.loader') as HTMLElement
+            if (loaderElement) {
+              loaderElement.style.display = 'none'
+            }
           }
         })
       }, remainingTime)
