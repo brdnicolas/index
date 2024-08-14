@@ -23,7 +23,7 @@ export const SectionLayout = ({
       style={style}
       className={clsx(
         isFullScreen ? 'min-h-screen' : 'h-auto',
-        isFullWidth ? '' : `max-w-layout ${hidePaddingX ? '' : 'mx-auto'}`,
+        isFullWidth ? '' : `px-4 lg:px-0 lg:max-w-layout ${hidePaddingX ? '' : 'mx-auto'}`,
         className
       )}
     >

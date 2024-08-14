@@ -30,7 +30,7 @@ export const Marquee = () => {
     gsap.registerPlugin(ScrollTrigger)
     const ctx = gsap.context(() => {
       gsap.to('.marquee-right .marquee__content', {
-        translateX: '+=500',
+        translateX: '+=900',
         scrollTrigger: {
           trigger: containerRef.current,
           start: '0 bottom',
@@ -44,7 +44,7 @@ export const Marquee = () => {
   }, [])
 
   return (
-    <SectionLayout hidePaddingX isFullWidth className="py-[120px]">
+    <SectionLayout hidePaddingX isFullWidth className="py-[20px] md:py-[120px]">
       <section ref={containerRef} className="marquees-wrapper">
         <div className="marquee marquee-left">
           <ul className="marquee__content scroll">

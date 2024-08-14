@@ -2,11 +2,11 @@ import { SectionLayout } from '@/components/SectionLayout'
 
 export const Presentation = () => {
   return (
-    <SectionLayout isFullScreen className="flex flex-col items-center justify-center h-screen">
+    <SectionLayout className="flex flex-col items-center justify-center h-screen">
       <h1 className="flex items-center text-6 gap-1 text-dark-300">
         Hi! <img src="/emoji/victory.png" className="h-6" /> I'm Nicolas Brouard
       </h1>
-      <h2 className="text-[92px] font-bold text-center">
+      <h2 className="text-12 md:text-[92px] font-bold text-center">
         I'm just a <br />
         React Engineer
       </h2>
