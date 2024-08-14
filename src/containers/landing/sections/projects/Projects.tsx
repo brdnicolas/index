@@ -3,7 +3,7 @@ import { ProjectsList } from './components/ProjectsList'
 
 export const Projects = () => {
   return (
-    <SectionLayout isFullWidth className="pb-[112px]">
+    <SectionLayout isFullWidth className="pb-[112px] pt-[30px]">
       <ProjectsList />
     </SectionLayout>
   )

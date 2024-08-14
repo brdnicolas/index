@@ -7,7 +7,7 @@ export const SpotifyCard = () => {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="border-[1px] relative border-dark-700 rounded-6 p-5 overflow-hidden group cursor-pointer backdrop-blur-md"
+      className="border-[1px] relative bg-white/5 border-dark-700 rounded-6 p-5 overflow-hidden group cursor-pointer backdrop-blur-md"
     >
       <div className="relative z-10 flex flex-col justify-between h-full">
         <img src={'/logos/spotify.webp'} className="w-10 h-10" alt="spotify" />

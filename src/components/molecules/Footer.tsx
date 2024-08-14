@@ -7,8 +7,8 @@ export const Footer = () => {
       <SectionLayout>
         <footer className="flex justify-between items-center">
           <div>
-            <p className="text-4 font-bold">&copy; Nicolas Brouard - All rights reserved</p>
-            <p className="text-3 text-dark-500 mt-3">Designed and developed with love by me</p>
+            <p className="text-4 font-bold">&copy; Folio {new Date().getFullYear()}</p>
+            <p className="text-3 text-dark-500 mt-2">Designed and developed with love by Nicolas B.</p>
           </div>
           <div>
             <div className="grid grid-cols-2 gap-x-18 gap-y-4">
