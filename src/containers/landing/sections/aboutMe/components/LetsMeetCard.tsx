@@ -1,6 +1,6 @@
 export const LetsMeetCard = () => {
   return (
-    <div className="border-[1px] relative border-dark-700 col-span-2 rounded-6 p-5 overflow-hidden backdrop-blur-md">
+    <div className="border-[1px] relative bg-white/5 border-dark-700 col-span-2 rounded-6 p-5 overflow-hidden backdrop-blur-md">
       <div className="relative z-10">
         <p className="text-6 text-center font-bold">Let's meet!</p>
         <p className="text-4 text-center mt-3">Book a call with me and let's talk together</p>

@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react/dist/iconify.mjs'
 
 export const ContactCard = () => {
   return (
-    <div className="border-[1px] relative border-dark-700 col-span-2 rounded-6 p-5 overflow-hidden backdrop-blur-md">
+    <div className="border-[1px] relative bg-white/5 border-dark-700 col-span-2 rounded-6 p-5 overflow-hidden backdrop-blur-md">
       <div className="flex justify-center items-center flex-col h-full">
         <p className="text-6 text-center font-bold">Contact me</p>
         <p className="text-4 text-center mt-2">I will answer you as soon as possible!</p>
