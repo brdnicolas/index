@@ -20,7 +20,7 @@ export const AwardsList = () => {
   }
 
   return (
-    <div className="relative overflow-x-clip">
+    <div className="relative overflow-x-clip mt-[224px]">
       <SectionLayout>
         <img src="/illustrations/medal.svg" className="absolute -left-[150px] -top-[200px] z-10" alt="" />
         <img src="/illustrations/trophy.svg" className="absolute -right-[150px] -bottom-[200px] z-10" alt="" />

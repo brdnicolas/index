@@ -15,7 +15,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
   return (
     <div className="project-card snap-center flex items-center gap-16 min-w-layout max-w-layout pr-16">
       <a href={`/project/${slug}`}>
-        <div className="group min-w-[681px] max-w-[681px] h-[464px] object-cover rounded-6 overflow-hidden relative">
+        <div className="group min-w-[50vw] max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
           <img
             className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"
             src={thumbnailUrl}

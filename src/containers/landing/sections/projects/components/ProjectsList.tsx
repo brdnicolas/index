@@ -30,7 +30,7 @@ export const ProjectsList = () => {
         ease: 'none',
         scrollTrigger: {
           trigger: container,
-          start: '-5% top',
+          start: 'center center',
           end: () => `+=${horizontalScrollLength}`,
           scrub: true,
           pin: true,
@@ -49,10 +49,14 @@ export const ProjectsList = () => {
   })
 
   return (
-    <div ref={containerRef} style={{ height: '100vh', overflow: 'hidden' }}>
+    <div ref={containerRef} style={{ overflow: 'hidden' }}>
+      <div className="max-w-layout mx-auto px-4 md:px-0">
+        <h2 className="text-14 md:text-20 font-semibold">Projects</h2>
+        <p className="mt-2 text-dark-300">Each project is made with love ♥</p>
+      </div>
       <div
         ref={horizontalScrollRef}
-        className="flex items-center gap-8 h-screen snap-x"
+        className="flex items-center gap-8 snap-x mt-10"
         style={{ paddingLeft: firstPaddingCard }}
       >
         {EXPERIENCES.map((project) => (
