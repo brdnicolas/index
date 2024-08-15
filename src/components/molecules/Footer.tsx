@@ -3,7 +3,7 @@ import { Button } from '../atoms/Button'
 
 export const Footer = () => {
   return (
-    <div className="py-13 border-t-[1px] border-t-dark-400 bg-black relative z-10 mt-[112px]">
+    <div className="py-13 border-t-[1px] border-t-dark-400 bg-black relative z-10 mt-[112px] font-manrope">
       <SectionLayout>
         <footer className="flex justify-between items-center">
           <div>

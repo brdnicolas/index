@@ -2,8 +2,11 @@ import type { Config } from 'tailwindcss'
 
 const SPACINGS = {
   1: '4px',
+  1.5: '6px',
   2: '8px',
+  2.5: '10px',
   3: '12px',
+  3.5: '14px',
   4: '16px',
   5: '20px',
   6: ' 24px',
@@ -39,6 +42,10 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
+    screens: {
+      desktop: '1216px',
+      tablet: '768px'
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -66,7 +73,8 @@ const config: Config = {
         }
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif']
+        inter: ['Inter', 'sans-serif'],
+        manrope: ['Manrope', 'sans-serif']
       }
     }
   },
