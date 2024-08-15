@@ -1,4 +1,3 @@
-import { AboutMe } from '@/conainers/landing/sections/aboutMe/AboutMe'
 import { AwardsList } from '@/containers/landing/sections/awardsList/AwardsList'
 import { Introduction } from '@/containers/landing/sections/introduction/Introduction'
 import { Marquee } from '@/containers/landing/sections/marquee/Marquee'
