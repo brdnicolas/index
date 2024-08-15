@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react/dist/iconify.mjs'
 export const Quote = () => {
   return (
     <div className="card rounded-6">
-      <div className="card-content bg-[#171717] p-7 text-4 overflow-hidden">
+      <div className="card-content bg-[#171717] p-7 text-4 overflow-hidden border-[1px] border-[#232323]">
         <p>
           Front-end engineer with 3+ years of experience, I create the websites of tomorrow—designed to impress both you
           and your users.
