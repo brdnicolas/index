@@ -24,14 +24,14 @@ export const Presentation = () => {
 
   return (
     <SectionLayout className="flex flex-col items-center justify-center h-screen">
-      <h1 className="flex items-center text-6 gap-1 text-dark-300">
+      <h1 className="flex items-center text-6 gap-1 text-dark-300 font-manrope font-medium">
         Hi! <img src="/emoji/victory.png" ref={emojiRef} className="h-6" /> I'm Nicolas Brouard
       </h1>
-      <h2 className="text-12 md:text-[92px] font-bold text-center">
+      <h2 className="text-12 tablet:text-[92px] font-bold text-center">
         I'm just a <br />
         React Engineer
       </h2>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 font-manrope font-medium">
         <span className="relative flex h-2 w-2">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>

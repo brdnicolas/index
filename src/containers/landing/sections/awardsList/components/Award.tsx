@@ -14,12 +14,14 @@ export const Award = ({ delivredBy, title, year }: AwardProps) => {
         {splitedTitle.map((word, index) => {
           if (word) {
             return (
-              <p
-                key={word}
-                className={`${index === 1 ? 'special-award-word text-6 font-bold' : 'text-5 font-semibold'} uppercase`}
-              >
-                {word}
-              </p>
+              <>
+                <p
+                  key={word}
+                  className={`${index === 1 ? 'special-award-word text-6 font-bold' : 'text-5 font-semibold'} uppercase`}
+                >
+                  {word}
+                </p>
+              </>
             )
           }
         })}
