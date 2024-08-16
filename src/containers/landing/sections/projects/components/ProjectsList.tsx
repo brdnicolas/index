@@ -67,7 +67,7 @@ export const ProjectsList = () => {
     return () => {
       ctx.revert()
     }
-  }, [size, firstPaddingCard])
+  }, [firstPaddingCard])
 
   return (
     <div ref={containerRef} style={{ overflow: 'hidden' }}>
