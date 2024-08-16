@@ -11,7 +11,7 @@ export const AWARDS = [
   },
   {
     delivredBy: 'etna',
-    title: '**Winner & Audience choice** of the innovation hackaton',
+    title: '**Winner** of the innovation hackaton',
     year: 2021
   },
   {
