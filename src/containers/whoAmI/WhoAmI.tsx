@@ -1,7 +1,8 @@
 'use client'
 import { SectionLayout } from '@/components/SectionLayout'
+import { gsap } from 'gsap'
 import './whoAmI.scss'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useWindowSize } from '@/shared/hooks/useWindowSize'
 import { ThreeColumnsMansonry } from './ThreeColumnsMansonry copy'
 import { TwoColumnsMansonry } from './TwoColumnsMansonry'
@@ -9,6 +10,7 @@ import { OneColumnsMansonry } from './OneColumnsMansonry copy 2'
 
 export const WhoAmI = () => {
   const size = useWindowSize()
+  const titleRef = useRef<HTMLHeadingElement>(null)
   const isDesktop = useMemo(() => size.width >= 1204 + 16 * 2, [size])
   const isMobile = useMemo(() => size.width <= 768, [size])
 
@@ -37,6 +39,28 @@ export const WhoAmI = () => {
     return () => {
       wrapper.removeEventListener('mousemove', handleMouseMove)
     }
+  }, [isMobile])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: titleRef.current,
+            scrub: 0.5,
+            start: 'top-=50% 85%',
+            end: 'bottom 85%'
+          }
+        }
+      )
+    })
+    return () => {
+      ctx.revert()
+    }
   }, [])
 
   return (
@@ -46,7 +70,9 @@ export const WhoAmI = () => {
       className="cards relative w-full min-h-dvh z-0 shadow-inner aboutme font-manrope font-semibold text-5 pb-[112px]"
     >
       <div className="max-w-layout mx-auto">
-        <h2 className="text-20 font-semibold text-center font-inter">Who am I</h2>
+        <h2 className="text-20 font-semibold text-center font-inter" ref={titleRef}>
+          Who am I
+        </h2>
 
         {isDesktop ? <ThreeColumnsMansonry /> : isMobile ? <OneColumnsMansonry /> : <TwoColumnsMansonry />}
       </div>
