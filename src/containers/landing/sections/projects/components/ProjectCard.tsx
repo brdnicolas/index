@@ -1,4 +1,5 @@
 import 'atropos/css'
+import clsx from 'clsx'
 
 interface ProjectCard {
   date: string
@@ -42,7 +43,9 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
         <p className="text-3 text-dark-500">{date}</p>
         <p className="text-white font-bold text-6 mt-1">{role}</p>
         <p className="text-4 text-dark-500 mt-1">@{company}</p>
-        <p className="text-4 text-dark-300 mt-6 text-justify line-clamp-4">{tinyDescription}</p>
+        <p className={clsx('text-4 text-dark-300 mt-6 text-justify break-words', isLastProject ? '' : 'line-clamp-4')}>
+          {tinyDescription}
+        </p>
       </div>
     </div>
   )

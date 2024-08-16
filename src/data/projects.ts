@@ -119,7 +119,7 @@ export const EXPERIENCES: Experience[] = [
     preview: '/projects/free/preview.jpg',
     thumbnail: '/projects/free/thumbnail.jpg',
     description:
-      'Free is a prominent French telecommunications company that revolutionized the industry with its disruptive offerings. Known for affordable and innovative services, Free Mobile and Freebox provide customers with cutting-edge mobile, broadband, and TV solutions. With a customer-centric approach, Free continues to challenge traditional norms and reshape the telecom landscape in France. ',
+      'Free is a French company that revolutionized the industry with its disruptive offerings. Known for affordable and innovative services, Free Mobile and Freebox provide customers with cutting-edge mobile, broadband, and TV solutions. With a customer-centric approach, Free continues to challenge traditional norms and reshape the telecom landscape in France. ',
     techs: ['NextJS', 'Typescript', 'Leaflet', 'Strapi', 'TailwindCSS', 'Material UI'],
     subProjects: [
       {
