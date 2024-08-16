@@ -4,15 +4,17 @@ import { ProjectCard } from './ProjectCard'
 import { gsap } from 'gsap'
 import { useEffect, useRef, useState } from 'react'
 import { EXPERIENCES } from '@/data/projects'
+import { useWindowSize } from '@/shared/hooks/useWindowSize'
 
 export const ProjectsList = () => {
+  const size = useWindowSize()
   const containerRef = useRef<HTMLDivElement>(null)
   const horizontalScrollRef = useRef<HTMLDivElement>(null)
   const [firstPaddingCard, setFirstPaddingCard] = useState(0)
 
   useEffect(() => {
-    setFirstPaddingCard((window.innerWidth - MAX_LAYOUT_WIDTH) / 2)
-  }, [])
+    setFirstPaddingCard(size.width <= MAX_LAYOUT_WIDTH ? 16 : (size.width - MAX_LAYOUT_WIDTH) / 2)
+  }, [size])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -23,7 +25,7 @@ export const ProjectsList = () => {
         return
       }
 
-      const horizontalScrollLength = horizontalScroll.scrollWidth - container.offsetWidth
+      const horizontalScrollLength = horizontalScroll.scrollWidth - container.offsetWidth + firstPaddingCard
 
       gsap.to(horizontalScroll, {
         x: -horizontalScrollLength,
@@ -35,10 +37,10 @@ export const ProjectsList = () => {
           scrub: true,
           pin: true,
           anticipatePin: 1,
-          snap: {
-            snapTo: 1 / (EXPERIENCES.length - 1),
-            duration: 0.75
-          },
+          // snap: {
+          //   snapTo: 1 / (EXPERIENCES.length - 1),
+          //   duration: 0.75
+          // },
           invalidateOnRefresh: true
         }
       })
@@ -56,7 +58,7 @@ export const ProjectsList = () => {
       </div>
       <div
         ref={horizontalScrollRef}
-        className="flex items-center gap-8 snap-x mt-10"
+        className="flex items-center gap-8 mt-10"
         style={{ paddingLeft: firstPaddingCard }}
       >
         {EXPERIENCES.map((project) => (
@@ -69,6 +71,15 @@ export const ProjectsList = () => {
             slug={project.slug}
           />
         ))}
+        <ProjectCard
+          date="Now"
+          tinyDescription="This could be the beginning of something amazing...
+          Imagine a world where your brilliant ideas meet my creativity. The possibilities? Endless. The results? Legendary."
+          company="Your company"
+          role="Our futur project"
+          thumbnailUrl="/projects/placeholder.svg"
+          slug=""
+        />
       </div>
     </div>
   )

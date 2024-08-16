@@ -7,7 +7,7 @@ export const LetsMeet = () => {
         <img
           src="/elements/calendar2.svg"
           alt=""
-          className="absolute w-5/6 hover:-bottom-5 cursor-pointer transition-all -bottom-12 left-1/2 -translate-x-1/2 duration-500"
+          className="absolute w-5/6 hover:-mt-[135px] cursor-pointer transition-all top-full -mt-[80px] left-1/2 -translate-x-1/2 duration-500"
         />
       </div>
     </div>
