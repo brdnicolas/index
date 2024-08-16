@@ -4,7 +4,6 @@ import 'atropos/css'
 import 'tippy.js/dist/tippy.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/molecules/Footer'
-import { ReactLenis } from '@/components/libs/lenis'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,11 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white font-inter">
-        <ReactLenis options={{ touchMultiplier: 0 }} root>
-          <Header />
-          {children}
-          <Footer />
-        </ReactLenis>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   )
