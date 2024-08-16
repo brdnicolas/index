@@ -23,7 +23,7 @@ export const Presentation = () => {
   }, [])
 
   return (
-    <SectionLayout className="flex flex-col items-center justify-center h-screen">
+    <SectionLayout className="flex flex-col items-center justify-center h-dvh">
       <h1 className="flex items-center text-6 gap-1 text-dark-300 font-manrope font-medium">
         Hi! <img src="/emoji/victory.png" ref={emojiRef} className="h-6" /> I'm Nicolas Brouard
       </h1>
