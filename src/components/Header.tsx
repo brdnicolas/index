@@ -8,8 +8,10 @@ export const Header = () => {
           Nicolas B.
         </a>
         <div className="flex items-center gap-2">
-          <Button.Secondary icon="solar:arrow-right-up-linear">Resume</Button.Secondary>
-          <Button.Primary>Let's talk</Button.Primary>
+          <Button.Secondary href="/resume/Nicolas BROUARD CV.pdf" icon="solar:arrow-right-up-linear">
+            Resume
+          </Button.Secondary>
+          <Button.Primary href="https://cal.com/brdnicolas">Let's talk</Button.Primary>
         </div>
       </div>
     </header>
