@@ -9,6 +9,10 @@ export const Footer = () => {
           <div>
             <p className="text-4 font-bold">&copy; Folio {new Date().getFullYear()}</p>
             <p className="text-3 text-dark-500 mt-2">Designed and developed with love by Nicolas B.</p>
+            <div className="mt-1 flex items-center gap-1">
+              <p className="text-3 text-dark-500">Thanks to Melanie J. for the extra sprinkle of magic!</p>
+              <img className="h-3 w-3" src="/emoji/sparkles.png" alt="sparkles" />
+            </div>
           </div>
           <div>
             <div className="grid grid-cols-2 gap-x-18 gap-y-4">
