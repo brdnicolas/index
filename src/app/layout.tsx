@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white font-inter">
-        <ReactLenis root>
+        <ReactLenis options={{ touchMultiplier: 0 }} root>
           <Header />
           {children}
           <Footer />
