@@ -16,10 +16,18 @@ export const Footer = () => {
           </div>
           <div>
             <div className="grid grid-cols-2 gap-x-18 gap-y-4 mt-10 tablet:mt-0">
-              <Button.Secondary icon="solar:arrow-right-up-linear">Linkedin</Button.Secondary>
-              <Button.Secondary icon="solar:arrow-right-up-linear">Whatsapp</Button.Secondary>
-              <Button.Secondary icon="solar:arrow-right-up-linear">Resume</Button.Secondary>
-              <Button.Secondary icon="solar:arrow-right-up-linear">Let's meet</Button.Secondary>
+              <Button.Secondary href="https://linkedin.com/in/brdnicolas" icon="solar:arrow-right-up-linear">
+                Linkedin
+              </Button.Secondary>
+              <Button.Secondary href="/resume/Nicolas BROUARD CV.pdf" icon="solar:arrow-right-up-linear">
+                Resume
+              </Button.Secondary>
+              <Button.Secondary href="https://www.malt.fr/profile/brdnicolas" icon="solar:arrow-right-up-linear">
+                Malt
+              </Button.Secondary>
+              <Button.Secondary href="https://cal.com/brdnicolas" icon="solar:arrow-right-up-linear">
+                Let's meet
+              </Button.Secondary>
             </div>
           </div>
         </footer>

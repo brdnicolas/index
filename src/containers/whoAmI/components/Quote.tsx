@@ -15,7 +15,7 @@ export const Quote = () => {
           <address className="flex items-center gap-2">
             <a
               className="bg-dark-600 group h-9 w-9 flex justify-center items-center rounded-2"
-              href="https://wa.me/0767939258"
+              href="https://www.linkedin.com/in/brdnicolas/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -26,7 +26,7 @@ export const Quote = () => {
             </a>
             <a
               className="bg-dark-600 group h-9 w-9 flex justify-center items-center rounded-2"
-              href="https://wa.me/0767939258"
+              href="mailto:brdnicolas.pro@gmail.com"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -48,7 +48,7 @@ export const Quote = () => {
             </a>
             <a
               className="bg-dark-600 group h-9 w-9 flex justify-center items-center rounded-2"
-              href="https://wa.me/0767939258"
+              href="https://x.com/_brdnicolas"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -58,7 +58,9 @@ export const Quote = () => {
               />
             </a>
           </address>
-          <Button.Tertiary icon="solar:arrow-right-up-linear">Resume</Button.Tertiary>
+          <Button.Tertiary href="/resume/Nicolas BROUARD CV.pdf" icon="solar:arrow-right-up-linear">
+            Resume
+          </Button.Tertiary>
         </div>
       </div>
     </div>
