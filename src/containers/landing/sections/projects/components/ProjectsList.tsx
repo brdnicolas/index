@@ -32,15 +32,11 @@ export const ProjectsList = () => {
         ease: 'none',
         scrollTrigger: {
           trigger: container,
-          start: 'center center',
+          start: size.width <= 1204 ? 'top 72px' : 'center center',
           end: () => `+=${horizontalScrollLength}`,
           scrub: true,
           pin: true,
           anticipatePin: 1,
-          // snap: {
-          //   snapTo: 1 / (EXPERIENCES.length - 1),
-          //   duration: 0.75
-          // },
           invalidateOnRefresh: true
         }
       })
@@ -48,7 +44,7 @@ export const ProjectsList = () => {
     return () => {
       ctx.revert()
     }
-  })
+  }, [size])
 
   return (
     <div ref={containerRef} style={{ overflow: 'hidden' }}>
