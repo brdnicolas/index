@@ -16,7 +16,7 @@ export const WhoAmI = () => {
     const cards = document.querySelectorAll('.card')
     const wrapper = document.querySelector('.cards')
 
-    if (!wrapper) {
+    if (!wrapper || isMobile) {
       return
     }
 

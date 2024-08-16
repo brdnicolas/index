@@ -15,7 +15,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
   return (
     <div
       className={
-        'project-card flex flex-col desktop:flex-row items-center gap-16 pr-16 min-w-[calc(100vw/2)] desktop:min-w-layout max-w-[calc(100vw/2)] desktop:max-w-layout font-manrope'
+        'project-card flex flex-col desktop:flex-row items-center gap-16 pr-4 tablet:pr-16 min-w-[calc(100vw-32px)] tablet:min-w-[calc(100vw/2)] max-w-[calc(100vw-32px)] desktop:min-w-layout tablet:max-w-[calc(100vw/2)] desktop:max-w-layout font-manrope'
       }
     >
       {isLastProject ? (
