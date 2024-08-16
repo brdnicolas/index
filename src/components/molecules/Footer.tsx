@@ -3,9 +3,9 @@ import { Button } from '../atoms/Button'
 
 export const Footer = () => {
   return (
-    <div className="py-13 border-t-[1px] border-t-dark-400 bg-black relative z-10 mt-[112px] font-manrope">
+    <div className="pb-4 pt-6 tablet:py-13 border-t-[1px] border-t-dark-400 bg-black relative z-10 mt-[112px] font-manrope">
       <SectionLayout>
-        <footer className="flex justify-between items-center">
+        <footer className="flex flex-col tablet:flex-row tablet:justify-between tablet:items-center">
           <div>
             <p className="text-4 font-bold">&copy; Folio {new Date().getFullYear()}</p>
             <p className="text-3 text-dark-500 mt-2">Designed and developed with love by Nicolas B.</p>
@@ -15,7 +15,7 @@ export const Footer = () => {
             </div>
           </div>
           <div>
-            <div className="grid grid-cols-2 gap-x-18 gap-y-4">
+            <div className="grid grid-cols-2 gap-x-18 gap-y-4 mt-10 tablet:mt-0">
               <Button.Secondary icon="solar:arrow-right-up-linear">Linkedin</Button.Secondary>
               <Button.Secondary icon="solar:arrow-right-up-linear">Whatsapp</Button.Secondary>
               <Button.Secondary icon="solar:arrow-right-up-linear">Resume</Button.Secondary>
