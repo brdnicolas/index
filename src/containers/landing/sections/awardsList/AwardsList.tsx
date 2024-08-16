@@ -46,7 +46,7 @@ export const AwardsList = () => {
               onClick={handleDisplayAll}
               className="underline text-4 underline-offset-4 text-normal cursor-pointer font-manrope font-medium"
             >
-              Wanna see more ?
+              Wanna see more?
             </button>
           )}
         </div>
