@@ -43,7 +43,7 @@ export const WhoAmI = () => {
     <SectionLayout
       hidePaddingX
       isFullWidth
-      className="cards relative w-full min-h-screen z-0 shadow-inner aboutme font-manrope font-semibold text-5 pb-[112px]"
+      className="cards relative w-full min-h-dvh z-0 shadow-inner aboutme font-manrope font-semibold text-5 pb-[112px]"
     >
       <div className="max-w-layout mx-auto">
         <h2 className="text-20 font-semibold text-center font-inter">Who am I</h2>
@@ -53,33 +53,3 @@ export const WhoAmI = () => {
     </SectionLayout>
   )
 }
-
-// return (
-//   <SectionLayout
-//     hidePaddingX
-//     isFullWidth
-//     className="cards relative w-full min-h-screen z-0 shadow-inner aboutme font-manrope font-semibold text-5 pb-[112px]"
-//   >
-//     <div className="max-w-layout mx-auto">
-//       <h2 className="text-20 font-semibold text-center font-inter">Who am I</h2>
-
-//       <div className="grid grid-cols-1 tablet:scale-90 tablet:grid-cols-3 gap-4 items-start mt-10 px-4 tablet:px-0">
-//         <div id="col1" className="flex flex-col tablet:grid gap-4 items-start">
-//           <Quote />
-//           <Stacks />
-//           <MyTopSongs />
-//         </div>
-//         <div id="col2" className="flex flex-col tablet:grid gap-4 items-start">
-//           <IAm />
-//           <Me />
-//           <LetsMeet />
-//         </div>
-//         <div id="col3" className="flex flex-col tablet:grid gap-4 items-start">
-//           <Experience />
-//           <Education />
-//           <Articles />
-//         </div>
-//       </div>
-//     </div>
-//   </SectionLayout>
-// )
