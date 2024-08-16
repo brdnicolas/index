@@ -13,9 +13,13 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
   const isLastProject = slug === ''
 
   return (
-    <div className={'project-card flex items-center gap-16 pr-16 min-w-layout max-w-layout font-manrope'}>
+    <div
+      className={
+        'project-card flex flex-col desktop:flex-row items-center gap-16 pr-16 min-w-[calc(100vw/2)] desktop:min-w-layout max-w-[calc(100vw/2)] desktop:max-w-layout font-manrope'
+      }
+    >
       {isLastProject ? (
-        <div className="group min-w-[50vw] max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
+        <div className="group min-w-full w-full desktop:min-w-[50vw] desktop:max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
           <img
             className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"
             src={thumbnailUrl}
@@ -23,8 +27,8 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
           />
         </div>
       ) : (
-        <a href={`/project/${slug}`}>
-          <div className="group min-w-[50vw] max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
+        <a href={`/project/${slug}`} className="w-full">
+          <div className="group min-w-full w-full desktop:min-w-[50vw] desktop:max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
             <img
               className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"
               src={thumbnailUrl}
