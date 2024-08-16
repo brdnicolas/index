@@ -11,10 +11,33 @@ export const ProjectsList = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const horizontalScrollRef = useRef<HTMLDivElement>(null)
   const [firstPaddingCard, setFirstPaddingCard] = useState(0)
+  const titleRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
     setFirstPaddingCard(size.width <= MAX_LAYOUT_WIDTH ? 16 : (size.width - MAX_LAYOUT_WIDTH) / 2)
   }, [size])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: titleRef.current,
+            scrub: 0.5,
+            start: 'top-=50% 85%',
+            end: 'bottom 85%'
+          }
+        }
+      )
+    })
+    return () => {
+      ctx.revert()
+    }
+  }, [])
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -48,7 +71,7 @@ export const ProjectsList = () => {
 
   return (
     <div ref={containerRef} style={{ overflow: 'hidden' }}>
-      <div className="max-w-layout mx-auto px-4 desktop:px-0">
+      <div className="max-w-layout mx-auto px-4 desktop:px-0" ref={titleRef}>
         <h2 className="text-14 desktop:text-20 font-semibold">Projects</h2>
         <p className="mt-2 text-dark-300 font-manrope">Each project is made with love ♥</p>
       </div>
