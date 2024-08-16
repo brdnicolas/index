@@ -25,7 +25,7 @@ export const ProjectView = ({ title, previewUrl, slug }: ProjectPropsType) => {
           </a>
         </Atropos>
       )}
-      <p className="project__title">{title}</p>
+      <p className="project__title font-manrope">{title}</p>
     </div>
   )
 }
