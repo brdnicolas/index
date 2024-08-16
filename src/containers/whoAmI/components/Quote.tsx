@@ -11,8 +11,8 @@ export const Quote = () => {
         </p>
         <p className="mt-6">Coding isn't just a skill, it's my way of turning ideas into reality.</p>
 
-        <div className="flex items-center justify-between mt-6">
-          <address className="flex items-center gap-4">
+        <div className="flex items-center justify-between mt-6 flex-wrap gap-2">
+          <address className="flex items-center gap-2">
             <a
               className="bg-dark-600 group h-9 w-9 flex justify-center items-center rounded-2"
               href="https://wa.me/0767939258"

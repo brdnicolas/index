@@ -1,18 +1,17 @@
 'use client'
 import { SectionLayout } from '@/components/SectionLayout'
-import { Quote } from './components/Quote'
-import { Me } from './components/Me'
-import { Experience } from './components/Experience'
-import { Education } from './components/Education'
-import { Stacks } from './components/Stacks'
-import { MyTopSongs } from './components/MyTopSongs'
-import { LetsMeet } from './components/LetsMeet'
-import { IAm } from './components/IAm'
 import './whoAmI.scss'
-import { useEffect } from 'react'
-import { Articles } from './components/Articles'
+import { useEffect, useMemo } from 'react'
+import { useWindowSize } from '@/shared/hooks/useWindowSize'
+import { ThreeColumnsMansonry } from './ThreeColumnsMansonry copy'
+import { TwoColumnsMansonry } from './TwoColumnsMansonry'
+import { OneColumnsMansonry } from './OneColumnsMansonry copy 2'
 
 export const WhoAmI = () => {
+  const size = useWindowSize()
+  const isDesktop = useMemo(() => size.width >= 1204 + 16 * 2, [size])
+  const isMobile = useMemo(() => size.width <= 768, [size])
+
   useEffect(() => {
     const cards = document.querySelectorAll('.card')
     const wrapper = document.querySelector('.cards')
@@ -49,24 +48,38 @@ export const WhoAmI = () => {
       <div className="max-w-layout mx-auto">
         <h2 className="text-20 font-semibold text-center font-inter">Who am I</h2>
 
-        <div className="grid grid-cols-3 gap-4 items-start mt-10">
-          <div id="col1" className="grid gap-4">
-            <Quote />
-            <Stacks />
-            <MyTopSongs />
-          </div>
-          <div id="col2" className="grid gap-4 items-start">
-            <IAm />
-            <Me />
-            <LetsMeet />
-          </div>
-          <div id="col3" className="grid gap-4">
-            <Experience />
-            <Education />
-            <Articles />
-          </div>
-        </div>
+        {isDesktop ? <ThreeColumnsMansonry /> : isMobile ? <OneColumnsMansonry /> : <TwoColumnsMansonry />}
       </div>
     </SectionLayout>
   )
 }
+
+// return (
+//   <SectionLayout
+//     hidePaddingX
+//     isFullWidth
+//     className="cards relative w-full min-h-screen z-0 shadow-inner aboutme font-manrope font-semibold text-5 pb-[112px]"
+//   >
+//     <div className="max-w-layout mx-auto">
+//       <h2 className="text-20 font-semibold text-center font-inter">Who am I</h2>
+
+//       <div className="grid grid-cols-1 tablet:scale-90 tablet:grid-cols-3 gap-4 items-start mt-10 px-4 tablet:px-0">
+//         <div id="col1" className="flex flex-col tablet:grid gap-4 items-start">
+//           <Quote />
+//           <Stacks />
+//           <MyTopSongs />
+//         </div>
+//         <div id="col2" className="flex flex-col tablet:grid gap-4 items-start">
+//           <IAm />
+//           <Me />
+//           <LetsMeet />
+//         </div>
+//         <div id="col3" className="flex flex-col tablet:grid gap-4 items-start">
+//           <Experience />
+//           <Education />
+//           <Articles />
+//         </div>
+//       </div>
+//     </div>
+//   </SectionLayout>
+// )
