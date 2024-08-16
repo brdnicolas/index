@@ -12,6 +12,7 @@ import { FullScreenImage } from './components/FullScreenImage'
 import { EXPERIENCES, Experience } from '@/data/projects'
 import { ProjectView } from './components/ProjectView'
 import { SectionLayout } from '@/components/SectionLayout'
+import { Tag } from '../whoAmI/components/Tag'
 
 interface ProjectContainerProps {
   project: Experience
@@ -69,12 +70,14 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
         <SectionLayout className="relative">
           <ul className="techs hide-scrollbar">
             {project.techs.map((stack, i) => (
-              <li key={`${stack}-${i}`}>{stack}</li>
+              <Tag className="text-3 py-2 px-3" key={stack}>
+                {stack}
+              </Tag>
             ))}
           </ul>
 
           <h1>{project.company}</h1>
-          <p className="title-description">{project.description}</p>
+          <p className="title-description font-manrope">{project.description}</p>
 
           {isMobile ? (
             <div style={{ position: 'relative' }} className="preview skeleton">

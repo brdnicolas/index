@@ -20,7 +20,7 @@ export const PresentationTemplate = ({
   const containerRef = useRef<HTMLDivElement>(null)
 
   return (
-    <section ref={containerRef}>
+    <section ref={containerRef} className="font-manrope">
       <div className="subtitle">
         <h2>{title}</h2>
         {url && (
