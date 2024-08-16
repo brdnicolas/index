@@ -1,63 +1,83 @@
 'use client'
-import React, { useEffect, useState, ReactNode } from 'react'
-import gsap from 'gsap'
+import { useEffect, useState } from 'react'
+import './loader.scss'
 
-interface LoaderProps {
-  children: ReactNode
-}
+const LOADER_TIME = 3000 // Temps total du loader en millisecondes
 
-const Loader: React.FC<LoaderProps> = ({ children }) => {
-  const [isLoaded, setIsLoaded] = useState(false)
+const Preloader: React.FC = () => {
+  const [loading, setLoading] = useState(true)
+  const [percentage, setPercentage] = useState(0) // État pour le pourcentage
 
   useEffect(() => {
-    const images: NodeListOf<HTMLImageElement> = document.querySelectorAll('img')
-    const imagePromises: Promise<void>[] = Array.from(images).map((image) => {
-      return new Promise((resolve) => {
-        if (image.complete) {
-          resolve()
-        }
-      })
-    })
+    const bodyElement = document.querySelector('body')
+    bodyElement?.classList.add('loading')
 
-    const MINIMUM_LOADING_TIME = 2000 // 2 seconds
-    const startTime = Date.now()
+    const intervalTime = LOADER_TIME / 100
+    let elapsedTime = 0
 
-    Promise.all(imagePromises).then(() => {
-      const elapsedTime = Date.now() - startTime
-      const remainingTime = Math.max(0, MINIMUM_LOADING_TIME + elapsedTime)
+    const interval = setInterval(() => {
+      elapsedTime += intervalTime
+      const newPercentage = Math.min((elapsedTime / (LOADER_TIME - 500)) * 100, 100)
+      setPercentage(Math.floor(newPercentage))
 
-      setTimeout(() => {
-        setIsLoaded(true)
-        gsap.to('.loader', {
-          opacity: 0,
-          duration: 1,
-          onComplete: () => {
-            const loaderElement = document.querySelector('.loader') as HTMLElement
-            if (loaderElement) {
-              loaderElement.style.display = 'none'
-            }
+      if (elapsedTime >= LOADER_TIME) {
+        clearInterval(interval)
+      }
+    }, intervalTime)
+
+    const scrollDuration = LOADER_TIME - 1000
+    const totalHeight = document.body.scrollHeight - window.innerHeight
+    let startTime: number | null = null
+
+    const scrollAnimation = (timestamp: number) => {
+      if (!startTime) startTime = timestamp
+      const progress = timestamp - startTime
+      const scrollTop = Math.min(progress / (scrollDuration / totalHeight), totalHeight)
+      window.scrollTo(0, scrollTop)
+
+      if (progress < scrollDuration) {
+        requestAnimationFrame(scrollAnimation)
+      } else {
+        const scrollUpAnimation = (timestamp: number) => {
+          if (!startTime) startTime = timestamp
+          const progress = timestamp - startTime
+          const scrollTop = Math.max(totalHeight - (progress / (scrollDuration / totalHeight)) * totalHeight, 0)
+          window.scrollTo(0, scrollTop)
+
+          if (progress < scrollDuration) {
+            requestAnimationFrame(scrollUpAnimation)
           }
-        })
-      }, remainingTime)
-    })
+        }
 
-    // Optionnel : Animer la barre de progression
-    gsap.to('.loader-progress', {
-      width: '100%',
-      duration: MINIMUM_LOADING_TIME / 1000,
-      ease: 'linear'
-    })
+        requestAnimationFrame(scrollUpAnimation)
+      }
+    }
+
+    requestAnimationFrame(scrollAnimation)
+
+    const timeout = setTimeout(() => {
+      setLoading(false)
+      window.scrollTo(0, 0)
+      bodyElement?.classList.remove('loading')
+    }, LOADER_TIME)
+
+    return () => {
+      clearInterval(interval)
+      clearTimeout(timeout)
+      window.scrollTo(0, 0)
+      bodyElement?.classList.remove('loading')
+    }
   }, [])
 
+  if (!loading) return null
+
   return (
-    <>
-      <div className="loader">
-        <div className="loader-progress h-[2px] w-screen bg-red-50" />
-        <p>Loading...</p>
+    <div className="preloader relative bg-black">
+      <div className="flex justify-center items-center tablet:absolute tablet:-bottom-7 right-4">
+        <p className="font-manrope font-extrabold text-[10vw]">{percentage}%</p>{' '}
       </div>
-      {isLoaded && children}
-    </>
+    </div>
   )
 }
 
-export default Loader
+export default Preloader

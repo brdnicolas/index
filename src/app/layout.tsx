@@ -4,6 +4,7 @@ import 'atropos/css'
 import 'tippy.js/dist/tippy.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/molecules/Footer'
+import Loader from '@/components/atoms/Loader'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white font-inter">
+        <Loader />
         <Header />
         {children}
         <Footer />
