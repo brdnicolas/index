@@ -10,6 +10,7 @@ import { LetsMeet } from './components/LetsMeet'
 import { IAm } from './components/IAm'
 import './whoAmI.scss'
 import { useEffect } from 'react'
+import { Articles } from './components/Articles'
 
 export const WhoAmI = () => {
   useEffect(() => {
@@ -55,13 +56,14 @@ export const WhoAmI = () => {
             <MyTopSongs />
           </div>
           <div id="col2" className="grid gap-4 items-start">
-            <Me />
             <IAm />
+            <Me />
             <LetsMeet />
           </div>
           <div id="col3" className="grid gap-4">
             <Experience />
             <Education />
+            <Articles />
           </div>
         </div>
       </div>
