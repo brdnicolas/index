@@ -4,6 +4,7 @@ import 'atropos/css'
 import 'tippy.js/dist/tippy.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/molecules/Footer'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,6 +19,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-black text-white font-inter">
+        <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=G-ZCEH1819G3`} />
+
+        <Script strategy="lazyOnload">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window && window.dataLayer && dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-ZCEH1819G3', {
+            page_path: window.location.pathname,
+          });
+        `}
+        </Script>
+
         <Header />
         {children}
         <Footer />

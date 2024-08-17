@@ -13,10 +13,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const project = EXPERIENCES.find(({ slug }) => slug === pathName)!
 
   return (
-    <main className="bg-black !px-0 !w-screen">
+    <main className="bg-black">
       <SEOHead
-        description={`Discover my project for ${project.company}!`}
-        title={`${project.company} - Nicolas B.`}
+        description={`Find out what we've done together!`}
+        title={`${project.company} x Nicolas B.`}
         previewUrl={`${project.thumbnail}`}
         url={`https://brdnicolas.com/${project.slug}`}
       />

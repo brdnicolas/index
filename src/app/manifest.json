@@ -1,0 +1,21 @@
+{
+  "name": "Nicolas Brouard",
+  "short_name": "brdnicolas",
+  "start_url": ".",
+  "description": "My mission? Helping you bring your projects to life with my versatility and knack for adapting to all kinds of situations. Let's team up and turn your ideas into something epic!",
+  "icons": [
+    {
+      "src": "/seo/192.png",
+      "sizes": "192",
+      "type": "image/png"
+    },
+    {
+      "src": "/seo/512.png",
+      "sizes": "512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "display": "standalone"
+}

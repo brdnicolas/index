@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <url>
+    <loc>https://brdnicolas.com/</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <xhtml:link
+      rel="alternate"
+      href="https://brdnicolas.com" />
+    <priority>1.00</priority>
+  </url>
+  
+  <url>
+    <loc>https://brdnicolas.com/resume/Nicolas BROUARD CV.pdf</loc>
+   <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+   <loc>https://brdnicolas.com/pepiswap</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+   <loc>https://brdnicolas.com/iliad-group</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+   <loc>https://brdnicolas.com/free</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+   <loc>https://brdnicolas.com/bellintone</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+   <loc>https://brdnicolas.com/mentorgoal</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+
+   <url>
+   <loc>https://brdnicolas.com/design-system</loc>
+    <lastmod>2024-08-17T15:02:24.021Z</lastmod>
+    <priority>0.5</priority>
+  </url>
+</urlset>
