@@ -21,7 +21,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
       }
     >
       {isLastProject ? (
-        <div className="group w-full flex-1 aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
+        <div className="group flex-[2] w-full flex-1 aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
           <img
             className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"
             src={thumbnailUrl}
