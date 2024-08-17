@@ -25,7 +25,7 @@ export const Introduction = () => {
             scrollTrigger: {
               trigger: '#introduction',
               start: 'top bottom',
-              end: 'bottom-=20 bottom',
+              end: 'bottom+=50 bottom',
               scrub: true
             }
           }
