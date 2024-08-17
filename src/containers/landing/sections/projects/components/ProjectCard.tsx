@@ -21,7 +21,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
       }
     >
       {isLastProject ? (
-        <div className="group min-w-full w-full desktop:min-w-[50vw] desktop:max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
+        <div className="group w-full flex-1 aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
           <img
             className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"
             src={thumbnailUrl}
@@ -29,8 +29,8 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
           />
         </div>
       ) : (
-        <TransitionLink href={`/${slug}`} className="w-full">
-          <div className="group min-w-full w-full desktop:min-w-[50vw] desktop:max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
+        <TransitionLink href={`/${slug}`} className="flex-[2] w-full">
+          <div className="group w-full aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
             <img
               className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"
               src={thumbnailUrl}
@@ -40,7 +40,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
         </TransitionLink>
       )}
 
-      <div>
+      <div className="flex-1">
         <p className="text-3 text-dark-500">{date}</p>
         <p className="text-white font-bold text-6 mt-1">{role}</p>
         <p className="text-4 text-dark-500 mt-1">@{company}</p>
