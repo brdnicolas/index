@@ -3,7 +3,7 @@ import './project.scss'
 import Image from 'next/image'
 import { Parallax } from 'react-parallax'
 import 'atropos/css'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import useIsMobile from '@/shared/hooks/useIsMobile'
@@ -12,17 +12,46 @@ import { FullScreenImage } from './components/FullScreenImage'
 import { EXPERIENCES, Experience } from '@/data/projects'
 import { ProjectView } from './components/ProjectView'
 import { SectionLayout } from '@/components/SectionLayout'
-import { Tag } from '../whoAmI/components/Tag'
+import { Tag } from '../landing/sections/whoAmI/components/Tag'
 
 interface ProjectContainerProps {
   project: Experience
 }
 
 export const ProjectContainer = ({ project }: ProjectContainerProps) => {
-  const otherProjects = EXPERIENCES.filter((xp) => xp !== project).slice(0, 3)
   const isMobile = useIsMobile()
   const containerRef = useRef<HTMLDivElement>(null)
   const [urlImageToShow, setUrlImageToShow] = useState<string>('')
+  const [randomProjects, setRandomProjects] = useState<Experience[]>([])
+
+  useEffect(() => {
+    const getRandomProjects = (projects: Experience[], currentProject: Experience) => {
+      // Filtrer les projets pour exclure le projet actuel
+      const filteredProjects = projects.filter((project) => project !== currentProject)
+
+      // Fonction pour mélanger le tableau de manière aléatoire
+      const shuffleArray = (array: Experience[]) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1))
+          ;[array[i], array[j]] = [array[j], array[i]] // Échange les éléments
+        }
+        return array
+      }
+
+      // Mélanger le tableau filtré
+      const shuffledProjects = shuffleArray(filteredProjects)
+
+      // Retourner les trois premiers projets aléatoires
+      return shuffledProjects.slice(0, 3)
+    }
+
+    setRandomProjects(
+      getRandomProjects(
+        EXPERIENCES.filter((x) => x !== project),
+        project
+      )
+    )
+  }, [project])
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -113,7 +142,7 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
       <SectionLayout>
         <h3 className="see-more">See other projects</h3>
         <div className="projects__wrapper">
-          {otherProjects.map((project) => (
+          {randomProjects.map((project) => (
             <ProjectView
               key={project.slug}
               title={project.company}

@@ -9,7 +9,7 @@ const Preloader: React.FC = () => {
   const [percentage, setPercentage] = useState(0) // État pour le pourcentage
 
   useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisited')
+    const hasVisited = sessionStorage.getItem('hasVisited')
     const bodyElement = document.querySelector('body')
     bodyElement?.classList.add('loading')
 
@@ -64,7 +64,7 @@ const Preloader: React.FC = () => {
 
     const timeout = setTimeout(() => {
       setLoading(false)
-      localStorage.setItem('hasVisited', 'true')
+      sessionStorage.setItem('hasVisited', 'true')
       window.scrollTo(0, 0)
       bodyElement?.classList.remove('loading')
     }, LOADER_TIME)
