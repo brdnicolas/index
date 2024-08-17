@@ -1,3 +1,4 @@
+import Loader from '@/components/atoms/Loader'
 import { AwardsList } from '@/containers/landing/sections/awardsList/AwardsList'
 import { Introduction } from '@/containers/landing/sections/introduction/Introduction'
 import { Marquee } from '@/containers/landing/sections/marquee/Marquee'
@@ -7,13 +8,14 @@ import { WhoAmI } from '@/containers/whoAmI/WhoAmI'
 
 export default function Home() {
   return (
-    <main className="bg-black">
+    <>
+      <Loader />
       <Presentation />
       <Introduction />
       <WhoAmI />
       <Marquee />
       <Projects />
       <AwardsList />
-    </main>
+    </>
   )
 }

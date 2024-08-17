@@ -70,7 +70,7 @@ export const ProjectsList = () => {
   }, [firstPaddingCard])
 
   return (
-    <div ref={containerRef} style={{ overflow: 'hidden' }}>
+    <div ref={containerRef} className="overflow-hidden">
       <div className="max-w-layout mx-auto px-4 desktop:px-0" ref={titleRef}>
         <h2 className="text-14 desktop:text-20 font-semibold">Projects</h2>
         <p className="mt-2 text-dark-300 font-manrope">Turning dreams into reality, one epic project at a time.</p>

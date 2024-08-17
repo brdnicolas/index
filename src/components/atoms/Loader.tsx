@@ -5,12 +5,19 @@ import './loader.scss'
 const LOADER_TIME = 3000 // Temps total du loader en millisecondes
 
 const Preloader: React.FC = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [percentage, setPercentage] = useState(0) // État pour le pourcentage
 
   useEffect(() => {
+    const hasVisited = localStorage.getItem('hasVisited')
     const bodyElement = document.querySelector('body')
     bodyElement?.classList.add('loading')
+
+    if (hasVisited) {
+      setLoading(false)
+      return
+    }
+    setLoading(true)
 
     const intervalTime = LOADER_TIME / 100
     let elapsedTime = 0
@@ -57,6 +64,7 @@ const Preloader: React.FC = () => {
 
     const timeout = setTimeout(() => {
       setLoading(false)
+      localStorage.setItem('hasVisited', 'true')
       window.scrollTo(0, 0)
       bodyElement?.classList.remove('loading')
     }, LOADER_TIME)
