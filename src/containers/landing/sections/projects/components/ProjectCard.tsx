@@ -29,7 +29,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
           />
         </div>
       ) : (
-        <TransitionLink href={`/project/${slug}`} className="w-full">
+        <TransitionLink href={`/${slug}`} className="w-full">
           <div className="group min-w-full w-full desktop:min-w-[50vw] desktop:max-w-[50vw] aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
             <img
               className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"

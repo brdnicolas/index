@@ -2,6 +2,7 @@ import React from 'react'
 import Atropos from 'atropos/react'
 import Image from 'next/image'
 import useIsMobile from '@/shared/hooks/useIsMobile'
+import { TransitionLink } from '@/components/atoms/TransitionLink'
 
 type ProjectPropsType = {
   title: string
@@ -15,14 +16,14 @@ export const ProjectView = ({ title, previewUrl, slug }: ProjectPropsType) => {
   return (
     <div className="project">
       {isMobile ? (
-        <a href={`/${slug}`} className="project__img__wrapper skeleton">
+        <TransitionLink href={`/${slug}`} className="project__img__wrapper skeleton">
           <img src={previewUrl} alt={title} />
-        </a>
+        </TransitionLink>
       ) : (
         <Atropos shadowScale={0.9}>
-          <a href={`/${slug}`} className="project__img__wrapper skeleton">
+          <TransitionLink href={`/${slug}`} className="project__img__wrapper skeleton">
             <Image fill src={previewUrl} alt={title} />
-          </a>
+          </TransitionLink>
         </Atropos>
       )}
       <p className="project__title font-manrope">{title}</p>

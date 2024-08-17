@@ -25,17 +25,14 @@ export const EXPERIENCES: Experience[] = [
     slug: 'design-systems',
     preview: '/projects/ds/preview.jpg',
     thumbnail: '/projects/ds/thumbnail.png',
-    description: `
-  The design system is a masterpiece, seamlessly blending forms and colors. Each component is a stroke, purposefully placed to capture the essence of our brand. Fluid lines guide the eye, while typography dances gracefully across the digital canvas. Every pixel is a musical note, harmoniously playing to create an enchanting user experience. Interactions flow effortlessly, like a well-choreographed performance. Documentation serves as a precious guide, revealing the secrets of this masterpiece. Our design system is a digital artwork, transcending time, and unveiling beauty in every interaction.`,
+    description:
+      'The design system is a harmonious blend of aesthetics and functionality. Each component is meticulously crafted, creating a seamless visual identity that enhances user experience across the brand. The system’s fluid design and well-documented components enable teams to deliver consistent, high-quality interfaces.',
     techs: ['ViteJS', 'Typescript', 'Storybook', 'Chromatic', 'React', 'SCSS', 'Tailwind'],
     subProjects: [
       {
-        title: 'Free',
+        title: 'Free’s Atomic Design System',
         description:
-          "Free's Atomic Design System is a collaborative masterpiece, crafted with designers to ensure seamless sharing across all tech teams. Its modular approach and atomic components provide a solid foundation for consistent design language. The system empowers teams to create cohesive interfaces, from atoms to molecules and organisms. With meticulous documentation and a user-friendly interface, Free's design system becomes an essential tool, fostering creativity and efficiency while unifying the brand experience." +
-          '' +
-          "Thank's a lot to the Free team for the opportunity to work on this project." +
-          'Specialy to Thomas VIMARE, Clovis DEROUCK, Melanie LÊ, Frédéric LUGBULL, Nicolas TOUILLET, Arnaud VATIN, Laurent MENU and others !',
+          'A collaborative project designed with Free’s tech and design teams, focusing on modularity and reusability. This system supports cohesive branding across platforms with a flexible yet structured component library. Special thanks to Thomas Vimare, Clovis Derouck, and other key contributors.',
         images: [
           '/projects/ds/projects/free/free1.png',
           '/projects/ds/projects/free/free2.jpg',
@@ -43,9 +40,9 @@ export const EXPERIENCES: Experience[] = [
         ]
       },
       {
-        title: 'Mentor Goal',
+        title: 'MentorGoal’s Simple Design System',
         description:
-          "MentorGoal's Simple Design System is a user-friendly toolkit, tailored for rapid integration in a startup environment. It streamlines design consistency, promoting a seamless user experience across platforms. With a focused set of components, colors, and typography, it accelerates product development without the complexity of Atomic Design. The system's intuitive documentation empowers teams to quickly grasp and implement its elements. MentorGoal's Simple Design System nurtures efficiency and brand coherence, providing a solid foundation to shape a delightful user journey for the startup's vision.",
+          'A streamlined toolkit optimized for startup environments, promoting quick deployment and consistency without the overhead of complex structures. It simplifies product development while maintaining a polished user experience.',
         images: [
           '/projects/ds/projects/mg/mg1.jpg',
           '/projects/ds/projects/mg/mg2.jpg',
@@ -61,14 +58,15 @@ export const EXPERIENCES: Experience[] = [
     slug: 'pepiswap',
     preview: '/projects/pepiswap/preview.jpg',
     thumbnail: '/projects/pepiswap/thumbnail.jpg',
-    description: `Discover Pepiswap, the 100% French DEX (Decentralized Exchange) designed to make cryptocurrency trading easy and accessible. With a user-friendly platform and comprehensive tutorials, Pepiswap welcomes both newcomers and experienced traders alike.`,
+    description:
+      'Pepiswap is a user-friendly decentralized exchange (DEX) tailored for the French market, bridging the gap between crypto enthusiasts and beginners. The platform focuses on simplicity, with intuitive interfaces and accessible learning resources.',
     techs: ['NextJS', 'Typescript', 'Strapi', 'Solidity', 'Tailwind'],
     subProjects: [
       {
         title: 'Decentralized Exchange',
         url: 'https://pepiswap.vercel.app/',
         description:
-          'The main but here is to make a platform for users to learn how to use cryptocurrency. To this end, the design is modern and accessible, and the functionalities simple and explained.',
+          'The main goal is to provide a platform where users can easily learn about and trade cryptocurrencies. The design is modern and accessible, with functionalities that are simple and well-explained.',
         images: [
           '/projects/pepiswap/pepiswap1.jpg',
           '/projects/pepiswap/pepiswap2.jpg',
@@ -119,14 +117,13 @@ export const EXPERIENCES: Experience[] = [
     preview: '/projects/free/preview.jpg',
     thumbnail: '/projects/free/thumbnail.jpg',
     description:
-      'Free is a French company that revolutionized the industry with its disruptive offerings. Known for affordable and innovative services, Free Mobile and Freebox provide customers with cutting-edge mobile, broadband, and TV solutions. With a customer-centric approach, Free continues to challenge traditional norms and reshape the telecom landscape in France. ',
+      'Free is a French company that revolutionized the industry with its disruptive offerings. Known for affordable and innovative services, Free Mobile and Freebox provide customers with cutting-edge mobile, broadband, and TV solutions. With a customer-centric approach, Free continues to challenge traditional norms and reshape the telecom landscape in France.',
     techs: ['NextJS', 'Typescript', 'Leaflet', 'Strapi', 'TailwindCSS', 'Material UI'],
     subProjects: [
       {
         title: 'Freebox',
         description:
-          "Crafted Free's landing page to redefine their online presence. With a modern design and compelling visuals, it showcases their disruptive telecom services, engaging users and driving conversions.\n" +
-          'Developed "Coverage Map" page to empower users with real-time network information. Using interactive maps and data visualization, it allows customers to check network coverage, reinforcing Free\'s commitment to transparency and customer satisfaction.',
+          "Revamped Free's online presence with a modern landing page showcasing their innovative telecom services. The 'Coverage Map' page empowers users with real-time network information, reinforcing Free's commitment to transparency and customer satisfaction.",
         url: 'https://free.fr/freebox',
         images: [
           '/projects/free/projects/freebox/freebox1.jpg',
@@ -137,7 +134,7 @@ export const EXPERIENCES: Experience[] = [
       {
         title: 'Free Mobile',
         description:
-          "Designed Freemobile's captivating landing page to elevate their online image. Through a sleek and user-friendly interface, it effectively communicates their affordable and innovative mobile services, enticing visitors to explore their offerings further.",
+          'Designed a captivating landing page for Free Mobile, elevating its online image with a sleek and user-friendly interface. The design effectively communicates Free Mobile’s affordable and innovative services, enticing visitors to explore further.',
         url: 'https://mobile.free.fr/',
         images: [
           '/projects/free/projects/freemobile/freemobile1.jpg',
@@ -155,13 +152,13 @@ export const EXPERIENCES: Experience[] = [
     preview: '/projects/bellintone/preview.jpg',
     thumbnail: '/projects/bellintone/thumbnail.jpg',
     description:
-      "BellIntone is a cutting-edge music platform that empowers aspiring artists to showcase their talent to the world. With a seamless interface and powerful features, BellIntone offers a global stage for musicians to connect with fans, industry professionals, and fellow artists. Whether you're a singer, songwriter, or producer, BellIntone is your gateway to reaching new heights in the music industry. Join the musical revolution today and let your sound resonate with the world! ",
+      'BellIntone is a cutting-edge music platform that empowers aspiring artists to showcase their talent globally. With a seamless interface and powerful features, BellIntone offers musicians a global stage to connect with fans, industry professionals, and fellow artists. Join the musical revolution and let your sound resonate with the world!',
     techs: ['NextJS', 'Typescript', 'ExpressJS', 'Material UI'],
     subProjects: [
       {
-        title: 'Luxury landing page',
+        title: 'Luxury Landing Page',
         description:
-          "Client's request: A luxurious landing page reminiscent of Netflix's design to showcase premium services. Crafted with elegance and sophistication, the page entices visitors with high-end offerings, creating an exclusive and captivating user experience.",
+          'Designed a luxurious landing page inspired by Netflix to highlight premium services. The elegant and sophisticated design creates an exclusive and captivating user experience.',
         url: 'https://bellintone.com/',
         images: [
           '/projects/bellintone/bellintone1.jpg',
@@ -179,13 +176,13 @@ export const EXPERIENCES: Experience[] = [
     preview: '/projects/mentorgoal/preview.jpg',
     thumbnail: '/projects/mentorgoal/thumbnail.jpg',
     description:
-      'Mentor Goal is a personalized mentoring platform that connects aspiring individuals with experienced mentors in their desired fields. Through one-on-one guidance, our platform helps mentees set and achieve their goals, gain valuable insights, and accelerate personal and professional growth. Unlock your potential with Mentor Goal and pave the way to your success journey!',
+      'Mentor Goal is a personalized mentoring platform that connects aspiring individuals with experienced mentors in their desired fields. Through one-on-one guidance, the platform helps mentees set and achieve their goals, gain valuable insights, and accelerate their personal and professional growth.',
     techs: ['ReactJS', 'SCSS'],
     subProjects: [
       {
         title: 'Platform',
         description:
-          'Continuing platform development to meet client needs and innovate. Our commitment to excellence drives us to enhance user experience, offer new features, and stay ahead in the ever-evolving landscape. Empowering our clients and inspiring progress remain at the core of our journey.',
+          'Ongoing development to meet evolving client needs and innovate. This includes enhancing user experience, adding new features, and staying ahead in the competitive landscape. Empowering clients and inspiring progress are at the core of this project.',
         url: 'https://mentorgoal.com',
         images: [
           '/projects/mentorgoal/projects/platform/platform1.jpg',
@@ -196,7 +193,7 @@ export const EXPERIENCES: Experience[] = [
       {
         title: '1 Click Extension',
         description:
-          "I developed an extension to ease students' application process on the platform. By streamlining the submission of candidatures, it empowers students to apply seamlessly and efficiently, reducing barriers and enhancing their overall experience. Students' success is our priority! ",
+          'Developed a Chrome extension to streamline the application process for students. This tool simplifies and accelerates the submission of applications, enhancing the overall user experience and reducing barriers.',
         url: 'https://chrome.google.com/webstore/detail/mentor-goal/liifiipnglpjacgkfeojooabgiionbeg?hl=fr',
         images: [
           '/projects/mentorgoal/projects/extension/extension1.jpeg',

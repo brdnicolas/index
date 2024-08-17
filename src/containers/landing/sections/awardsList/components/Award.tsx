@@ -1,5 +1,5 @@
 'use client'
-import { Tag } from '@/containers/whoAmI/components/Tag'
+import { Tag } from '@/containers/landing/sections/whoAmI/components/Tag'
 import { useWindowSize } from '@/shared/hooks/useWindowSize'
 import { useMemo } from 'react'
 
