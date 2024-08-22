@@ -7,6 +7,7 @@ export const Articles = () => {
         <p className="text-5">I also write articles!</p>
         <a
           href="https://dev.to/brdnicolas"
+          target="_blank"
           rel="noopener noreferrer"
           className="group flex items-center gap-1 hover:text-white text-[#989898] text-4 mt-4 w-fit"
         >
