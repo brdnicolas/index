@@ -1,6 +1,6 @@
 'use client'
 import { SectionLayout } from '@/components/SectionLayout'
-import './WorkedWith.scss'
+import './workedWith.scss'
 import useIsMobile from '@/shared/hooks/useIsMobile'
 
 export const WorkedWith = () => {
