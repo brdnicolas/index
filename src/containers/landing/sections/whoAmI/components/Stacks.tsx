@@ -11,7 +11,7 @@ export const Stacks = () => {
           <Tippy content="Next.js" animation="scale">
             <img id="next" src="/icons/next.svg" alt="nextjs" />
           </Tippy>
-          <Tippy content="React.js" animation="scale">
+          <Tippy content="React.js & React Native" animation="scale">
             <img src="/icons/react.svg" alt="reactjs" />
           </Tippy>
           <Tippy content="Javascript" animation="scale">
@@ -31,6 +31,9 @@ export const Stacks = () => {
           </Tippy>
           <Tippy content="Docker" animation="scale">
             <img src="/icons/docker.svg" alt="docker" />
+          </Tippy>
+          <Tippy content="Fastlane" animation="scale">
+            <img src="/icons/fastlane.svg" alt="fastlane" />
           </Tippy>
         </div>
       </div>

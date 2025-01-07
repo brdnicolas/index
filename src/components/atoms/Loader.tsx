@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import './loader.scss'
 
-const LOADER_TIME = 3000 // Temps total du loader en millisecondes
+export const LOADER_TIME = 3000 // Temps total du loader en millisecondes
 
 const Preloader: React.FC = () => {
   const [loading, setLoading] = useState(false)

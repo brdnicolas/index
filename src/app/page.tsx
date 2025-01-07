@@ -6,6 +6,7 @@ import { Marquee } from '@/containers/landing/sections/marquee/Marquee'
 import { Presentation } from '@/containers/landing/sections/presentation/Presentation'
 import { Projects } from '@/containers/landing/sections/projects/Projects'
 import { WhoAmI } from '@/containers/landing/sections/whoAmI/WhoAmI'
+import { WorkedWith } from '@/containers/landing/sections/workedWith/WorkedWith'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       />
       <Loader />
       <Presentation />
+      <WorkedWith />
       <Introduction />
       <WhoAmI />
       <Marquee />

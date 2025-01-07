@@ -31,7 +31,7 @@ export const AwardsList = () => {
         <p className="mt-8 text-dark-300 text-center font-manrope">Great achievements are born from great challenges</p>
         <div className="flex flex-col gap-4 tablet:gap-11 items-center mt-[56px] tablet:mt-[112px]">
           {AWARDS.slice(0, numberOfDisplayedAwards).map((award) => (
-            <Award delivredBy={award.delivredBy} title={award.title} year={award.year} />
+            <Award key={award.title} delivredBy={award.delivredBy} title={award.title} year={award.year} />
           ))}
 
           {shouldShowHideAwards ? (

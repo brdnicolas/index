@@ -2,17 +2,24 @@
 import { SectionLayout } from '@/components/SectionLayout'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { LOADER_TIME } from '@/components/atoms/Loader'
 
 export const Presentation = () => {
   const emojiRef = useRef(null)
+  const bigTitle = useRef(null)
+  const title = "I'm|just|a"
+  const title2 = 'React|Engineer'
 
   useEffect(() => {
+    const hasVisited = sessionStorage.getItem('hasVisited')
+
     gsap.to(emojiRef.current, {
       rotation: 20, // L'angle de rotation en degrés
       duration: 1, // Durée d'un aller-retour
       ease: 'power1.inOut', // Type d'effet pour lisser l'animation
       repeat: -1,
       repeatDelay: 5,
+      delay: hasVisited ? 1 : LOADER_TIME + 1,
       keyframes: [
         { rotation: -20, duration: 1 }, // Va de 0 à -20 degrés
         { rotation: 0, duration: 1 }, // Va de 0 à -20 degrés
@@ -27,7 +34,7 @@ export const Presentation = () => {
       <h1 className="flex items-center text-6 gap-1 text-dark-300 font-manrope font-medium">
         Hi! <img src="/emoji/victory.png" ref={emojiRef} className="h-6" /> I'm Nicolas Brouard
       </h1>
-      <h2 className="text-12 tablet:text-[92px] font-bold text-center">
+      <h2 ref={bigTitle} id="my-text" className="text-12 tablet:text-[92px] font-bold text-center">
         I'm just a <br />
         React Engineer
       </h2>
