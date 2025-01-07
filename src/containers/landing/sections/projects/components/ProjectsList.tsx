@@ -82,6 +82,7 @@ export const ProjectsList = () => {
       >
         {EXPERIENCES.map((project) => (
           <ProjectCard
+            key={project.slug}
             date={project.date}
             tinyDescription={project.description}
             company={project.company}
