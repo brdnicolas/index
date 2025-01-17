@@ -44,17 +44,9 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
       // Retourner les trois premiers projets aléatoires
       return shuffledProjects.slice(0, 3)
     }
-
-    setRandomProjects(
-      getRandomProjects(
-        EXPERIENCES.filter((x) => x !== project),
-        project
-      )
-    )
   }, [project])
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.grid-background div',
@@ -81,6 +73,7 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
         }
       )
     })
+    gsap.registerPlugin(ScrollTrigger)
 
     return () => ctx.revert()
   }, [])
