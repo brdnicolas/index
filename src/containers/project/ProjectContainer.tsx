@@ -20,8 +20,6 @@ interface ProjectContainerProps {
 
 export const ProjectContainer = ({ project }: ProjectContainerProps) => {
   const isMobile = useIsMobile()
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [urlImageToShow, setUrlImageToShow] = useState<string>('')
   const [randomProjects, setRandomProjects] = useState<Experience[]>([])
 
   useEffect(() => {
@@ -53,8 +51,9 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
     )
   }, [project])
 
+  const containerRef = useRef<HTMLDivElement>(null)
+
   useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
     const ctx = gsap.context(() => {
       gsap.fromTo(
         '.grid-background div',
