@@ -9,7 +9,7 @@ export const Header = () => {
           Nicolas B.
         </TransitionLink>
         <div className="flex items-center gap-2">
-          <Button.Secondary href="/resume/CV NICOLAS BROUARD.pdf" icon="solar:arrow-right-up-linear">
+          <Button.Secondary href="/resume/NICOLAS BROUARD CV.pdf" icon="solar:arrow-right-up-linear">
             Resume
           </Button.Secondary>
           <Button.Primary href="https://cal.com/brdnicolas">Let's talk</Button.Primary>
