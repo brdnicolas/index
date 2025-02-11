@@ -58,7 +58,7 @@ export const Quote = () => {
               />
             </a>
           </address>
-          <Button.Tertiary href="/resume/Nicolas BROUARD CV.pdf" icon="solar:arrow-right-up-linear">
+          <Button.Tertiary href="/resume/CV NICOLAS BROUARD.pdf" icon="solar:arrow-right-up-linear">
             Resume
           </Button.Tertiary>
         </div>
