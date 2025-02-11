@@ -19,7 +19,7 @@ export const Footer = () => {
               <Button.Secondary href="https://linkedin.com/in/brdnicolas" icon="solar:arrow-right-up-linear">
                 Linkedin
               </Button.Secondary>
-              <Button.Secondary href="/resume/Nicolas BROUARD CV.pdf" icon="solar:arrow-right-up-linear">
+              <Button.Secondary href="/resume/CV NICOLAS BROUARD.pdf" icon="solar:arrow-right-up-linear">
                 Resume
               </Button.Secondary>
               <Button.Secondary href="https://www.malt.fr/profile/brdnicolas" icon="solar:arrow-right-up-linear">
