@@ -5,9 +5,6 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/molecules/Footer'
 import Script from 'next/script'
 import dayjs from 'dayjs'
-import 'dayjs/locale/fr'
-
-dayjs.locale('fr')
 
 export default function RootLayout({
   children
