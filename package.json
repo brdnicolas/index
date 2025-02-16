@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.0.1",
     "@gsap/react": "^2.1.1",
     "@tippyjs/react": "^4.2.6",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "atropos": "^2.0.2",
     "clsx": "^2.1.1",
+    "contentful": "^11.4.6",
+    "dayjs": "^1.11.13",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
