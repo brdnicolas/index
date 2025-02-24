@@ -1,14 +1,31 @@
+import { CodeBlock } from '@/components/molecules/CodeBlock/CodeBlock'
 import { SEOHead } from '@/components/atoms/SEOHead'
 import { SectionLayout } from '@/components/SectionLayout'
 import { Tag } from '@/containers/landing/sections/whoAmI/components/Tag'
 import { getAllSlugs, getPostBySlug } from '@/services/contentful/posts/post'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { BLOCKS } from '@contentful/rich-text-types'
 import dayjs from 'dayjs'
 
 export const dynamicParams = false
 
 export async function generateStaticParams() {
   return await getAllSlugs()
+}
+
+const extractCodeBlocks = (content: string) => {
+  const regex = /```(\w+)?\n([\s\S]*?)```/g
+  let match
+  const blocks = []
+
+  while ((match = regex.exec(content)) !== null) {
+    blocks.push({
+      language: match[1] || 'plaintext', // Défaut à "plaintext" si le langage n'est pas défini
+      code: match[2].trim()
+    })
+  }
+
+  return blocks
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
@@ -19,6 +36,10 @@ export default async function PostPage({ params }: { params: { slug: string } })
 
   const options = {
     renderNode: {
+      [BLOCKS.EMBEDDED_ENTRY]: (node: any) => {
+        const { language, code } = node.data.target.fields
+        return <CodeBlock language={language}>{code}</CodeBlock>
+      },
       'embedded-asset-block': (node: any) => {
         const { file, title, description } = node.data.target.fields
         const imageUrl = file.url ? `https:${file.url}` : ''
@@ -55,7 +76,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
           <div className="mb-15">
             <time dateTime={post.date}>{dayjs(post.date).format('DD MMM YYYY')}</time>
           </div>
-          <article className="[&>ul]:text-[#bdc5d1] [&>ul]:flex [&>ul]:flex-col [&>ul]:gap-5 [&>ul]:pl-4 [&>ul]:list-disc [&>p]:text-[#bdc5d1] [&>p]:text-[18px] [&>p]:mb-6 [&>h2]:mb-3 [&>h2]:mt-20 [&>h3]:mb-3 [&>h3]:mt-15 [&>h2]:font-extrabold [&>h2]:text-7 [&>h3]:font-extrabold [&>h3]:text-5">
+          <article className="[&>ul]:text-[#bdc5d1] [&>code]:m-10 [&>ul]:flex [&>ul]:flex-col [&>ul]:gap-5 [&>ul]:pl-4 [&>ul]:list-disc [&>p]:text-[#bdc5d1] [&>p]:text-[16px] [&>ul]:mb-6 [&>h5]:mb-6 [&>h4]:text-[18px] [&>h5]:font-bold [&>h4]:font-bold [&>h4]:mb-6 [&>p]:mb-6 [&>h2]:mb-3 [&>h2]:mt-20 [&>h3]:mb-3 [&>h3]:mt-15 [&>h2]:font-extrabold [&>h2]:text-7 [&>h3]:font-extrabold [&>h3]:text-5">
             {documentToReactComponents(post.content, options)}
           </article>
         </div>
