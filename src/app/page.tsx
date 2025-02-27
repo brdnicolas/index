@@ -7,6 +7,7 @@ import { Presentation } from '@/containers/landing/sections/presentation/Present
 import { Projects } from '@/containers/landing/sections/projects/Projects'
 import { WhoAmI } from '@/containers/landing/sections/whoAmI/WhoAmI'
 import { WorkedWith } from '@/containers/landing/sections/workedWith/WorkedWith'
+import { getTheLatestMinimalPost } from '@/services/contentful/posts/post'
 
 export default function Home() {
   return (

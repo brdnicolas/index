@@ -7,8 +7,5 @@ export const client = createClient({
 })
 
 export const getOneItem = () => {
-  client
-    .getEntry('4vVZ5KGn8GjN8P8vt8Z4WG')
-    .then((entry) => console.log(entry))
-    .catch(console.error)
+  client.getEntry('4vVZ5KGn8GjN8P8vt8Z4WG').catch(console.error)
 }

@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   return EXPERIENCES.map((experience) => ({ slug: experience.slug }))
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({ params }: { params: { slug: string } }) {
   const pathName = params.slug
   const project = EXPERIENCES.find(({ slug }) => slug === pathName)!
 

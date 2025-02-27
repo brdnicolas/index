@@ -7,8 +7,6 @@ import { LOADER_TIME } from '@/components/atoms/Loader'
 export const Presentation = () => {
   const emojiRef = useRef(null)
   const bigTitle = useRef(null)
-  const title = "I'm|just|a"
-  const title2 = 'React|Engineer'
 
   useEffect(() => {
     const hasVisited = sessionStorage.getItem('hasVisited')

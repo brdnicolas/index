@@ -13,21 +13,6 @@ export async function generateStaticParams() {
   return await getAllSlugs()
 }
 
-const extractCodeBlocks = (content: string) => {
-  const regex = /```(\w+)?\n([\s\S]*?)```/g
-  let match
-  const blocks = []
-
-  while ((match = regex.exec(content)) !== null) {
-    blocks.push({
-      language: match[1] || 'plaintext', // Défaut à "plaintext" si le langage n'est pas défini
-      code: match[2].trim()
-    })
-  }
-
-  return blocks
-}
-
 export default async function PostPage({ params }: { params: { slug: string } }) {
   const slug = params.slug
   const post = await getPostBySlug(slug)
@@ -65,7 +50,11 @@ export default async function PostPage({ params }: { params: { slug: string } })
         url={`https://brdnicolas.com/blog/${slug}`}
       />
       <SectionLayout className="pt-27">
-        <img alt="cover" src={`https:${post.cover.fields.file.url}`} width="100%" height={500} />
+        <img
+          alt="cover"
+          src={`https:${post.cover.fields.file.url}`}
+          className="w-full h-[300px] object-cover object-center rounded-3"
+        />
         <div className="w-[900px] mx-auto p-7 mt-9">
           <div className="flex gap-3 mb-2">
             {post.tags.map((tag) => (

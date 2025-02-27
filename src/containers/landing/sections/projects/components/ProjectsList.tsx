@@ -17,28 +17,6 @@ export const ProjectsList = () => {
     setFirstPaddingCard(size.width <= MAX_LAYOUT_WIDTH ? 16 : (size.width - MAX_LAYOUT_WIDTH) / 2)
   }, [size])
 
-  // useEffect(() => {
-  //   const ctx = gsap.context(() => {
-  //     gsap.fromTo(
-  //       titleRef.current,
-  //       { opacity: 0, y: 50 },
-  //       {
-  //         opacity: 1,
-  //         y: 0,
-  //         scrollTrigger: {
-  //           trigger: titleRef.current,
-  //           scrub: 0.5,
-  //           start: 'top-=50% 85%',
-  //           end: 'bottom 85%'
-  //         }
-  //       }
-  //     )
-  //   })
-  //   return () => {
-  //     ctx.revert()
-  //   }
-  // }, [])
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       const container = containerRef.current

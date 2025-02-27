@@ -36,20 +36,6 @@ export const Education = () => {
         confettiColors: ['#FFFFFF', '#E9DB4E', '#809FCA', '#D58799']
       })
     }
-
-    const handleMouseLeave = () => {
-      console.log("Souris sortie de l'élément")
-      // Optionnel: tu peux ajouter une action lorsque la souris quitte l'élément
-    }
-
-    element.addEventListener('mouseenter', handleMouseEnter)
-    element.addEventListener('mouseleave', handleMouseLeave)
-
-    // Cleanup pour éviter les fuites de mémoire
-    return () => {
-      element.removeEventListener('mouseenter', handleMouseEnter)
-      element.removeEventListener('mouseleave', handleMouseLeave)
-    }
   }, [])
 
   return (
