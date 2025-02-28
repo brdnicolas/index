@@ -55,7 +55,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
           src={`https:${post.cover.fields.file.url}`}
           className="w-full h-[300px] object-cover object-center rounded-3"
         />
-        <div className="w-[900px] mx-auto p-7 mt-9">
+        <div className="w-full max-w-[900px] mx-auto tablet:p-7 mt-9">
           <div className="flex gap-3 mb-2">
             {post.tags.map((tag) => (
               <Tag className="text-3">{tag.fields.title}</Tag>
