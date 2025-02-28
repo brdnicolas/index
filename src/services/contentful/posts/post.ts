@@ -58,7 +58,7 @@ export const getAllMinimalPosts = async (): Promise<MinimalPost[]> => {
     .getEntries({
       content_type: 'post',
       select: ['fields.cover', 'fields.title', 'fields.description', 'fields.date', 'fields.slug'],
-      order: ['fields.date']
+      order: ['-fields.date']
     })
     .then((entries) => {
       return entries.items.map((post) => post.fields)
