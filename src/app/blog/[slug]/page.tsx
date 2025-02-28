@@ -37,6 +37,14 @@ export default async function PostPage({ params }: { params: { slug: string } })
             height="auto"
           />
         )
+      },
+      hyperlink: (node: any) => {
+        const { uri } = node.data
+        return (
+          <a href={uri} target="_blank" rel="noopener noreferrer" className="underline text-gray-300 hover:text-white">
+            {node.content[0].value}
+          </a>
+        )
       }
     }
   }
