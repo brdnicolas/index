@@ -15,10 +15,10 @@ export async function CodeBlock({ children, language }: CodeBlockProps) {
   })
 
   return (
-    <div className="codeblock relative">
+    <div className="codeblock relative group">
       <CopyButton
         onCopyChildren={<Icon className="text-5 text-green-600" icon="solar:check-read-outline" />}
-        className="absolute z-10 top-3 right-3 bg-[#212121] rounded-3 p-2"
+        className="group-hover:block hidden absolute z-10 top-3 right-3 bg-[#212121] rounded-3 p-2"
         text={children}
       >
         <Icon className="text-5 text-gray-400" icon="solar:copy-linear" />
