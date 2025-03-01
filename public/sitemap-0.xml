@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://brdnicolas.com/manifest.json</loc><lastmod>2025-03-01T11:30:45.076Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/sitemap.xml</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/robots.txt</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/design-systems</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/pepiswap</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/iliad-group</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/free</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/bellintone</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/mentor-goal</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/blog</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/blog/singleton-pattern</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/blog/mastering-design-system</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/blog/how-to-use-react-contexts</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://brdnicolas.com/blog/react-portals</loc><lastmod>2025-03-01T11:30:45.077Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+</urlset>
