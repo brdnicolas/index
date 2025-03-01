@@ -25,6 +25,13 @@ export default async function PostPage({ params }: { params: { slug: string } })
         const { language, code } = node.data.target.fields
         return <CodeBlock language={language}>{code}</CodeBlock>
       },
+      [BLOCKS.OL_LIST]: (node: any) => {
+        return (
+          <ol className="list-decimal pl-6 text-[#bdc5d1]">
+            {node.content.map((item: any) => documentToReactComponents(item))}
+          </ol>
+        )
+      },
       'embedded-asset-block': (node: any) => {
         const { file, title, description } = node.data.target.fields
         const imageUrl = file.url ? `https:${file.url}` : ''
