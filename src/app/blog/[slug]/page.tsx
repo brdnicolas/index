@@ -6,6 +6,7 @@ import { getAllSlugs, getPostBySlug } from '@/services/contentful/posts/post'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import dayjs from 'dayjs'
+import { ScrollProgress } from '@/components/magicui/scroll-progress'
 
 export const dynamicParams = false
 
@@ -65,6 +66,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
         url={`https://brdnicolas.com/blog/${slug}`}
       />
       <SectionLayout className="pt-27">
+        <ScrollProgress className="top-[71px]" />
         <img
           alt="cover"
           src={`https:${post.cover.fields.file.url}`}
