@@ -7,6 +7,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS } from '@contentful/rich-text-types'
 import dayjs from 'dayjs'
 import { ScrollProgress } from '@/components/magicui/scroll-progress'
+import { SupportActionButton } from '@/components/atoms/SupportActionButton'
 
 export const dynamicParams = false
 
@@ -87,6 +88,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
           </article>
         </div>
       </SectionLayout>
+      <SupportActionButton />
     </main>
   )
 }
