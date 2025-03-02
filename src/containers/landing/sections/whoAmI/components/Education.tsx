@@ -36,6 +36,12 @@ export const Education = () => {
         confettiColors: ['#FFFFFF', '#E9DB4E', '#809FCA', '#D58799']
       })
     }
+
+    element.addEventListener('mouseenter', handleMouseEnter)
+
+    return () => {
+      element.removeEventListener('mouseenter', handleMouseEnter)
+    }
   }, [])
 
   return (

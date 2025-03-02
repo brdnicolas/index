@@ -31,7 +31,7 @@ export const SupportActionButton = () => {
 
   return (
     <>
-      <canvas id="support-cookie-canvas" className="z-10 fixed top-0 left-0 w-full h-full" />
+      <canvas id="support-cookie-canvas" className="z-10 fixed pointer-events-none top-0 left-0 w-full h-full" />
       <Tippy content="I can't code without cookies. Help me survive" animation="scale">
         <a
           ref={buttonRef}
