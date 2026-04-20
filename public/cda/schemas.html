@@ -1479,6 +1479,22 @@
         line-height: 1.4;
       }
 
+      /* UML Diagramme — image PNG */
+      .uml-wrapper {
+        width: 100%;
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+      }
+
+      .uml-image {
+        width: 100%;
+        max-width: 1000px;
+        height: auto;
+        display: block;
+        border-radius: 8px;
+      }
+
       /* UML Diagramme */
       .uml-grid {
         display: grid;
@@ -2568,97 +2584,27 @@
       <div class="schema">
         <div class="schema-label"><span class="fig">Fig. 03</span> UML / Diagramme de classes</div>
 
-        <div class="uml-grid">
-          <div class="uml-abstract-parent">
-            <div class="uml-class abstract" style="width: 280px">
-              <div class="uml-head">
-                <div class="cname">Personne</div>
-                <div class="stereo">«abstract»</div>
-              </div>
-              <div class="uml-attrs">
-                <div><span class="vis-priv">–</span> nom : <span style="color: var(--info)">String</span></div>
-                <div><span class="vis-priv">–</span> prenom : <span style="color: var(--info)">String</span></div>
-              </div>
-              <div class="uml-divider"></div>
-              <div class="uml-methods">
-                <div>
-                  <span class="vis-pub">+</span> getNomComplet() : <span style="color: var(--info)">String</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="uml-class">
-            <div class="uml-head"><div class="cname">Lecteur</div></div>
-            <div class="uml-attrs">
-              <div><span class="vis-priv">–</span> idLecteur : <span style="color: var(--info)">int</span></div>
-              <div><span class="vis-priv">–</span> email : <span style="color: var(--info)">String</span></div>
-              <div><span class="vis-priv">–</span> dateInscription : <span style="color: var(--info)">Date</span></div>
-            </div>
-            <div class="uml-divider"></div>
-            <div class="uml-methods">
-              <div><span class="vis-pub">+</span> emprunter(l : Livre) : void</div>
-              <div><span class="vis-pub">+</span> rendre(l : Livre) : void</div>
-              <div><span class="vis-pub">+</span> consulterHistorique() : List</div>
-            </div>
-          </div>
-
-          <div class="uml-class">
-            <div class="uml-head"><div class="cname">Bibliothecaire</div></div>
-            <div class="uml-attrs">
-              <div><span class="vis-priv">–</span> matricule : <span style="color: var(--info)">String</span></div>
-              <div><span class="vis-prot">#</span> salaire : <span style="color: var(--info)">double</span></div>
-              <div><span class="vis-priv">–</span> dateEmbauche : <span style="color: var(--info)">Date</span></div>
-            </div>
-            <div class="uml-divider"></div>
-            <div class="uml-methods">
-              <div><span class="vis-pub">+</span> ajouterLivre(l : Livre)</div>
-              <div><span class="vis-pub">+</span> supprimerLivre(l : Livre)</div>
-              <div><span class="vis-pub">+</span> validerEmprunt() : bool</div>
-            </div>
-          </div>
-
-          <div class="uml-class">
-            <div class="uml-head"><div class="cname">Livre</div></div>
-            <div class="uml-attrs">
-              <div><span class="vis-priv">–</span> idLivre : <span style="color: var(--info)">int</span></div>
-              <div><span class="vis-priv">–</span> titre : <span style="color: var(--info)">String</span></div>
-              <div><span class="vis-priv">–</span> auteur : <span style="color: var(--info)">String</span></div>
-              <div><span class="vis-priv">–</span> isbn : <span style="color: var(--info)">String</span></div>
-            </div>
-            <div class="uml-divider"></div>
-            <div class="uml-methods">
-              <div><span class="vis-pub">+</span> estDisponible() : bool</div>
-              <div><span class="vis-pub">+</span> reserver() : void</div>
-            </div>
-          </div>
-
-          <div class="uml-class">
-            <div class="uml-head"><div class="cname">Exemplaire</div></div>
-            <div class="uml-attrs">
-              <div><span class="vis-priv">–</span> numeroExemplaire : <span style="color: var(--info)">int</span></div>
-              <div><span class="vis-priv">–</span> etat : <span style="color: var(--info)">String</span></div>
-              <div><span class="vis-priv">–</span> dateAcquisition : <span style="color: var(--info)">Date</span></div>
-            </div>
-            <div class="uml-divider"></div>
-            <div class="uml-methods">
-              <div><span class="vis-pub">+</span> getEtat() : String</div>
-              <div><span class="vis-pub">+</span> estEmpruntable() : bool</div>
-            </div>
-          </div>
+        <div class="uml-wrapper">
+          <img
+            src="/cda/uml_diagram.png"
+            alt="Diagramme de classes UML : Personne (abstract) héritée par Lecteur et Bibliothecaire, Livre composé d'Exemplaires, Lecteur emprunte des Livres"
+            class="uml-image"
+            loading="lazy"
+          />
         </div>
 
         <div class="schema-legend">
           <div class="leg-row">
             <span class="leg-label">Héritage</span
-            ><span>Lecteur et Bibliothecaire héritent de Personne (classe abstraite).</span>
+            ><span>Lecteur et Bibliothecaire héritent de Personne (classe abstraite) — flèche avec triangle vide.</span>
           </div>
           <div class="leg-row">
             <span class="leg-label">Composition</span
-            ><span>Un Livre est composé de 1 à plusieurs Exemplaires (losange plein).</span>
+            ><span>Un Livre est composé de 1 à plusieurs Exemplaires — losange plein côté Livre.</span>
           </div>
           <div class="leg-row">
-            <span class="leg-label">Association</span><span>Un Lecteur emprunte de 0 à 5 Livres simultanément.</span>
+            <span class="leg-label">Association</span
+            ><span>Un Lecteur emprunte de 0 à 5 Livres simultanément — ligne simple avec cardinalités.</span>
           </div>
         </div>
       </div>
