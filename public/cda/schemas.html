@@ -1,0 +1,2854 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Anti-sèche CDA — MERISE & UML</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --bg-2: #111111;
+        --card: #161616;
+        --card-2: #1d1d1d;
+        --card-3: #242424;
+        --border: #2a2a2a;
+        --border-soft: #1f1f1f;
+        --white: #ffffff;
+        --text: #e5e5e5;
+        --muted: #a3a3a3;
+        --dim: #6b6b6b;
+        --faint: #404040;
+
+        --accent: #fbbf24;
+        --accent-soft: #fde68a;
+        --accent-glow: rgba(251, 191, 36, 0.15);
+        --success: #4ade80;
+        --danger: #f87171;
+        --info: #60a5fa;
+        --violet: #c084fc;
+        --pink: #f472b6;
+
+        --serif: 'Instrument Serif', Georgia, serif;
+        --sans: 'Inter', -apple-system, sans-serif;
+        --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      html,
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      ::selection {
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        padding: 18mm 16mm;
+        margin: 10mm auto;
+        background: var(--bg);
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      .page::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle at 20% 10%, rgba(251, 191, 36, 0.03) 0%, transparent 40%),
+          radial-gradient(circle at 80% 90%, rgba(96, 165, 250, 0.02) 0%, transparent 40%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .page > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Header & Footer */
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 22px;
+        font-size: 9px;
+        color: var(--dim);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      .page-header .brand {
+        color: var(--muted);
+      }
+      .page-header .chapter {
+        color: var(--dim);
+        letter-spacing: 0.15em;
+      }
+
+      .page-footer {
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 9px;
+        color: var(--dim);
+      }
+
+      .page-footer .pnum {
+        color: var(--accent);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        font-size: 10px;
+      }
+
+      /* Couverture */
+      .cover {
+        padding: 0 !important;
+      }
+
+      .cover-inner {
+        padding: 22mm 18mm;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      .cover-bg-letters {
+        position: absolute;
+        bottom: -40mm;
+        right: -30mm;
+        font-family: var(--serif);
+        font-size: 420px;
+        font-weight: 400;
+        line-height: 0.85;
+        color: var(--accent);
+        opacity: 0.06;
+        letter-spacing: -0.05em;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .cover-kicker {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--accent);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .cover-kicker::before,
+      .cover-kicker::after {
+        content: '';
+        height: 1px;
+        flex: 1;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        max-width: 60px;
+      }
+
+      .cover-rule {
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+        margin-bottom: 32px;
+      }
+
+      .cover-meta {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        margin-bottom: 20px;
+      }
+
+      .cover-meta .num {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .cover-title {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 72px;
+        color: var(--white);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+      }
+
+      .cover-title-big {
+        font-family: var(--sans);
+        font-size: 160px;
+        font-weight: 900;
+        line-height: 0.85;
+        letter-spacing: -0.05em;
+        background: linear-gradient(180deg, var(--accent) 0%, #d97706 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-top: 8px;
+        filter: drop-shadow(0 4px 20px rgba(251, 191, 36, 0.2));
+      }
+
+      .cover-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 14px;
+        margin-bottom: 24px;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        padding: 4px 10px;
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-size: 9px;
+        font-weight: 600;
+        color: var(--text);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .tag.accent {
+        background: var(--accent-glow);
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .cover-split {
+        height: 1px;
+        background: var(--border);
+        width: 40%;
+        margin-bottom: 20px;
+      }
+
+      .cover-intro {
+        max-width: 440px;
+        color: var(--text);
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+      }
+
+      .cover-intro strong {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .toc-block {
+        margin-top: auto;
+      }
+
+      .toc-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .toc-title::before {
+        content: '';
+        width: 16px;
+        height: 2px;
+        background: var(--accent);
+      }
+
+      .toc {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .toc-row {
+        display: grid;
+        grid-template-columns: 50px 1fr 60px;
+        padding: 10px 20px;
+        align-items: center;
+        font-size: 12px;
+        border-bottom: 1px solid var(--border-soft);
+      }
+
+      .toc-row:last-child {
+        border-bottom: none;
+      }
+
+      .toc-row.head {
+        background: var(--card-2);
+        color: var(--accent);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        padding: 10px 20px;
+      }
+
+      .toc-row .num {
+        color: var(--accent);
+        font-weight: 700;
+        font-family: var(--mono);
+      }
+
+      .toc-row .page-n {
+        text-align: right;
+        color: var(--dim);
+        font-family: var(--mono);
+        font-weight: 600;
+      }
+
+      .toc-row .title {
+        color: var(--white);
+        font-weight: 500;
+      }
+
+      /* Chapter header */
+      .chapter-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 22px;
+        margin-bottom: 22px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .chapter-num {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 84px;
+        line-height: 0.8;
+        color: var(--accent);
+        font-weight: 400;
+        flex-shrink: 0;
+        text-shadow: 0 0 40px var(--accent-glow);
+      }
+
+      .chapter-titles {
+        padding-top: 8px;
+      }
+
+      .chapter-kicker {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--dim);
+        margin-bottom: 6px;
+      }
+
+      .chapter-title {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--white);
+        letter-spacing: -0.02em;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .chapter-subtitle {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 16px;
+        color: var(--muted);
+      }
+
+      /* Contenu */
+      .lead {
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--text);
+        margin-bottom: 16px;
+      }
+
+      .lead strong {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      .lead em {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--accent-soft);
+        font-size: 15px;
+      }
+
+      p {
+        font-size: 12.5px;
+        line-height: 1.65;
+        color: var(--text);
+        margin-bottom: 10px;
+      }
+
+      p strong {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--white);
+        letter-spacing: -0.01em;
+        margin: 22px 0 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      h2::before {
+        content: '';
+        width: 3px;
+        height: 18px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      h3 {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin: 16px 0 8px;
+      }
+
+      .small-label {
+        font-size: 10px;
+        color: var(--muted);
+        font-style: italic;
+        margin-top: -4px;
+        margin-bottom: 10px;
+      }
+
+      /* Tableaux */
+      table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+        margin: 10px 0 16px;
+        font-size: 11.5px;
+      }
+
+      table thead th {
+        background: var(--card-2);
+        color: var(--accent);
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 10px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+
+      table tbody td {
+        padding: 9px 14px;
+        color: var(--text);
+        border-bottom: 1px solid var(--border-soft);
+        vertical-align: middle;
+      }
+
+      table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      table tbody td:first-child {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      /* Callouts */
+      .callout {
+        position: relative;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 16px 12px 20px;
+        margin: 12px 0;
+        overflow: hidden;
+      }
+
+      .callout::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--accent);
+      }
+
+      .callout .callout-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 5px;
+      }
+
+      .callout .callout-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+
+      .callout .callout-text {
+        font-size: 11px;
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      .callout.warn::before {
+        background: var(--danger);
+      }
+      .callout.warn .callout-label {
+        color: var(--danger);
+      }
+      .callout.key::before {
+        background: var(--success);
+      }
+      .callout.key .callout-label {
+        color: var(--success);
+      }
+
+      /* Checklist */
+      .checklist {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0 12px;
+      }
+
+      .checklist li {
+        padding: 5px 0 5px 26px;
+        position: relative;
+        font-size: 12px;
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      .checklist li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 9px;
+        width: 13px;
+        height: 13px;
+        border: 1.5px solid var(--accent);
+        border-radius: 3px;
+        background: var(--card);
+      }
+
+      .checklist li strong {
+        color: var(--white);
+      }
+
+      /* Outils (nouvelle section) */
+      .tools-section {
+        background: linear-gradient(180deg, var(--card) 0%, rgba(251, 191, 36, 0.03) 100%);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin: 14px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tools-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent), transparent);
+      }
+
+      .tools-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+
+      .tools-title .ico {
+        font-size: 16px;
+        letter-spacing: normal;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .tool-card {
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 14px 16px;
+        transition: border-color 0.2s;
+      }
+
+      .tool-card.recommended {
+        border-color: var(--accent);
+        background: linear-gradient(135deg, var(--card-2) 0%, rgba(251, 191, 36, 0.05) 100%);
+      }
+
+      .tool-card .tool-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        margin-bottom: 3px;
+      }
+
+      .tool-card .tool-name {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .tool-card .tool-badge {
+        font-size: 8px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .tool-card .tool-badge.free {
+        background: rgba(74, 222, 128, 0.15);
+        color: var(--success);
+      }
+
+      .tool-card .tool-badge.code {
+        background: rgba(96, 165, 250, 0.15);
+        color: var(--info);
+      }
+
+      .tool-card .tool-badge.top {
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .tool-card .tool-url {
+        font-family: var(--mono);
+        font-size: 9.5px;
+        color: var(--accent);
+        display: block;
+        margin-bottom: 4px;
+        word-break: break-all;
+      }
+
+      .tool-card .tool-desc {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* SCHEMAS */
+      .schema {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px 14px;
+        margin: 14px 0;
+      }
+
+      .schema-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .schema-label .fig {
+        color: var(--accent);
+        background: var(--accent-glow);
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+
+      .schema-legend {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-soft);
+        font-size: 10.5px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .schema-legend .leg-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 3px;
+      }
+
+      .schema-legend .leg-label {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 9px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        min-width: 70px;
+      }
+
+      .schema-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .entity {
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        width: 180px;
+        font-size: 11px;
+      }
+
+      .entity .ent-head {
+        background: linear-gradient(180deg, var(--card-3), var(--card-2));
+        color: var(--white);
+        font-weight: 700;
+        text-align: center;
+        padding: 7px;
+        font-size: 12px;
+        letter-spacing: 0.05em;
+        border-bottom: 1px solid var(--border);
+        font-family: var(--mono);
+      }
+
+      .entity.livre .ent-head,
+      .entity.lecteur .ent-head {
+        background: linear-gradient(180deg, #1e3a5f, #1a2f4d);
+        color: var(--info);
+      }
+
+      .entity.assoc .ent-head {
+        background: linear-gradient(180deg, #3a2e18, #2a2010);
+        color: var(--accent);
+      }
+
+      .entity.assoc {
+        border-color: var(--accent);
+      }
+
+      .entity .ent-body {
+        padding: 5px 0;
+      }
+
+      .entity .ent-row {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        padding: 3px 10px;
+        font-family: var(--mono);
+        font-size: 10px;
+        align-items: center;
+      }
+
+      .entity .ent-row .tag-k {
+        font-weight: 700;
+        font-size: 8.5px;
+        color: var(--accent);
+      }
+
+      .entity .ent-row .tag-k.fk {
+        color: var(--danger);
+      }
+
+      .entity .ent-row.pk .field {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-underline-offset: 3px;
+      }
+
+      .entity .ent-row.fk .field {
+        color: var(--danger);
+        font-weight: 600;
+      }
+
+      .entity .ent-row .field {
+        color: var(--text);
+        font-size: 10.5px;
+      }
+
+      .entity .ent-divider {
+        height: 1px;
+        background: var(--border-soft);
+        margin: 4px 0;
+      }
+
+      .assoc-ellipse {
+        background: var(--card-2);
+        border: 1.5px solid var(--accent);
+        border-radius: 999px;
+        padding: 12px 20px;
+        text-align: center;
+        min-width: 120px;
+        box-shadow: 0 0 30px var(--accent-glow);
+        z-index: 2;
+      }
+
+      .assoc-ellipse .name {
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 12px;
+      }
+
+      .assoc-ellipse .attr {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 9.5px;
+        font-style: italic;
+        margin-top: 2px;
+      }
+
+      .connector {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--muted), var(--accent), var(--muted));
+        position: relative;
+        min-width: 30px;
+      }
+
+      .card-badge {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--bg);
+        border: 1.5px solid var(--accent);
+        color: var(--accent);
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 999px;
+        font-family: var(--mono);
+      }
+
+      .card-badge.blue {
+        border-color: var(--info);
+        color: var(--info);
+      }
+
+      /* MLD */
+      .mld-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .mld-connector {
+        flex: 1;
+        position: relative;
+        min-width: 40px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mld-connector .line {
+        height: 1px;
+        width: 100%;
+        background: var(--muted);
+      }
+
+      .mld-connector .bubble {
+        position: absolute;
+        background: var(--bg);
+        border: 1.5px solid var(--accent);
+        color: var(--accent);
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 999px;
+        font-family: var(--mono);
+      }
+
+      .mld-connector .bubble.left {
+        left: 10%;
+      }
+      .mld-connector .bubble.right {
+        right: 10%;
+      }
+      .mld-connector .bubble.blue {
+        border-color: var(--info);
+        color: var(--info);
+      }
+
+      /* UML */
+      .uml-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 55px 70px;
+        padding: 25px 10px 8px;
+        position: relative;
+      }
+
+      .uml-abstract-parent {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-bottom: -18px;
+        z-index: 2;
+      }
+
+      .uml-class {
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        width: 100%;
+        max-width: 220px;
+        font-size: 10.5px;
+        z-index: 2;
+        position: relative;
+      }
+
+      .uml-class.abstract {
+        border-color: var(--violet);
+        background: linear-gradient(180deg, rgba(192, 132, 252, 0.05), rgba(192, 132, 252, 0.02));
+      }
+
+      .uml-class .uml-head {
+        background: var(--card-3);
+        padding: 7px 12px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .uml-class.abstract .uml-head {
+        background: rgba(192, 132, 252, 0.1);
+        border-bottom-color: var(--violet);
+      }
+
+      .uml-class .uml-head .cname {
+        font-weight: 700;
+        color: var(--white);
+        font-size: 12px;
+        font-family: var(--sans);
+      }
+
+      .uml-class.abstract .uml-head .cname {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--violet);
+        font-weight: 400;
+        font-size: 15px;
+      }
+
+      .uml-class.abstract .uml-head .stereo {
+        color: var(--muted);
+        font-size: 9px;
+        font-style: italic;
+        margin-top: 2px;
+      }
+
+      .uml-class .uml-attrs,
+      .uml-class .uml-methods {
+        padding: 5px 12px;
+        font-family: var(--mono);
+      }
+
+      .uml-class .uml-attrs div,
+      .uml-class .uml-methods div {
+        padding: 2px 0;
+        font-size: 9.5px;
+        color: var(--text);
+        line-height: 1.4;
+      }
+
+      .uml-class .uml-methods div {
+        color: var(--success);
+      }
+
+      .uml-class .uml-divider {
+        height: 1px;
+        background: var(--border-soft);
+        margin: 0 12px;
+      }
+
+      .uml-class.abstract .uml-divider {
+        background: rgba(192, 132, 252, 0.2);
+      }
+
+      .vis-prot {
+        color: var(--accent) !important;
+      }
+      .vis-priv {
+        color: var(--danger);
+      }
+      .vis-pub {
+        color: var(--success);
+      }
+
+      /* Légende visibilité */
+      .vis-legend {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px;
+        margin: 10px 0;
+      }
+
+      .vis-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+
+      .vis-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: var(--card-2);
+        border: 1.5px solid var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 15px;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .vis-circle.success {
+        border-color: var(--success);
+        color: var(--success);
+      }
+      .vis-circle.danger {
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+      .vis-circle.info {
+        border-color: var(--info);
+        color: var(--info);
+      }
+
+      .vis-text .vn {
+        color: var(--white);
+        font-weight: 600;
+        font-size: 11px;
+        display: block;
+      }
+
+      .vis-text .vd {
+        color: var(--muted);
+        font-size: 9.5px;
+        font-style: italic;
+      }
+
+      .rel-legend {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin: 10px 0;
+      }
+
+      .rel-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+
+      .rel-item {
+        padding: 6px 0;
+      }
+
+      .rel-item .rel-name {
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--white);
+        margin-bottom: 5px;
+      }
+
+      .rel-visual {
+        margin: 6px 0;
+        color: var(--text);
+        font-size: 14px;
+        font-family: var(--mono);
+      }
+
+      .rel-item .rel-desc {
+        font-size: 9.5px;
+        color: var(--muted);
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      /* Code SQL */
+      .code-block {
+        background: #0d0d0d;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin: 12px 0;
+        overflow: hidden;
+        font-family: var(--mono);
+        font-size: 10.5px;
+        line-height: 1.6;
+      }
+
+      .code-header {
+        background: var(--card-2);
+        border-bottom: 1px solid var(--border);
+        padding: 7px 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 9.5px;
+        color: var(--muted);
+      }
+
+      .code-header .dots {
+        display: flex;
+        gap: 5px;
+      }
+      .code-header .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+      }
+      .code-header .dot:nth-child(1) {
+        background: #ff5f56;
+      }
+      .code-header .dot:nth-child(2) {
+        background: #ffbd2e;
+      }
+      .code-header .dot:nth-child(3) {
+        background: #27c93f;
+      }
+
+      .code-header .filename {
+        margin-left: 8px;
+        font-weight: 600;
+        color: var(--text);
+        font-family: var(--mono);
+      }
+
+      .code-content {
+        padding: 12px 16px;
+        color: var(--text);
+        white-space: pre;
+        overflow-x: auto;
+        font-size: 10px;
+      }
+
+      .kw {
+        color: #fbbf24;
+        font-weight: 600;
+      }
+      .type {
+        color: #60a5fa;
+      }
+      .fn {
+        color: #4ade80;
+      }
+      .str {
+        color: #f472b6;
+      }
+      .cmt {
+        color: #6b7280;
+        font-style: italic;
+      }
+      .null {
+        color: #f87171;
+      }
+      .fk {
+        color: #c084fc;
+      }
+
+      /* ===== Intro MERISE : schéma méthode → livrables ===== */
+      .merise-diagram {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin: 14px 0;
+        position: relative;
+      }
+
+      .merise-method {
+        background: linear-gradient(135deg, var(--card-2) 0%, rgba(251, 191, 36, 0.08) 100%);
+        border: 1.5px solid var(--accent);
+        border-radius: 10px;
+        padding: 14px 18px;
+        text-align: center;
+        margin-bottom: 24px;
+        box-shadow: 0 0 40px var(--accent-glow);
+        position: relative;
+      }
+
+      .merise-method .label {
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+
+      .merise-method .name {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 32px;
+        color: var(--accent);
+        font-weight: 400;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .merise-method .desc {
+        font-size: 10.5px;
+        color: var(--text);
+        font-style: italic;
+      }
+
+      .merise-arrows {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: -14px 0 10px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .merise-arrows .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid var(--accent);
+        margin: 0 60px;
+      }
+
+      .merise-branch-label {
+        text-align: center;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .merise-branch-label span {
+        color: var(--accent);
+      }
+
+      .merise-livrables {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+      }
+
+      .livrable-card {
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .livrable-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+      }
+
+      .livrable-card.c::before {
+        background: var(--info);
+      }
+      .livrable-card.l::before {
+        background: var(--accent);
+      }
+      .livrable-card.p::before {
+        background: var(--success);
+      }
+
+      .livrable-card .l-tag {
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+
+      .livrable-card .l-name {
+        font-size: 18px;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .livrable-card.c .l-name {
+        color: var(--info);
+      }
+      .livrable-card.l .l-name {
+        color: var(--accent);
+      }
+      .livrable-card.p .l-name {
+        color: var(--success);
+      }
+
+      .livrable-card .l-q {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 13px;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+
+      .livrable-card .l-desc {
+        font-size: 10px;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* Analogie maison */
+      .analogy-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin: 12px 0;
+      }
+
+      .analogy-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+
+      .analogy-card .a-ico {
+        font-size: 16px;
+        margin-bottom: 4px;
+      }
+
+      .analogy-card .a-title {
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 4px;
+      }
+
+      .analogy-card .a-desc {
+        font-size: 10px;
+        color: var(--text);
+        line-height: 1.4;
+      }
+
+      .analogy-card .a-desc strong {
+        color: var(--white);
+      }
+
+      /* MLD notation */
+      .mld-notation {
+        background: #0d0d0d;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-family: var(--mono);
+        font-size: 10.5px;
+        line-height: 1.9;
+        color: var(--text);
+        margin: 8px 0 14px;
+      }
+
+      .mld-notation .line {
+        display: block;
+      }
+      .mld-notation .pk {
+        color: var(--accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        font-weight: 600;
+      }
+      .mld-notation .fk {
+        color: var(--danger);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        font-weight: 600;
+      }
+      .mld-notation .tn {
+        color: var(--info);
+        font-weight: 700;
+      }
+
+      /* Item list */
+      .item-list {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .item-list .item {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        padding: 9px 16px;
+        font-size: 11px;
+        border-bottom: 1px solid var(--border-soft);
+        align-items: center;
+      }
+
+      .item-list .item:last-child {
+        border-bottom: none;
+      }
+
+      .item-list .item .k {
+        color: var(--accent);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .item-list .item .k::before {
+        content: '▸';
+        color: var(--accent);
+        font-size: 10px;
+      }
+
+      .item-list .item .v {
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 10px;
+      }
+
+      /* Erreurs */
+      .error-block {
+        display: grid;
+        grid-template-columns: 65px 1fr;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        margin-bottom: 9px;
+        overflow: hidden;
+      }
+
+      .error-block .err-num {
+        background: var(--card-2);
+        border-right: 2px solid var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 36px;
+        color: var(--accent);
+      }
+
+      .error-block .err-body {
+        padding: 12px 16px;
+      }
+
+      .error-block .err-title {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: var(--white);
+        margin-bottom: 4px;
+      }
+
+      .error-block .err-desc {
+        font-size: 10.5px;
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      /* Decor */
+      .deco-rule {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 20px 0;
+      }
+
+      .deco-rule::before,
+      .deco-rule::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--border), transparent);
+      }
+
+      .deco-rule .diamond {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        transform: rotate(45deg);
+        box-shadow: 0 0 12px var(--accent-glow);
+      }
+
+      .end-note {
+        text-align: center;
+        margin-top: 26px;
+      }
+
+      .end-title {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 26px;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+
+      .end-sub {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      /* Impression */
+      @media print {
+        @page {
+          size: A4;
+          margin: 0;
+        }
+        body,
+        html {
+          background: var(--bg);
+        }
+        .page {
+          margin: 0;
+          width: 210mm;
+          height: 297mm;
+          page-break-after: always;
+        }
+        .no-print {
+          display: none !important;
+        }
+      }
+
+      .print-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: var(--accent);
+        color: var(--bg);
+        border: none;
+        padding: 14px 22px;
+        border-radius: 999px;
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: 13px;
+        cursor: pointer;
+        box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .info-banner {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--card-2);
+        border: 1px solid var(--accent);
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 11px;
+        color: var(--text);
+        z-index: 1000;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      .info-banner strong {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ============================================
+     PAGE 1 — COUVERTURE
+     ============================================ -->
+    <div class="page cover">
+      <div class="cover-inner">
+        <div class="cover-bg-letters">CDA</div>
+
+        <div class="cover-kicker">Dossier professionnel · Révisions</div>
+        <div class="cover-rule"></div>
+
+        <div class="cover-meta"><span class="num">N° 01</span> &nbsp;·&nbsp; Édition 2026 &nbsp;·&nbsp; Vol. I</div>
+
+        <h1 class="cover-title">Anti-Sèche</h1>
+        <div class="cover-title-big">CDA</div>
+
+        <div class="cover-tags">
+          <span class="tag accent">MCD</span>
+          <span class="tag">MLD</span>
+          <span class="tag">MPD</span>
+          <span class="tag">UML</span>
+          <span class="tag">SQL</span>
+        </div>
+
+        <div class="cover-split"></div>
+
+        <p class="cover-intro">
+          <strong>Fiche de synthèse pour le titre Concepteur Développeur d'Applications.</strong>
+          L'ensemble des schémas est décliné autour d'un unique cas d'école : la gestion d'une bibliothèque. Chaque
+          section contient la théorie, un exemple travaillé, les pièges à éviter, et
+          <strong>les outils recommandés pour construire ton schéma</strong>.
+        </p>
+
+        <div class="toc-block">
+          <div class="toc-title">Sommaire</div>
+          <div class="toc">
+            <div class="toc-row head">
+              <span>§</span>
+              <span>Chapitre</span>
+              <span class="page-n">Page</span>
+            </div>
+            <div class="toc-row">
+              <span class="num">—</span><span class="title">Introduction — MERISE et ses livrables</span
+              ><span class="page-n">02</span>
+            </div>
+            <div class="toc-row">
+              <span class="num">01</span><span class="title">MCD — Modèle Conceptuel de Données</span
+              ><span class="page-n">03</span>
+            </div>
+            <div class="toc-row">
+              <span class="num">02</span><span class="title">MLD — Modèle Logique de Données</span
+              ><span class="page-n">05</span>
+            </div>
+            <div class="toc-row">
+              <span class="num">03</span><span class="title">MPD — Modèle Physique de Données</span
+              ><span class="page-n">07</span>
+            </div>
+            <div class="toc-row">
+              <span class="num">04</span><span class="title">UML — Diagramme de classes</span
+              ><span class="page-n">09</span>
+            </div>
+            <div class="toc-row">
+              <span class="num">05</span><span class="title">Les 5 erreurs à éviter</span><span class="page-n">12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================
+     PAGE 2 — INTRODUCTION : MERISE
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="chapter-header">
+        <div class="chapter-num">§</div>
+        <div class="chapter-titles">
+          <div class="chapter-kicker">Introduction</div>
+          <h1 class="chapter-title">MERISE</h1>
+          <div class="chapter-subtitle">La méthode et ses livrables</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        <strong>MERISE est la méthode</strong>. MCD, MLD et MPD sont <strong>les livrables</strong> qu'elle produit.
+        Méthode française d'analyse et de conception née dans les années 1970, elle décrit <em>comment</em> concevoir
+        une base de données en passant par trois niveaux d'abstraction successifs, du métier vers la technique.
+      </p>
+
+      <div class="merise-diagram">
+        <div class="merise-method">
+          <div class="label">Méthode</div>
+          <div class="name">MERISE</div>
+          <div class="desc">Méthode d'analyse et de conception · France, 1970s</div>
+        </div>
+
+        <div class="merise-arrows">
+          <div class="arrow-down"></div>
+          <div class="arrow-down"></div>
+          <div class="arrow-down"></div>
+        </div>
+
+        <div class="merise-branch-label">Produit <span>3 livrables</span> successifs, du métier vers la technique</div>
+
+        <div class="merise-livrables">
+          <div class="livrable-card c">
+            <div class="l-tag">Niveau 1 · Conceptuel</div>
+            <div class="l-name">MCD</div>
+            <div class="l-q">Quoi ?</div>
+            <div class="l-desc">Modélise le métier, sans aucune considération technique. Entités et associations.</div>
+          </div>
+          <div class="livrable-card l">
+            <div class="l-tag">Niveau 2 · Logique</div>
+            <div class="l-name">MLD</div>
+            <div class="l-q">Comment ?</div>
+            <div class="l-desc">Traduit le MCD en tables relationnelles avec clés étrangères. Indépendant du SGBD.</div>
+          </div>
+          <div class="livrable-card p">
+            <div class="l-tag">Niveau 3 · Physique</div>
+            <div class="l-name">MPD</div>
+            <div class="l-q">Avec quoi ?</div>
+            <div class="l-desc">Implémentation dans un SGBD précis. Script SQL exécutable.</div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Analogie : construire une maison</h2>
+
+      <div class="analogy-grid">
+        <div class="analogy-card">
+          <div class="a-ico">📐</div>
+          <div class="a-title">MERISE</div>
+          <div class="a-desc">La <strong>méthode</strong> de l'architecte : règles et étapes à suivre.</div>
+        </div>
+        <div class="analogy-card">
+          <div class="a-ico">✏️</div>
+          <div class="a-title">MCD</div>
+          <div class="a-desc">Le <strong>croquis du besoin client</strong> : « 3 chambres, un salon ».</div>
+        </div>
+        <div class="analogy-card">
+          <div class="a-ico">📏</div>
+          <div class="a-title">MLD</div>
+          <div class="a-desc">Le <strong>plan technique</strong> avec dimensions et matériaux génériques.</div>
+        </div>
+        <div class="analogy-card">
+          <div class="a-ico">🔨</div>
+          <div class="a-title">MPD</div>
+          <div class="a-desc">Le <strong>plan d'exécution</strong> : béton X, vis Y, références précises.</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">💬 &nbsp; Formulation pour le jury</div>
+        <div class="callout-text" style="font-style: italic">
+          « MERISE est la méthode que j'ai utilisée pour concevoir ma base de données. Elle m'a guidé à travers trois
+          niveaux d'abstraction : le MCD pour modéliser le métier, le MLD pour le traduire en tables relationnelles, et
+          le MPD pour l'implémenter en MySQL. »
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 02 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 3 — MCD (partie 1 : théorie)
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="chapter-header">
+        <div class="chapter-num">01</div>
+        <div class="chapter-titles">
+          <div class="chapter-kicker">Chapitre I</div>
+          <h1 class="chapter-title">MCD</h1>
+          <div class="chapter-subtitle">Modèle Conceptuel de Données · Méthode MERISE</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        Le MCD représente les données métier <strong>sans aucune considération technique</strong>. Il décrit
+        <em>ce qu'est</em> l'information dans l'organisation, indépendamment de tout SGBD. C'est la
+        <strong>première étape</strong> de la méthode MERISE : MCD → MLD → MPD.
+      </p>
+
+      <h2>Éléments fondamentaux</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 110px">Élément</th>
+            <th>Définition</th>
+            <th>Représentation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Entité</td>
+            <td>Objet du monde réel (Client, Livre...)</td>
+            <td>Rectangle, nom MAJUSCULE singulier</td>
+          </tr>
+          <tr>
+            <td>Propriété</td>
+            <td>Caractéristique d'une entité</td>
+            <td>Dans le rectangle de l'entité</td>
+          </tr>
+          <tr>
+            <td>Identifiant</td>
+            <td>Attribut qui identifie uniquement</td>
+            <td>Souligné, préfixé # ou id</td>
+          </tr>
+          <tr>
+            <td>Association</td>
+            <td>Lien entre entités</td>
+            <td>Ellipse, <strong>verbe à l'infinitif</strong></td>
+          </tr>
+          <tr>
+            <td>Cardinalité</td>
+            <td>Participation min, max</td>
+            <td>Près du lien entité-association</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Les cardinalités</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 80px">Notation</th>
+            <th>Signification</th>
+            <th>Exemple</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0,1</td>
+            <td>0 ou 1 fois (optionnel, unique)</td>
+            <td>Un employé a au plus 1 bureau</td>
+          </tr>
+          <tr>
+            <td>1,1</td>
+            <td>Exactement 1 fois (obligatoire)</td>
+            <td>Une commande a 1 client</td>
+          </tr>
+          <tr>
+            <td>0,N</td>
+            <td>0 ou plusieurs fois</td>
+            <td>Un client a 0 à N commandes</td>
+          </tr>
+          <tr>
+            <td>1,N</td>
+            <td>Au moins 1 fois</td>
+            <td>Une facture a au moins 1 ligne</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <div class="callout-label">⚠ &nbsp; Attention</div>
+        <div class="callout-title">Sens de lecture MERISE</div>
+        <div class="callout-text">
+          Les cardinalités se lisent <strong>depuis l'entité vers l'association</strong>. C'est l'inverse d'UML où on
+          lit vers la classe cible. Question piège typique du jury.
+        </div>
+      </div>
+
+      <h2>Checklist MCD</h2>
+      <ul class="checklist">
+        <li>Toutes les entités ont un identifiant <strong>souligné</strong></li>
+        <li>Associations = <strong>verbes</strong>, entités = <strong>noms</strong></li>
+        <li>Cardinalités sur les <strong>deux côtés</strong> de chaque relation</li>
+        <li><strong>Aucune clé étrangère</strong> au MCD (FK = MLD)</li>
+        <li>Pas de doublons d'information (normalisation)</li>
+      </ul>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 03 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 3 — MCD (exemple + outils)
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <h2>Exemple : bibliothèque</h2>
+      <p>
+        Des <strong>lecteurs</strong> empruntent des <strong>livres</strong>. L'historique doit être conservé, donc la
+        date d'emprunt est portée par l'association elle-même (association <em>porteuse</em>).
+      </p>
+
+      <div class="schema">
+        <div class="schema-label"><span class="fig">Fig. 01</span> MCD / Emprunt en bibliothèque</div>
+
+        <div class="schema-row">
+          <div class="entity livre">
+            <div class="ent-head">LIVRE</div>
+            <div class="ent-body">
+              <div class="ent-row pk"><span class="tag-k">PK</span><span class="field">idLivre</span></div>
+              <div class="ent-divider"></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">titre</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">auteur</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">isbn</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">anneePublication</span></div>
+            </div>
+          </div>
+
+          <div class="connector"><div class="card-badge">0,N</div></div>
+
+          <div class="assoc-ellipse">
+            <div class="name">emprunter</div>
+            <div class="attr">dateEmprunt</div>
+          </div>
+
+          <div class="connector"><div class="card-badge">0,N</div></div>
+
+          <div class="entity lecteur">
+            <div class="ent-head">LECTEUR</div>
+            <div class="ent-body">
+              <div class="ent-row pk"><span class="tag-k">PK</span><span class="field">idLecteur</span></div>
+              <div class="ent-divider"></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">nom</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">prenom</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">email</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">dateInscription</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schema-legend">
+          <div class="leg-row">
+            <span class="leg-label">Lecture</span>
+            <span
+              >Un livre peut être emprunté 0 ou N fois ; un lecteur emprunte 0 ou N livres.<br />« dateEmprunt » est
+              portée par l'association (on ne sait pas à quelle entité la rattacher).</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION OUTILS -->
+      <div class="tools-section">
+        <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour ton MCD</div>
+        <div class="tools-grid">
+          <div class="tool-card recommended">
+            <div class="tool-head">
+              <div class="tool-name">drawDB</div>
+              <div class="tool-badge top">Recommandé</div>
+            </div>
+            <span class="tool-url">drawdb.app</span>
+            <div class="tool-desc">
+              100% gratuit, open source, aucun compte requis. Interface moderne en glisser-déposer, export SQL / PNG /
+              PDF. Parfait pour construire MCD et MLD dans la foulée.
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-head">
+              <div class="tool-name">dbdiagram.io</div>
+              <div class="tool-badge free">Free</div>
+            </div>
+            <span class="tool-url">dbdiagram.io</span>
+            <div class="tool-desc">
+              Tu écris tes tables en DBML (un langage super simple), le schéma se dessine tout seul. Rapide, version «
+              dev ». Gratuit jusqu'à 10 diagrammes.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 04 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 4 — MLD (théorie + exemple)
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="chapter-header">
+        <div class="chapter-num">02</div>
+        <div class="chapter-titles">
+          <div class="chapter-kicker">Chapitre II</div>
+          <h1 class="chapter-title">MLD</h1>
+          <div class="chapter-subtitle">Modèle Logique de Données</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        Le MLD traduit le MCD en <strong>tables relationnelles</strong>, toujours indépendamment du SGBD. C'est ici
+        qu'apparaissent les <strong>clés étrangères</strong> et que les relations N:N deviennent de vraies tables.
+      </p>
+
+      <h2>Règles de passage MCD → MLD</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 40px">N°</th>
+            <th style="width: 150px">Règle</th>
+            <th>Transformation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Entité</td>
+            <td>Devient une table. L'identifiant devient clé primaire (PK).</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Relation 1:N</td>
+            <td>La PK du côté « 1 » migre comme FK du côté « N ».</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Relation N:N</td>
+            <td>Création d'une table d'association avec PK composée des 2 FK.</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>Relation 1:1</td>
+            <td>FK du côté (0,1) vers (1,1), ou fusion des tables.</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>Association porteuse</td>
+            <td>Les attributs rejoignent la table d'association.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout key">
+        <div class="callout-label">✓ &nbsp; Mnémotechnique</div>
+        <div class="callout-title">« La clé migre du côté 1 vers le côté N »</div>
+        <div class="callout-text">L'entité côté N reçoit une colonne FK qui pointe vers l'entité côté 1.</div>
+      </div>
+
+      <h2>Traduction du MCD bibliothèque</h2>
+
+      <div class="schema">
+        <div class="schema-label"><span class="fig">Fig. 02</span> MLD / Tables relationnelles</div>
+
+        <div class="mld-row">
+          <div class="entity livre">
+            <div class="ent-head">LIVRE</div>
+            <div class="ent-body">
+              <div class="ent-row pk"><span class="tag-k">PK</span><span class="field">idLivre</span></div>
+              <div class="ent-divider"></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">titre</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">auteur</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">isbn</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">anneePublication</span></div>
+            </div>
+          </div>
+
+          <div class="mld-connector">
+            <div class="line"></div>
+            <div class="bubble blue left">1</div>
+            <div class="bubble right">N</div>
+          </div>
+
+          <div class="entity assoc" style="width: 195px">
+            <div class="ent-head">EMPRUNTER</div>
+            <div class="ent-body">
+              <div class="ent-row fk"><span class="tag-k fk">PK/FK</span><span class="field">idLivre</span></div>
+              <div class="ent-row fk"><span class="tag-k fk">PK/FK</span><span class="field">idLecteur</span></div>
+              <div class="ent-row pk"><span class="tag-k">PK</span><span class="field">dateEmprunt</span></div>
+              <div class="ent-divider"></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">dateRetour</span></div>
+            </div>
+          </div>
+
+          <div class="mld-connector">
+            <div class="line"></div>
+            <div class="bubble left">N</div>
+            <div class="bubble blue right">1</div>
+          </div>
+
+          <div class="entity lecteur">
+            <div class="ent-head">LECTEUR</div>
+            <div class="ent-body">
+              <div class="ent-row pk"><span class="tag-k">PK</span><span class="field">idLecteur</span></div>
+              <div class="ent-divider"></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">nom</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">prenom</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">email</span></div>
+              <div class="ent-row"><span class="tag-k"></span><span class="field">dateInscription</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schema-legend">
+          <div class="leg-row">
+            <span class="leg-label">PK</span
+            ><span
+              >Primary Key &nbsp;·&nbsp; <strong style="color: var(--danger)">FK</strong> Foreign Key &nbsp;·&nbsp;
+              <strong style="color: var(--danger)">PK/FK</strong> Clé composée</span
+            >
+          </div>
+          <div class="leg-row">
+            <span class="leg-label"></span
+            ><span style="font-style: italic"
+              >La relation N:N du MCD est devenue la table EMPRUNTER avec PK composée (idLivre, idLecteur,
+              dateEmprunt).</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 05 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 5 — MLD notation + outils
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <h2>Notation textuelle normalisée</h2>
+      <div class="small-label">Format souvent demandé en complément du schéma visuel.</div>
+
+      <div class="mld-notation">
+        <span class="line"
+          ><span class="tn">LIVRE</span> (<span class="pk">idLivre</span>, titre, auteur, isbn, anneePublication)</span
+        >
+        <span class="line"
+          ><span class="tn">LECTEUR</span> (<span class="pk">idLecteur</span>, nom, prenom, email,
+          dateInscription)</span
+        >
+        <span class="line"
+          ><span class="tn">EMPRUNTER</span> (<span class="fk">#idLivre</span>, <span class="fk">#idLecteur</span>,
+          <span class="pk">dateEmprunt</span>, dateRetour)</span
+        >
+      </div>
+
+      <p>
+        La PK est <strong>soulignée</strong>. Les FK sont préfixées par <strong>#</strong>. Ici, la PK de EMPRUNTER est
+        <strong>composée</strong> de trois colonnes pour conserver plusieurs emprunts du même livre par le même lecteur
+        à des dates différentes.
+      </p>
+
+      <h2>Checklist MLD</h2>
+      <ul class="checklist">
+        <li>Chaque entité du MCD → une table</li>
+        <li>Chaque relation N:N → une table d'association</li>
+        <li>FK placées côté N pour les relations 1:N</li>
+        <li>Respect de la 3<sup>e</sup> forme normale (3FN)</li>
+        <li>PK et FK clairement identifiées dans la notation</li>
+      </ul>
+
+      <!-- OUTILS MLD -->
+      <div class="tools-section">
+        <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour ton MLD</div>
+        <div class="tools-grid">
+          <div class="tool-card recommended">
+            <div class="tool-head">
+              <div class="tool-name">drawDB</div>
+              <div class="tool-badge top">Recommandé</div>
+            </div>
+            <span class="tool-url">drawdb.app</span>
+            <div class="tool-desc">
+              Le même outil que pour le MCD — mais ici tu passes en mode tables relationnelles avec clés étrangères.
+              Export SQL direct (MySQL, PostgreSQL, SQLite...). Tout-en-un.
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-head">
+              <div class="tool-name">ChartDB</div>
+              <div class="tool-badge free">Free + AI</div>
+            </div>
+            <span class="tool-url">chartdb.io</span>
+            <div class="tool-desc">
+              Outil moderne 2025, éditeur visuel très soigné. Génération de schémas par IA, éditeur DBML, export SQL.
+              Peut importer une base existante en 1 clic.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 06 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 6 — MPD (théorie + SQL 1)
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="chapter-header">
+        <div class="chapter-num">03</div>
+        <div class="chapter-titles">
+          <div class="chapter-kicker">Chapitre III</div>
+          <h1 class="chapter-title">MPD</h1>
+          <div class="chapter-subtitle">Modèle Physique de Données</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        Le MPD est l'<strong>implémentation concrète</strong> dans un SGBD précis (MySQL, PostgreSQL...). C'est le
+        script SQL qui sera exécuté pour créer la base.
+      </p>
+
+      <h2>Ce qui apparaît au MPD (et pas avant)</h2>
+
+      <div class="item-list">
+        <div class="item">
+          <div class="k">Types SGBD-spécifiques</div>
+          <div class="v">VARCHAR(50), INT, DATE, DECIMAL(10,2), BOOLEAN</div>
+        </div>
+        <div class="item">
+          <div class="k">Contraintes</div>
+          <div class="v">NOT NULL, UNIQUE, DEFAULT, CHECK</div>
+        </div>
+        <div class="item">
+          <div class="k">Clés</div>
+          <div class="v">PRIMARY KEY, FOREIGN KEY ... REFERENCES ...</div>
+        </div>
+        <div class="item">
+          <div class="k">Auto-increment</div>
+          <div class="v">AUTO_INCREMENT (MySQL), SERIAL (PostgreSQL)</div>
+        </div>
+        <div class="item">
+          <div class="k">Actions référentielles</div>
+          <div class="v">ON DELETE CASCADE / RESTRICT / SET NULL</div>
+        </div>
+        <div class="item">
+          <div class="k">Index</div>
+          <div class="v">Pour optimiser les requêtes fréquentes</div>
+        </div>
+      </div>
+
+      <h2>Script SQL — MySQL 8</h2>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="filename">gestion_bibliotheque.sql</div>
+        </div>
+        <div class="code-content">
+          <span class="cmt">-- Base : gestion_bibliotheque | SGBD : MySQL 8.0</span>
+
+          <span class="kw">CREATE TABLE</span> <span class="type">LIVRE</span> ( idLivre <span class="type">INT</span>
+          <span class="kw">AUTO_INCREMENT</span> <span class="kw">PRIMARY KEY</span>, titre
+          <span class="type">VARCHAR</span>(200) <span class="null">NOT NULL</span>, auteur
+          <span class="type">VARCHAR</span>(100) <span class="null">NOT NULL</span>, isbn
+          <span class="type">VARCHAR</span>(13) <span class="kw">UNIQUE</span>, anneePublication
+          <span class="type">YEAR</span>, dateAjout <span class="type">DATE</span>
+          <span class="kw">DEFAULT</span> (<span class="fn">CURRENT_DATE</span>),
+          <span class="kw">INDEX</span> idx_auteur (auteur) ) <span class="kw">ENGINE</span>=InnoDB
+          <span class="kw">CHARSET</span>=utf8mb4;
+
+          <span class="kw">CREATE TABLE</span> <span class="type">LECTEUR</span> ( idLecteur
+          <span class="type">INT</span> <span class="kw">AUTO_INCREMENT</span> <span class="kw">PRIMARY KEY</span>, nom
+          <span class="type">VARCHAR</span>(50) <span class="null">NOT NULL</span>, prenom
+          <span class="type">VARCHAR</span>(50) <span class="null">NOT NULL</span>, email
+          <span class="type">VARCHAR</span>(100) <span class="kw">UNIQUE</span> <span class="null">NOT NULL</span>,
+          dateInscription <span class="type">DATE</span> <span class="kw">DEFAULT</span> (<span class="fn"
+            >CURRENT_DATE</span
+          >), actif <span class="type">BOOLEAN</span> <span class="kw">DEFAULT</span> <span class="kw">TRUE</span> )
+          <span class="kw">ENGINE</span>=InnoDB <span class="kw">CHARSET</span>=utf8mb4;
+
+          <span class="kw">CREATE TABLE</span> <span class="type">EMPRUNTER</span> ( idLivre
+          <span class="type">INT</span> <span class="null">NOT NULL</span>, idLecteur <span class="type">INT</span>
+          <span class="null">NOT NULL</span>, dateEmprunt <span class="type">DATETIME</span>
+          <span class="null">NOT NULL</span>, dateRetour <span class="type">DATETIME</span>
+          <span class="kw">DEFAULT</span> <span class="kw">NULL</span>, <span class="kw">PRIMARY KEY</span> (idLivre,
+          idLecteur, dateEmprunt), <span class="fk">FOREIGN KEY</span> (idLivre)
+          <span class="kw">REFERENCES</span> LIVRE(idLivre) <span class="kw">ON DELETE</span> RESTRICT
+          <span class="kw">ON UPDATE</span> CASCADE, <span class="fk">FOREIGN KEY</span> (idLecteur)
+          <span class="kw">REFERENCES</span> LECTEUR(idLecteur) <span class="kw">ON DELETE</span> RESTRICT
+          <span class="kw">ON UPDATE</span> CASCADE ) <span class="kw">ENGINE</span>=InnoDB
+          <span class="kw">CHARSET</span>=utf8mb4;
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 07 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 7 — MPD outils + checklist
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="callout">
+        <div class="callout-label">💡 &nbsp; À commenter au jury</div>
+        <div class="callout-title">Justifie tes choix techniques</div>
+        <div class="callout-text">
+          Moteur <strong>InnoDB</strong> (support des FK), encodage <strong>utf8mb4</strong> (emojis, accents),
+          <strong>RESTRICT</strong> sur ON DELETE (empêche de supprimer un livre encore emprunté),
+          <strong>index</strong> sur les colonnes de recherche fréquente.
+        </div>
+      </div>
+
+      <h2>Checklist MPD</h2>
+      <ul class="checklist">
+        <li>SGBD cible précisé (MySQL 8, PostgreSQL 15...)</li>
+        <li>Types adaptés : <strong>jamais d'INT pour un code postal français</strong> !</li>
+        <li>Contraintes (NOT NULL, UNIQUE, CHECK) définies</li>
+        <li>Index sur les FK et colonnes de recherche</li>
+        <li>Actions ON DELETE / ON UPDATE réfléchies, pas par défaut</li>
+      </ul>
+
+      <!-- OUTILS MPD -->
+      <div class="tools-section">
+        <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour tester ton SQL</div>
+        <div class="tools-grid">
+          <div class="tool-card recommended">
+            <div class="tool-head">
+              <div class="tool-name">DB Fiddle</div>
+              <div class="tool-badge top">Recommandé</div>
+            </div>
+            <span class="tool-url">db-fiddle.com</span>
+            <div class="tool-desc">
+              Teste ton script SQL en ligne en 10 secondes. MySQL, PostgreSQL, SQLite. Idéal pour valider ton MPD avant
+              le dossier et générer un lien partageable au jury.
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-head">
+              <div class="tool-name">SQLite Online</div>
+              <div class="tool-badge free">Free</div>
+            </div>
+            <span class="tool-url">sqliteonline.com</span>
+            <div class="tool-desc">
+              Base SQL directement dans le navigateur. Tu colles ton script, tu lances des SELECT, tu vérifies tes
+              contraintes. Zéro config, zéro install.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 08 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 8 — UML (théorie)
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="chapter-header">
+        <div class="chapter-num">04</div>
+        <div class="chapter-titles">
+          <div class="chapter-kicker">Chapitre IV</div>
+          <h1 class="chapter-title">UML</h1>
+          <div class="chapter-subtitle">Diagramme de classes</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        UML est un langage de modélisation <strong>orienté objet</strong>. Le diagramme de classes est le plus demandé
+        en CDA : il décrit les classes, leurs attributs, méthodes et relations. <strong>Ce n'est pas un MCD</strong> —
+        il inclut méthodes, visibilités, héritage, interfaces.
+      </p>
+
+      <h2>Niveaux de visibilité</h2>
+      <div class="vis-legend">
+        <div class="vis-item">
+          <div class="vis-circle success">+</div>
+          <div class="vis-text"><span class="vn">public</span><span class="vd">accessible partout</span></div>
+        </div>
+        <div class="vis-item">
+          <div class="vis-circle danger">–</div>
+          <div class="vis-text"><span class="vn">private</span><span class="vd">classe seule</span></div>
+        </div>
+        <div class="vis-item">
+          <div class="vis-circle">#</div>
+          <div class="vis-text"><span class="vn">protected</span><span class="vd">+ sous-classes</span></div>
+        </div>
+        <div class="vis-item">
+          <div class="vis-circle info">~</div>
+          <div class="vis-text"><span class="vn">package</span><span class="vd">même package</span></div>
+        </div>
+      </div>
+
+      <h2>Relations UML</h2>
+      <div class="rel-legend">
+        <div class="rel-grid">
+          <div class="rel-item">
+            <div class="rel-name">Association</div>
+            <div class="rel-visual">───────</div>
+            <div class="rel-desc">Lien simple entre classes</div>
+          </div>
+          <div class="rel-item">
+            <div class="rel-name">Agrégation</div>
+            <div class="rel-visual">◇───────</div>
+            <div class="rel-desc">Losange vide — « a-un »</div>
+          </div>
+          <div class="rel-item">
+            <div class="rel-name">Composition</div>
+            <div class="rel-visual" style="color: var(--accent)">◆───────</div>
+            <div class="rel-desc">Losange plein — « composé de »</div>
+          </div>
+          <div class="rel-item">
+            <div class="rel-name">Héritage</div>
+            <div class="rel-visual">───────▷</div>
+            <div class="rel-desc">Triangle vide — « est-un »</div>
+          </div>
+          <div class="rel-item">
+            <div class="rel-name">Dépendance</div>
+            <div class="rel-visual">- - - - ▸</div>
+            <div class="rel-desc">Utilise temporairement</div>
+          </div>
+          <div class="rel-item">
+            <div class="rel-name">Réalisation</div>
+            <div class="rel-visual">- - - - ▷</div>
+            <div class="rel-desc">Implémente une interface</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout key">
+        <div class="callout-label">✓ &nbsp; Mnémotechnique</div>
+        <div class="callout-title">Agrégation vs Composition</div>
+        <div class="callout-text">
+          <strong>Losange vide</strong> : le tout disparaît, les parties survivent (université / étudiants).
+          <strong>Losange plein</strong> : le tout disparaît, les parties aussi (maison / pièces).
+        </div>
+      </div>
+
+      <h2>Cardinalités UML</h2>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 160px">Notation</th>
+            <th>Signification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Exactement 1</td>
+          </tr>
+          <tr>
+            <td>0..1</td>
+            <td>0 ou 1 (optionnel)</td>
+          </tr>
+          <tr>
+            <td>* &nbsp; ou &nbsp; 0..*</td>
+            <td>0 à plusieurs</td>
+          </tr>
+          <tr>
+            <td>1..*</td>
+            <td>1 à plusieurs</td>
+          </tr>
+          <tr>
+            <td>n..m</td>
+            <td>Entre n et m</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout warn">
+        <div class="callout-label">⚠ &nbsp; Piège</div>
+        <div class="callout-title">Sens inversé par rapport à MERISE</div>
+        <div class="callout-text">
+          En UML, la cardinalité se lit <strong>vers la classe opposée</strong>. En MERISE, elle se lit
+          <strong>vers l'association</strong>. À savoir justifier à l'oral.
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 09 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 9 — UML (diagramme)
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <h2>Exemple : bibliothèque en UML</h2>
+      <p>
+        Le même domaine, mais modélisé pour une application orientée objet. On voit apparaître l'<strong
+          >héritage</strong
+        >
+        (Personne abstraite), la <strong>composition</strong> (Livre composé d'Exemplaires), et une
+        <strong>association</strong> classique.
+      </p>
+
+      <div class="schema">
+        <div class="schema-label"><span class="fig">Fig. 03</span> UML / Diagramme de classes</div>
+
+        <div class="uml-grid">
+          <div class="uml-abstract-parent">
+            <div class="uml-class abstract" style="width: 220px">
+              <div class="uml-head">
+                <div class="cname">Personne</div>
+                <div class="stereo">«abstract»</div>
+              </div>
+              <div class="uml-attrs">
+                <div><span class="vis-priv">–</span> nom : <span style="color: var(--info)">String</span></div>
+                <div><span class="vis-priv">–</span> prenom : <span style="color: var(--info)">String</span></div>
+              </div>
+              <div class="uml-divider"></div>
+              <div class="uml-methods">
+                <div>
+                  <span class="vis-pub">+</span> getNomComplet() : <span style="color: var(--info)">String</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="uml-class">
+            <div class="uml-head"><div class="cname">Lecteur</div></div>
+            <div class="uml-attrs">
+              <div><span class="vis-priv">–</span> idLecteur : <span style="color: var(--info)">int</span></div>
+              <div><span class="vis-priv">–</span> email : <span style="color: var(--info)">String</span></div>
+              <div><span class="vis-priv">–</span> dateInscription : <span style="color: var(--info)">Date</span></div>
+            </div>
+            <div class="uml-divider"></div>
+            <div class="uml-methods">
+              <div><span class="vis-pub">+</span> emprunter(l : Livre) : void</div>
+              <div><span class="vis-pub">+</span> rendre(l : Livre) : void</div>
+              <div><span class="vis-pub">+</span> consulterHistorique() : List</div>
+            </div>
+          </div>
+
+          <div class="uml-class">
+            <div class="uml-head"><div class="cname">Bibliothecaire</div></div>
+            <div class="uml-attrs">
+              <div><span class="vis-priv">–</span> matricule : <span style="color: var(--info)">String</span></div>
+              <div><span class="vis-prot">#</span> salaire : <span style="color: var(--info)">double</span></div>
+              <div><span class="vis-priv">–</span> dateEmbauche : <span style="color: var(--info)">Date</span></div>
+            </div>
+            <div class="uml-divider"></div>
+            <div class="uml-methods">
+              <div><span class="vis-pub">+</span> ajouterLivre(l : Livre)</div>
+              <div><span class="vis-pub">+</span> supprimerLivre(l : Livre)</div>
+              <div><span class="vis-pub">+</span> validerEmprunt() : bool</div>
+            </div>
+          </div>
+
+          <div class="uml-class">
+            <div class="uml-head"><div class="cname">Livre</div></div>
+            <div class="uml-attrs">
+              <div><span class="vis-priv">–</span> idLivre : <span style="color: var(--info)">int</span></div>
+              <div><span class="vis-priv">–</span> titre : <span style="color: var(--info)">String</span></div>
+              <div><span class="vis-priv">–</span> auteur : <span style="color: var(--info)">String</span></div>
+              <div><span class="vis-priv">–</span> isbn : <span style="color: var(--info)">String</span></div>
+            </div>
+            <div class="uml-divider"></div>
+            <div class="uml-methods">
+              <div><span class="vis-pub">+</span> estDisponible() : bool</div>
+              <div><span class="vis-pub">+</span> reserver() : void</div>
+            </div>
+          </div>
+
+          <div class="uml-class">
+            <div class="uml-head"><div class="cname">Exemplaire</div></div>
+            <div class="uml-attrs">
+              <div><span class="vis-priv">–</span> numeroExemplaire : <span style="color: var(--info)">int</span></div>
+              <div><span class="vis-priv">–</span> etat : <span style="color: var(--info)">String</span></div>
+              <div><span class="vis-priv">–</span> dateAcquisition : <span style="color: var(--info)">Date</span></div>
+            </div>
+            <div class="uml-divider"></div>
+            <div class="uml-methods">
+              <div><span class="vis-pub">+</span> getEtat() : String</div>
+              <div><span class="vis-pub">+</span> estEmpruntable() : bool</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schema-legend">
+          <div class="leg-row">
+            <span class="leg-label">Héritage</span
+            ><span>Lecteur et Bibliothecaire héritent de Personne (classe abstraite).</span>
+          </div>
+          <div class="leg-row">
+            <span class="leg-label">Composition</span
+            ><span>Un Livre est composé de 1 à plusieurs Exemplaires (losange plein).</span>
+          </div>
+          <div class="leg-row">
+            <span class="leg-label">Association</span><span>Un Lecteur emprunte de 0 à 5 Livres simultanément.</span>
+          </div>
+        </div>
+      </div>
+
+      <h2>Checklist UML</h2>
+      <ul class="checklist">
+        <li>Visibilité (+, –, #) sur <strong>tous</strong> les attributs et méthodes</li>
+        <li>Types de retour des méthodes précisés</li>
+        <li>Cardinalités sur toutes les associations</li>
+        <li>Bons symboles (losange vide vs plein selon l'intention)</li>
+        <li>Classes abstraites en <em>italique</em> ou avec «abstract»</li>
+      </ul>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 10 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 10 — UML outils
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <!-- OUTILS UML -->
+      <div class="tools-section">
+        <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour ton diagramme UML</div>
+        <div class="tools-grid">
+          <div class="tool-card recommended">
+            <div class="tool-head">
+              <div class="tool-name">Mermaid Live</div>
+              <div class="tool-badge top">Recommandé</div>
+            </div>
+            <span class="tool-url">mermaid.live</span>
+            <div class="tool-desc">
+              100% gratuit, aucun compte. Tu écris ton diagramme en quelques lignes de code, rendu instantané. Supporte
+              classes, héritage, composition, cardinalités. Export PNG/SVG.
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-head">
+              <div class="tool-name">Eraser · DiagramGPT</div>
+              <div class="tool-badge free">Free + AI</div>
+            </div>
+            <span class="tool-url">eraser.io/ai/uml-diagram-generator</span>
+            <div class="tool-desc">
+              Tu décris ton système en français, l'IA génère le diagramme UML. Parfait pour démarrer vite. Résultat
+              éditable ensuite. Ultra moderne.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <div class="callout-label">💡 &nbsp; Le snippet Mermaid à connaître</div>
+        <div class="callout-title">Diagramme de classes en 6 lignes</div>
+        <div class="callout-text" style="font-family: var(--mono); font-size: 10px; line-height: 1.7">
+          <span style="color: var(--accent)">classDiagram</span><br />
+          &nbsp;&nbsp;<span style="color: var(--muted)">class</span> Personne { &lt;&lt;abstract&gt;&gt; <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;-nom : String <br />
+          &nbsp;&nbsp;&nbsp;&nbsp;+getNomComplet() String }<br />
+          &nbsp;&nbsp;Personne <span style="color: var(--accent)">&lt;|--</span> Lecteur &nbsp;
+          <span style="color: var(--muted)">%% héritage</span><br />
+          &nbsp;&nbsp;Lecteur <span style="color: var(--accent)">"0..5" -- "0..*"</span> Livre : emprunte
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 11 —</span>
+      </footer>
+    </div>
+
+    <!-- ============================================
+     PAGE 11 — LES 5 ERREURS
+     ============================================ -->
+    <div class="page">
+      <header class="page-header">
+        <span class="brand">Anti-sèche CDA</span>
+        <span class="chapter">MCD · MLD · MPD · UML</span>
+        <span class="edition">Édition 2026</span>
+      </header>
+
+      <div class="chapter-header">
+        <div class="chapter-num">05</div>
+        <div class="chapter-titles">
+          <div class="chapter-kicker">Chapitre V</div>
+          <h1 class="chapter-title">Les 5 erreurs</h1>
+          <div class="chapter-subtitle">Ce qui fait tiquer le jury</div>
+        </div>
+      </div>
+
+      <p class="lead">
+        Cinq erreurs reviennent systématiquement dans les dossiers CDA et sont immédiatement repérées par les membres du
+        jury. Les connaître, c'est éviter de les commettre.
+      </p>
+
+      <div class="error-block">
+        <div class="err-num">01</div>
+        <div class="err-body">
+          <div class="err-title">Confondre les cardinalités MERISE et UML</div>
+          <div class="err-desc">
+            En MERISE on lit vers l'association ; en UML vers la classe cible. Le sens est inversé. Cette confusion
+            conduit à inverser les cardinalités quand on passe d'un formalisme à l'autre.
+          </div>
+        </div>
+      </div>
+
+      <div class="error-block">
+        <div class="err-num">02</div>
+        <div class="err-body">
+          <div class="err-title">Mettre des clés étrangères au MCD</div>
+          <div class="err-desc">
+            Les FK n'apparaissent qu'au MLD. Au MCD, on a des associations — pas des colonnes techniques. Ajouter un
+            champ « idClient » dans une entité COMMANDE au MCD est une faute classique.
+          </div>
+        </div>
+      </div>
+
+      <div class="error-block">
+        <div class="err-num">03</div>
+        <div class="err-body">
+          <div class="err-title">Oublier les visibilités en UML</div>
+          <div class="err-desc">
+            Un attribut ou une méthode sans +, – ou # devant est incomplet. C'est le premier détail que le jury va
+            vérifier sur ton diagramme de classes.
+          </div>
+        </div>
+      </div>
+
+      <div class="error-block">
+        <div class="err-num">04</div>
+        <div class="err-body">
+          <div class="err-title">Confondre agrégation et composition</div>
+          <div class="err-desc">
+            Losange vide = parties indépendantes du tout. Losange plein = parties détruites avec le tout. Mélanger les
+            deux montre qu'on n'a pas compris la subtilité de la relation.
+          </div>
+        </div>
+      </div>
+
+      <div class="error-block">
+        <div class="err-num">05</div>
+        <div class="err-body">
+          <div class="err-title">Mélanger MLD et MPD</div>
+          <div class="err-desc">
+            Pas de VARCHAR(50), AUTO_INCREMENT ou ENGINE=InnoDB au MLD. Ces détails n'apparaissent qu'au MPD. Le MLD
+            reste indépendant du SGBD choisi.
+          </div>
+        </div>
+      </div>
+
+      <footer class="page-footer">
+        <span>Dossier professionnel · CDA</span>
+        <span class="pnum">— 12 —</span>
+      </footer>
+    </div>
+
+    <script>
+      setTimeout(() => {
+        const banner = document.querySelector('.info-banner')
+        if (banner) banner.style.opacity = '0.6'
+      }, 5000)
+    </script>
+  </body>
+</html>
