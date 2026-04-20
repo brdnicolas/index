@@ -2,7 +2,12 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anti-sèche CDA — MERISE & UML</title>
+    <meta
+      name="description"
+      content="Fiche de synthèse MCD, MLD, MPD et UML pour le titre Concepteur Développeur d'Applications."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,24 +41,30 @@
         --serif: 'Instrument Serif', Georgia, serif;
         --sans: 'Inter', -apple-system, sans-serif;
         --mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+        --container: 1100px;
+        --gap: 80px;
       }
 
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
       }
 
-      html,
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 73.6px;
+      }
+
       body {
         background: var(--bg);
         color: var(--text);
         font-family: var(--sans);
-        font-size: 14px;
-        line-height: 1.5;
+        font-size: 15px;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
       }
 
       ::selection {
@@ -61,158 +72,186 @@
         color: var(--bg);
       }
 
-      .page {
-        width: 210mm;
-        min-height: 297mm;
-        padding: 18mm 16mm;
-        margin: 10mm auto;
-        background: var(--bg);
-        position: relative;
-        overflow: hidden;
-        page-break-after: always;
-        display: flex;
-        flex-direction: column;
-      }
-
-      .page:last-child {
-        page-break-after: auto;
-      }
-
-      .page::before {
+      /* Noise/gradient overlay global */
+      body::before {
         content: '';
-        position: absolute;
+        position: fixed;
         inset: 0;
-        background-image: radial-gradient(circle at 20% 10%, rgba(251, 191, 36, 0.03) 0%, transparent 40%),
-          radial-gradient(circle at 80% 90%, rgba(96, 165, 250, 0.02) 0%, transparent 40%);
+        background-image: radial-gradient(ellipse at top left, rgba(251, 191, 36, 0.05) 0%, transparent 50%),
+          radial-gradient(ellipse at bottom right, rgba(96, 165, 250, 0.03) 0%, transparent 50%);
         pointer-events: none;
         z-index: 0;
       }
 
-      .page > * {
+      /* ==============================================
+     NAV STICKY
+     ============================================== */
+      .topnav {
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        background: rgba(10, 10, 10, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border);
+        height: 76px;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .topnav .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--white);
+        letter-spacing: -0.01em;
+      }
+
+      .topnav .brand .logo {
+        width: 28px;
+        height: 28px;
+        background: linear-gradient(135deg, var(--accent), #d97706);
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 17px;
+        color: var(--bg);
+        font-weight: 600;
+        box-shadow: 0 0 20px var(--accent-glow);
+      }
+
+      .topnav .brand .title-group {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+
+      .topnav .brand .subtitle {
+        font-size: 10px;
+        color: var(--muted);
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .topnav nav {
+        display: flex;
+        gap: 2px;
+        align-items: center;
+      }
+
+      .topnav nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 7px 12px;
+        border-radius: 6px;
+        transition:
+          color 0.2s,
+          background 0.2s;
+      }
+
+      .topnav nav a:hover {
+        color: var(--white);
+        background: var(--card);
+      }
+
+      .topnav nav a.active {
+        color: var(--accent);
+        background: var(--accent-glow);
+      }
+
+      /* ==============================================
+     HERO
+     ============================================== */
+      .hero {
+        position: relative;
+        padding: 100px 32px 80px;
+        max-width: var(--container);
+        margin: 0 auto;
+        z-index: 1;
+      }
+
+      .hero-bg-letters {
+        position: absolute;
+        top: 50%;
+        right: -100px;
+        transform: translateY(-50%);
+        font-family: var(--serif);
+        font-size: 480px;
+        font-weight: 400;
+        line-height: 0.85;
+        color: var(--accent);
+        opacity: 0.05;
+        letter-spacing: -0.05em;
+        pointer-events: none;
+        user-select: none;
+        z-index: 0;
+      }
+
+      .hero > * {
         position: relative;
         z-index: 1;
       }
 
-      /* Header & Footer */
-      .page-header {
-        display: flex;
-        justify-content: space-between;
+      .hero-kicker {
+        display: inline-flex;
         align-items: center;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 22px;
-        font-size: 9px;
-        color: var(--dim);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-weight: 600;
-      }
-
-      .page-header .brand {
-        color: var(--muted);
-      }
-      .page-header .chapter {
-        color: var(--dim);
-        letter-spacing: 0.15em;
-      }
-
-      .page-footer {
-        margin-top: auto;
-        padding-top: 12px;
-        border-top: 1px solid var(--border);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 9px;
-        color: var(--dim);
-      }
-
-      .page-footer .pnum {
+        gap: 10px;
         color: var(--accent);
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        font-size: 10px;
-      }
-
-      /* Couverture */
-      .cover {
-        padding: 0 !important;
-      }
-
-      .cover-inner {
-        padding: 22mm 18mm;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-      }
-
-      .cover-bg-letters {
-        position: absolute;
-        bottom: -40mm;
-        right: -30mm;
-        font-family: var(--serif);
-        font-size: 420px;
-        font-weight: 400;
-        line-height: 0.85;
-        color: var(--accent);
-        opacity: 0.06;
-        letter-spacing: -0.05em;
-        pointer-events: none;
-        user-select: none;
-      }
-
-      .cover-kicker {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: var(--accent);
-        font-size: 10px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        margin-bottom: 8px;
-      }
-
-      .cover-kicker::before,
-      .cover-kicker::after {
-        content: '';
-        height: 1px;
-        flex: 1;
-        background: linear-gradient(90deg, transparent, var(--accent), transparent);
-        max-width: 60px;
-      }
-
-      .cover-rule {
-        height: 2px;
-        background: linear-gradient(90deg, var(--accent), transparent);
-        margin-bottom: 32px;
-      }
-
-      .cover-meta {
-        color: var(--muted);
-        font-size: 11px;
-        letter-spacing: 0.05em;
         margin-bottom: 20px;
+        padding: 6px 14px;
+        background: var(--accent-glow);
+        border: 1px solid rgba(251, 191, 36, 0.3);
+        border-radius: 999px;
       }
 
-      .cover-meta .num {
-        color: var(--accent);
-        font-weight: 700;
+      .hero-kicker::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background: var(--accent);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--accent);
+        animation: pulse 2s ease-in-out infinite;
       }
 
-      .cover-title {
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .hero-title {
         font-family: var(--serif);
         font-style: italic;
-        font-size: 72px;
+        font-size: 96px;
         color: var(--white);
         line-height: 0.95;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.03em;
       }
 
-      .cover-title-big {
+      .hero-title-big {
         font-family: var(--sans);
-        font-size: 160px;
+        font-size: 200px;
         font-weight: 900;
         line-height: 0.85;
         letter-spacing: -0.05em;
@@ -221,25 +260,24 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         margin-top: 8px;
-        filter: drop-shadow(0 4px 20px rgba(251, 191, 36, 0.2));
+        filter: drop-shadow(0 4px 30px rgba(251, 191, 36, 0.3));
       }
 
-      .cover-tags {
+      .hero-tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 14px;
-        margin-bottom: 24px;
+        gap: 8px;
+        margin: 32px 0;
       }
 
       .tag {
         display: inline-flex;
         align-items: center;
-        padding: 4px 10px;
+        padding: 6px 14px;
         background: var(--card-2);
         border: 1px solid var(--border);
         border-radius: 999px;
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 600;
         color: var(--text);
         letter-spacing: 0.08em;
@@ -252,111 +290,88 @@
         color: var(--accent);
       }
 
-      .cover-split {
-        height: 1px;
-        background: var(--border);
-        width: 40%;
-        margin-bottom: 20px;
-      }
-
-      .cover-intro {
-        max-width: 440px;
+      .hero-intro {
+        max-width: 640px;
         color: var(--text);
-        font-size: 13px;
+        font-size: 17px;
         line-height: 1.7;
-        margin-bottom: 30px;
+        margin-top: 20px;
       }
 
-      .cover-intro strong {
+      .hero-intro strong {
         color: var(--white);
         font-weight: 600;
       }
 
-      .toc-block {
-        margin-top: auto;
-      }
-
-      .toc-title {
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 12px;
+      .hero-cta {
         display: flex;
-        align-items: center;
-        gap: 10px;
+        gap: 14px;
+        margin-top: 36px;
+        flex-wrap: wrap;
       }
 
-      .toc-title::before {
-        content: '';
-        width: 16px;
-        height: 2px;
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .btn.primary {
         background: var(--accent);
+        color: var(--bg);
       }
 
-      .toc {
+      .btn.primary:hover {
+        background: var(--accent-soft);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 30px rgba(251, 191, 36, 0.3);
+      }
+
+      .btn.secondary {
         background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        overflow: hidden;
+        color: var(--text);
+        border-color: var(--border);
       }
 
-      .toc-row {
-        display: grid;
-        grid-template-columns: 50px 1fr 60px;
-        padding: 10px 20px;
-        align-items: center;
-        font-size: 12px;
-        border-bottom: 1px solid var(--border-soft);
-      }
-
-      .toc-row:last-child {
-        border-bottom: none;
-      }
-
-      .toc-row.head {
+      .btn.secondary:hover {
         background: var(--card-2);
-        color: var(--accent);
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        padding: 10px 20px;
-      }
-
-      .toc-row .num {
-        color: var(--accent);
-        font-weight: 700;
-        font-family: var(--mono);
-      }
-
-      .toc-row .page-n {
-        text-align: right;
-        color: var(--dim);
-        font-family: var(--mono);
-        font-weight: 600;
-      }
-
-      .toc-row .title {
+        border-color: var(--accent);
         color: var(--white);
-        font-weight: 500;
       }
 
-      /* Chapter header */
-      .chapter-header {
+      /* ==============================================
+     SECTIONS
+     ============================================== */
+      .section {
+        padding: 60px 32px 40px;
+        max-width: var(--container);
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+      }
+
+      .section-header {
         display: flex;
-        align-items: flex-start;
-        gap: 22px;
-        margin-bottom: 22px;
-        padding-bottom: 20px;
+        align-items: flex-end;
+        gap: 24px;
+        margin-bottom: 40px;
+        padding-bottom: 28px;
         border-bottom: 1px solid var(--border);
       }
 
-      .chapter-num {
+      .section-num {
         font-family: var(--serif);
         font-style: italic;
-        font-size: 84px;
+        font-size: 110px;
         line-height: 0.8;
         color: var(--accent);
         font-weight: 400;
@@ -364,41 +379,44 @@
         text-shadow: 0 0 40px var(--accent-glow);
       }
 
-      .chapter-titles {
-        padding-top: 8px;
+      .section-titles {
+        padding-bottom: 12px;
       }
 
-      .chapter-kicker {
-        font-size: 9px;
+      .section-kicker {
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.25em;
         text-transform: uppercase;
         color: var(--dim);
-        margin-bottom: 6px;
+        margin-bottom: 8px;
       }
 
-      .chapter-title {
-        font-size: 32px;
+      .section-title {
+        font-size: 48px;
         font-weight: 800;
         color: var(--white);
         letter-spacing: -0.02em;
         line-height: 1;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
       }
 
-      .chapter-subtitle {
+      .section-subtitle {
         font-family: var(--serif);
         font-style: italic;
-        font-size: 16px;
+        font-size: 22px;
         color: var(--muted);
       }
 
-      /* Contenu */
+      /* ==============================================
+     TEXTE
+     ============================================== */
       .lead {
-        font-size: 13px;
+        font-size: 18px;
         line-height: 1.7;
         color: var(--text);
-        margin-bottom: 16px;
+        margin-bottom: 24px;
+        max-width: 800px;
       }
 
       .lead strong {
@@ -410,14 +428,15 @@
         font-family: var(--serif);
         font-style: italic;
         color: var(--accent-soft);
-        font-size: 15px;
+        font-size: 20px;
       }
 
       p {
-        font-size: 12.5px;
-        line-height: 1.65;
+        font-size: 15px;
+        line-height: 1.7;
         color: var(--text);
-        margin-bottom: 10px;
+        margin-bottom: 16px;
+        max-width: 800px;
       }
 
       p strong {
@@ -426,68 +445,70 @@
       }
 
       h2 {
-        font-size: 18px;
+        font-size: 28px;
         font-weight: 700;
         color: var(--white);
         letter-spacing: -0.01em;
-        margin: 22px 0 10px;
+        margin: 48px 0 16px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 14px;
       }
 
       h2::before {
         content: '';
-        width: 3px;
-        height: 18px;
+        width: 4px;
+        height: 26px;
         background: var(--accent);
         border-radius: 2px;
       }
 
       h3 {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 700;
         color: var(--accent);
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        margin: 16px 0 8px;
+        margin: 28px 0 12px;
       }
 
       .small-label {
-        font-size: 10px;
+        font-size: 12px;
         color: var(--muted);
         font-style: italic;
-        margin-top: -4px;
-        margin-bottom: 10px;
+        margin-top: -8px;
+        margin-bottom: 18px;
       }
 
-      /* Tableaux */
+      /* ==============================================
+     TABLEAUX
+     ============================================== */
       table {
         width: 100%;
         border-collapse: separate;
         border-spacing: 0;
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
-        margin: 10px 0 16px;
-        font-size: 11.5px;
+        margin: 16px 0 24px;
+        font-size: 14px;
       }
 
       table thead th {
         background: var(--card-2);
         color: var(--accent);
-        font-size: 9.5px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        padding: 10px 14px;
+        padding: 14px 18px;
         text-align: left;
         border-bottom: 1px solid var(--border);
       }
 
       table tbody td {
-        padding: 9px 14px;
+        padding: 14px 18px;
         color: var(--text);
         border-bottom: 1px solid var(--border-soft);
         vertical-align: middle;
@@ -496,21 +517,27 @@
       table tbody tr:last-child td {
         border-bottom: none;
       }
+      table tbody tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
 
       table tbody td:first-child {
         color: var(--white);
         font-weight: 600;
       }
 
-      /* Callouts */
+      /* ==============================================
+     CALLOUTS
+     ============================================== */
       .callout {
         position: relative;
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 12px 16px 12px 20px;
-        margin: 12px 0;
+        border-radius: 12px;
+        padding: 18px 22px 18px 26px;
+        margin: 20px 0;
         overflow: hidden;
+        max-width: 900px;
       }
 
       .callout::before {
@@ -526,26 +553,26 @@
       .callout .callout-label {
         display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 9px;
+        gap: 10px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
         color: var(--accent);
-        margin-bottom: 5px;
+        margin-bottom: 8px;
       }
 
       .callout .callout-title {
-        font-size: 12px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--white);
-        margin-bottom: 4px;
+        margin-bottom: 6px;
       }
 
       .callout .callout-text {
-        font-size: 11px;
+        font-size: 14px;
         color: var(--text);
-        line-height: 1.55;
+        line-height: 1.6;
       }
 
       .callout.warn::before {
@@ -561,17 +588,20 @@
         color: var(--success);
       }
 
-      /* Checklist */
+      /* ==============================================
+     CHECKLIST
+     ============================================== */
       .checklist {
         list-style: none;
         padding: 0;
-        margin: 8px 0 12px;
+        margin: 12px 0;
+        max-width: 800px;
       }
 
       .checklist li {
-        padding: 5px 0 5px 26px;
+        padding: 9px 0 9px 32px;
         position: relative;
-        font-size: 12px;
+        font-size: 14px;
         color: var(--text);
         line-height: 1.5;
       }
@@ -580,11 +610,11 @@
         content: '';
         position: absolute;
         left: 0;
-        top: 9px;
-        width: 13px;
-        height: 13px;
+        top: 12px;
+        width: 16px;
+        height: 16px;
         border: 1.5px solid var(--accent);
-        border-radius: 3px;
+        border-radius: 4px;
         background: var(--card);
       }
 
@@ -592,13 +622,15 @@
         color: var(--white);
       }
 
-      /* Outils (nouvelle section) */
+      /* ==============================================
+     OUTILS
+     ============================================== */
       .tools-section {
         background: linear-gradient(180deg, var(--card) 0%, rgba(251, 191, 36, 0.03) 100%);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px 18px;
-        margin: 14px 0;
+        border-radius: 14px;
+        padding: 28px 32px;
+        margin: 28px 0;
         position: relative;
         overflow: hidden;
       }
@@ -616,32 +648,41 @@
       .tools-title {
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 11px;
+        gap: 12px;
+        font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
         color: var(--accent);
-        margin-bottom: 10px;
+        margin-bottom: 18px;
       }
 
       .tools-title .ico {
-        font-size: 16px;
+        font-size: 20px;
         letter-spacing: normal;
       }
 
       .tools-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 14px;
       }
 
       .tool-card {
         background: var(--card-2);
         border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 14px 16px;
-        transition: border-color 0.2s;
+        border-radius: 10px;
+        padding: 18px 20px;
+        transition: all 0.2s;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .tool-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
       }
 
       .tool-card.recommended {
@@ -653,24 +694,21 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 6px;
-        margin-bottom: 3px;
+        gap: 8px;
+        margin-bottom: 5px;
       }
 
       .tool-card .tool-name {
-        font-size: 12px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--white);
-        display: flex;
-        align-items: center;
-        gap: 6px;
       }
 
       .tool-card .tool-badge {
-        font-size: 8px;
+        font-size: 9px;
         font-weight: 700;
-        padding: 2px 6px;
-        border-radius: 4px;
+        padding: 3px 8px;
+        border-radius: 5px;
         letter-spacing: 0.05em;
         text-transform: uppercase;
       }
@@ -680,11 +718,6 @@
         color: var(--success);
       }
 
-      .tool-card .tool-badge.code {
-        background: rgba(96, 165, 250, 0.15);
-        color: var(--info);
-      }
-
       .tool-card .tool-badge.top {
         background: var(--accent);
         color: var(--bg);
@@ -692,85 +725,283 @@
 
       .tool-card .tool-url {
         font-family: var(--mono);
-        font-size: 9.5px;
+        font-size: 11px;
         color: var(--accent);
         display: block;
-        margin-bottom: 4px;
-        word-break: break-all;
+        margin-bottom: 6px;
       }
 
       .tool-card .tool-desc {
-        font-size: 11px;
+        font-size: 13px;
         color: var(--muted);
         line-height: 1.5;
       }
 
-      /* SCHEMAS */
+      /* ==============================================
+     MERISE DIAGRAM (intro)
+     ============================================== */
+      .merise-diagram {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 32px;
+        margin: 24px 0;
+      }
+
+      .merise-method {
+        background: linear-gradient(135deg, var(--card-2) 0%, rgba(251, 191, 36, 0.08) 100%);
+        border: 1.5px solid var(--accent);
+        border-radius: 12px;
+        padding: 22px 28px;
+        text-align: center;
+        margin-bottom: 32px;
+        box-shadow: 0 0 50px var(--accent-glow);
+      }
+
+      .merise-method .label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .merise-method .name {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 48px;
+        color: var(--accent);
+        font-weight: 400;
+        line-height: 1;
+        margin-bottom: 8px;
+      }
+
+      .merise-method .desc {
+        font-size: 13px;
+        color: var(--text);
+        font-style: italic;
+      }
+
+      .merise-arrows {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: -18px 0 14px;
+      }
+
+      .merise-arrows .arrow-down {
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-top: 12px solid var(--accent);
+        margin: 0 80px;
+      }
+
+      .merise-branch-label {
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 18px;
+      }
+
+      .merise-branch-label span {
+        color: var(--accent);
+      }
+
+      .merise-livrables {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+
+      .livrable-card {
+        background: var(--card-2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px 20px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .livrable-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+      }
+
+      .livrable-card.c::before {
+        background: var(--info);
+      }
+      .livrable-card.l::before {
+        background: var(--accent);
+      }
+      .livrable-card.p::before {
+        background: var(--success);
+      }
+
+      .livrable-card .l-tag {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      .livrable-card .l-name {
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1;
+        margin-bottom: 10px;
+      }
+
+      .livrable-card.c .l-name {
+        color: var(--info);
+      }
+      .livrable-card.l .l-name {
+        color: var(--accent);
+      }
+      .livrable-card.p .l-name {
+        color: var(--success);
+      }
+
+      .livrable-card .l-q {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 18px;
+        color: var(--white);
+        margin-bottom: 6px;
+      }
+
+      .livrable-card .l-desc {
+        font-size: 12.5px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* ==============================================
+     ANALOGIE
+     ============================================== */
+      .analogy-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin: 20px 0;
+      }
+
+      .analogy-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px 18px;
+      }
+
+      .analogy-card .a-ico {
+        font-size: 24px;
+        margin-bottom: 8px;
+      }
+
+      .analogy-card .a-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 6px;
+      }
+
+      .analogy-card .a-desc {
+        font-size: 13px;
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      .analogy-card .a-desc strong {
+        color: var(--white);
+      }
+
+      /* ==============================================
+     SCHÉMAS (MCD, MLD, UML)
+     ============================================== */
       .schema {
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 16px 18px 14px;
-        margin: 14px 0;
+        border-radius: 14px;
+        padding: 28px 32px 24px;
+        margin: 24px 0;
       }
 
       .schema-label {
         display: flex;
         align-items: center;
-        gap: 8px;
-        font-size: 9px;
+        gap: 10px;
+        font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
         color: var(--muted);
-        margin-bottom: 12px;
+        margin-bottom: 24px;
       }
 
       .schema-label .fig {
         color: var(--accent);
         background: var(--accent-glow);
-        padding: 3px 8px;
-        border-radius: 4px;
+        padding: 4px 10px;
+        border-radius: 5px;
       }
 
       .schema-legend {
-        margin-top: 12px;
-        padding-top: 12px;
+        margin-top: 20px;
+        padding-top: 20px;
         border-top: 1px solid var(--border-soft);
-        font-size: 10.5px;
+        font-size: 13px;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.6;
       }
 
       .schema-legend .leg-row {
         display: flex;
         align-items: baseline;
-        gap: 8px;
-        margin-bottom: 3px;
+        gap: 12px;
+        margin-bottom: 6px;
       }
 
       .schema-legend .leg-label {
         color: var(--accent);
         font-weight: 700;
-        font-size: 9px;
+        font-size: 10px;
         letter-spacing: 0.1em;
         text-transform: uppercase;
-        min-width: 70px;
+        min-width: 90px;
       }
 
-      .schema-row {
+      /* ==============================================
+     MCD — entités + ellipse association
+     ============================================== */
+      .mcd-layout {
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 0;
+        flex-wrap: wrap;
       }
 
       .entity {
         background: var(--card-2);
         border: 1px solid var(--border);
-        border-radius: 8px;
+        border-radius: 10px;
         overflow: hidden;
-        width: 180px;
-        font-size: 11px;
+        width: 220px;
+        font-size: 13px;
+        flex-shrink: 0;
       }
 
       .entity .ent-head {
@@ -778,8 +1009,8 @@
         color: var(--white);
         font-weight: 700;
         text-align: center;
-        padding: 7px;
-        font-size: 12px;
+        padding: 10px;
+        font-size: 14px;
         letter-spacing: 0.05em;
         border-bottom: 1px solid var(--border);
         font-family: var(--mono);
@@ -801,21 +1032,21 @@
       }
 
       .entity .ent-body {
-        padding: 5px 0;
+        padding: 8px 0;
       }
 
       .entity .ent-row {
         display: grid;
-        grid-template-columns: 56px 1fr;
-        padding: 3px 10px;
+        grid-template-columns: 66px 1fr;
+        padding: 4px 14px;
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: 12px;
         align-items: center;
       }
 
       .entity .ent-row .tag-k {
         font-weight: 700;
-        font-size: 8.5px;
+        font-size: 10px;
         color: var(--accent);
       }
 
@@ -828,7 +1059,7 @@
         font-weight: 600;
         text-decoration: underline;
         text-decoration-color: var(--accent);
-        text-underline-offset: 3px;
+        text-underline-offset: 4px;
       }
 
       .entity .ent-row.fk .field {
@@ -838,61 +1069,67 @@
 
       .entity .ent-row .field {
         color: var(--text);
-        font-size: 10.5px;
+        font-size: 12.5px;
       }
 
       .entity .ent-divider {
         height: 1px;
         background: var(--border-soft);
-        margin: 4px 0;
+        margin: 6px 0;
       }
 
+      /* MCD — Association ellipse */
       .assoc-ellipse {
         background: var(--card-2);
         border: 1.5px solid var(--accent);
         border-radius: 999px;
-        padding: 12px 20px;
+        padding: 16px 28px;
         text-align: center;
-        min-width: 120px;
-        box-shadow: 0 0 30px var(--accent-glow);
+        min-width: 150px;
+        box-shadow: 0 0 40px var(--accent-glow);
+        position: relative;
         z-index: 2;
+        flex-shrink: 0;
       }
 
       .assoc-ellipse .name {
         color: var(--accent);
         font-weight: 700;
-        font-size: 12px;
+        font-size: 14px;
       }
 
       .assoc-ellipse .attr {
         color: var(--muted);
         font-family: var(--mono);
-        font-size: 9.5px;
+        font-size: 11px;
         font-style: italic;
-        margin-top: 2px;
+        margin-top: 4px;
       }
 
-      .connector {
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, var(--muted), var(--accent), var(--muted));
+      /* Connecteurs MCD - plus longs et plus visibles */
+      .mcd-connector {
+        flex: 0 0 90px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--muted) 0%, var(--accent) 50%, var(--muted) 100%);
         position: relative;
-        min-width: 30px;
+        margin: 0 -2px;
       }
 
       .card-badge {
         position: absolute;
-        top: -10px;
+        top: -13px;
         left: 50%;
         transform: translateX(-50%);
         background: var(--bg);
         border: 1.5px solid var(--accent);
         color: var(--accent);
-        font-size: 9px;
+        font-size: 11px;
         font-weight: 700;
-        padding: 2px 7px;
+        padding: 3px 10px;
         border-radius: 999px;
         font-family: var(--mono);
+        letter-spacing: 0.05em;
+        white-space: nowrap;
       }
 
       .card-badge.blue {
@@ -900,288 +1137,118 @@
         color: var(--info);
       }
 
-      /* MLD */
-      .mld-row {
+      /* ==============================================
+     MLD — Connecteurs améliorés pour bien voir les relations
+     ============================================== */
+      .mld-layout {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        align-items: stretch;
+        justify-content: center;
+        gap: 0;
       }
 
       .mld-connector {
-        flex: 1;
+        flex: 0 0 110px;
         position: relative;
-        min-width: 40px;
-        height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
-      .mld-connector .line {
-        height: 1px;
-        width: 100%;
-        background: var(--muted);
+      /* Ligne horizontale centrale */
+      .mld-connector::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--info) 0%, var(--accent) 50%, var(--info) 100%);
+        transform: translateY(-50%);
+      }
+
+      /* Petits crochets aux extrémités (style pattes de corbeau) */
+      .mld-connector::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 8px;
+        height: 24px;
+        border-top: 2px solid var(--info);
+        border-bottom: 2px solid var(--info);
+        transform: translateY(-50%);
+        border-radius: 0;
+      }
+
+      .mld-connector .crow-right {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        width: 8px;
+        height: 24px;
+        border-top: 2px solid var(--info);
+        border-bottom: 2px solid var(--info);
+        transform: translateY(-50%);
+      }
+
+      .mld-connector .bubbles {
+        position: relative;
+        display: flex;
+        gap: 40px;
+        z-index: 2;
       }
 
       .mld-connector .bubble {
-        position: absolute;
         background: var(--bg);
         border: 1.5px solid var(--accent);
         color: var(--accent);
-        font-size: 9px;
+        font-size: 12px;
         font-weight: 700;
-        padding: 2px 6px;
+        padding: 4px 10px;
         border-radius: 999px;
         font-family: var(--mono);
+        min-width: 30px;
+        text-align: center;
       }
 
-      .mld-connector .bubble.left {
-        left: 10%;
-      }
-      .mld-connector .bubble.right {
-        right: 10%;
-      }
       .mld-connector .bubble.blue {
         border-color: var(--info);
         color: var(--info);
       }
 
-      /* UML */
-      .uml-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto;
-        gap: 55px 70px;
-        padding: 25px 10px 8px;
-        position: relative;
-      }
-
-      .uml-abstract-parent {
-        grid-column: 1 / -1;
-        justify-self: center;
-        margin-bottom: -18px;
-        z-index: 2;
-      }
-
-      .uml-class {
-        background: var(--card-2);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        overflow: hidden;
-        width: 100%;
-        max-width: 220px;
-        font-size: 10.5px;
-        z-index: 2;
-        position: relative;
-      }
-
-      .uml-class.abstract {
-        border-color: var(--violet);
-        background: linear-gradient(180deg, rgba(192, 132, 252, 0.05), rgba(192, 132, 252, 0.02));
-      }
-
-      .uml-class .uml-head {
-        background: var(--card-3);
-        padding: 7px 12px;
-        text-align: center;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .uml-class.abstract .uml-head {
-        background: rgba(192, 132, 252, 0.1);
-        border-bottom-color: var(--violet);
-      }
-
-      .uml-class .uml-head .cname {
-        font-weight: 700;
-        color: var(--white);
-        font-size: 12px;
-        font-family: var(--sans);
-      }
-
-      .uml-class.abstract .uml-head .cname {
-        font-family: var(--serif);
-        font-style: italic;
-        color: var(--violet);
-        font-weight: 400;
-        font-size: 15px;
-      }
-
-      .uml-class.abstract .uml-head .stereo {
-        color: var(--muted);
-        font-size: 9px;
-        font-style: italic;
-        margin-top: 2px;
-      }
-
-      .uml-class .uml-attrs,
-      .uml-class .uml-methods {
-        padding: 5px 12px;
-        font-family: var(--mono);
-      }
-
-      .uml-class .uml-attrs div,
-      .uml-class .uml-methods div {
-        padding: 2px 0;
-        font-size: 9.5px;
-        color: var(--text);
-        line-height: 1.4;
-      }
-
-      .uml-class .uml-methods div {
-        color: var(--success);
-      }
-
-      .uml-class .uml-divider {
-        height: 1px;
-        background: var(--border-soft);
-        margin: 0 12px;
-      }
-
-      .uml-class.abstract .uml-divider {
-        background: rgba(192, 132, 252, 0.2);
-      }
-
-      .vis-prot {
-        color: var(--accent) !important;
-      }
-      .vis-priv {
-        color: var(--danger);
-      }
-      .vis-pub {
-        color: var(--success);
-      }
-
-      /* Légende visibilité */
-      .vis-legend {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 14px;
-        margin: 10px 0;
-      }
-
-      .vis-item {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-      }
-
-      .vis-circle {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background: var(--card-2);
-        border: 1.5px solid var(--accent);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        font-size: 15px;
-        color: var(--accent);
-        flex-shrink: 0;
-      }
-
-      .vis-circle.success {
-        border-color: var(--success);
-        color: var(--success);
-      }
-      .vis-circle.danger {
-        border-color: var(--danger);
-        color: var(--danger);
-      }
-      .vis-circle.info {
-        border-color: var(--info);
-        color: var(--info);
-      }
-
-      .vis-text .vn {
-        color: var(--white);
-        font-weight: 600;
-        font-size: 11px;
-        display: block;
-      }
-
-      .vis-text .vd {
-        color: var(--muted);
-        font-size: 9.5px;
-        font-style: italic;
-      }
-
-      .rel-legend {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 14px 18px;
-        margin: 10px 0;
-      }
-
-      .rel-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 14px;
-      }
-
-      .rel-item {
-        padding: 6px 0;
-      }
-
-      .rel-item .rel-name {
-        font-size: 9.5px;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--white);
-        margin-bottom: 5px;
-      }
-
-      .rel-visual {
-        margin: 6px 0;
-        color: var(--text);
-        font-size: 14px;
-        font-family: var(--mono);
-      }
-
-      .rel-item .rel-desc {
-        font-size: 9.5px;
-        color: var(--muted);
-        font-style: italic;
-        line-height: 1.4;
-      }
-
-      /* Code SQL */
+      /* ==============================================
+     CODE BLOCK
+     ============================================== */
       .code-block {
         background: #0d0d0d;
         border: 1px solid var(--border);
-        border-radius: 10px;
-        margin: 12px 0;
+        border-radius: 12px;
+        margin: 18px 0;
         overflow: hidden;
         font-family: var(--mono);
-        font-size: 10.5px;
-        line-height: 1.6;
+        font-size: 13px;
+        line-height: 1.7;
       }
 
       .code-header {
         background: var(--card-2);
         border-bottom: 1px solid var(--border);
-        padding: 7px 14px;
+        padding: 10px 16px;
         display: flex;
         align-items: center;
         gap: 10px;
-        font-size: 9.5px;
+        font-size: 11px;
         color: var(--muted);
       }
 
       .code-header .dots {
         display: flex;
-        gap: 5px;
+        gap: 6px;
       }
       .code-header .dot {
-        width: 9px;
-        height: 9px;
+        width: 11px;
+        height: 11px;
         border-radius: 50%;
       }
       .code-header .dot:nth-child(1) {
@@ -1195,18 +1262,18 @@
       }
 
       .code-header .filename {
-        margin-left: 8px;
+        margin-left: 10px;
         font-weight: 600;
         color: var(--text);
         font-family: var(--mono);
       }
 
       .code-content {
-        padding: 12px 16px;
+        padding: 18px 22px;
         color: var(--text);
         white-space: pre;
         overflow-x: auto;
-        font-size: 10px;
+        font-size: 12.5px;
       }
 
       .kw {
@@ -1233,208 +1300,18 @@
         color: #c084fc;
       }
 
-      /* ===== Intro MERISE : schéma méthode → livrables ===== */
-      .merise-diagram {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 22px 24px;
-        margin: 14px 0;
-        position: relative;
-      }
-
-      .merise-method {
-        background: linear-gradient(135deg, var(--card-2) 0%, rgba(251, 191, 36, 0.08) 100%);
-        border: 1.5px solid var(--accent);
-        border-radius: 10px;
-        padding: 14px 18px;
-        text-align: center;
-        margin-bottom: 24px;
-        box-shadow: 0 0 40px var(--accent-glow);
-        position: relative;
-      }
-
-      .merise-method .label {
-        font-size: 8.5px;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 4px;
-      }
-
-      .merise-method .name {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 32px;
-        color: var(--accent);
-        font-weight: 400;
-        line-height: 1;
-        margin-bottom: 6px;
-      }
-
-      .merise-method .desc {
-        font-size: 10.5px;
-        color: var(--text);
-        font-style: italic;
-      }
-
-      .merise-arrows {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: -14px 0 10px;
-        position: relative;
-        z-index: 2;
-      }
-
-      .merise-arrows .arrow-down {
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 10px solid var(--accent);
-        margin: 0 60px;
-      }
-
-      .merise-branch-label {
-        text-align: center;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 12px;
-      }
-
-      .merise-branch-label span {
-        color: var(--accent);
-      }
-
-      .merise-livrables {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 10px;
-      }
-
-      .livrable-card {
-        background: var(--card-2);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 12px 14px;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .livrable-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-      }
-
-      .livrable-card.c::before {
-        background: var(--info);
-      }
-      .livrable-card.l::before {
-        background: var(--accent);
-      }
-      .livrable-card.p::before {
-        background: var(--success);
-      }
-
-      .livrable-card .l-tag {
-        font-size: 8px;
-        font-weight: 700;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--muted);
-        margin-bottom: 4px;
-      }
-
-      .livrable-card .l-name {
-        font-size: 18px;
-        font-weight: 800;
-        line-height: 1;
-        margin-bottom: 6px;
-      }
-
-      .livrable-card.c .l-name {
-        color: var(--info);
-      }
-      .livrable-card.l .l-name {
-        color: var(--accent);
-      }
-      .livrable-card.p .l-name {
-        color: var(--success);
-      }
-
-      .livrable-card .l-q {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 13px;
-        color: var(--white);
-        margin-bottom: 4px;
-      }
-
-      .livrable-card .l-desc {
-        font-size: 10px;
-        color: var(--muted);
-        line-height: 1.4;
-      }
-
-      /* Analogie maison */
-      .analogy-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
-        margin: 12px 0;
-      }
-
-      .analogy-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 10px 12px;
-      }
-
-      .analogy-card .a-ico {
-        font-size: 16px;
-        margin-bottom: 4px;
-      }
-
-      .analogy-card .a-title {
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 4px;
-      }
-
-      .analogy-card .a-desc {
-        font-size: 10px;
-        color: var(--text);
-        line-height: 1.4;
-      }
-
-      .analogy-card .a-desc strong {
-        color: var(--white);
-      }
-
       /* MLD notation */
       .mld-notation {
         background: #0d0d0d;
         border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 12px 16px;
+        border-radius: 10px;
+        padding: 18px 22px;
         font-family: var(--mono);
-        font-size: 10.5px;
-        line-height: 1.9;
+        font-size: 14px;
+        line-height: 2;
         color: var(--text);
-        margin: 8px 0 14px;
+        margin: 14px 0;
+        max-width: 900px;
       }
 
       .mld-notation .line {
@@ -1443,13 +1320,13 @@
       .mld-notation .pk {
         color: var(--accent);
         text-decoration: underline;
-        text-underline-offset: 3px;
+        text-underline-offset: 4px;
         font-weight: 600;
       }
       .mld-notation .fk {
         color: var(--danger);
         text-decoration: underline;
-        text-underline-offset: 3px;
+        text-underline-offset: 4px;
         font-weight: 600;
       }
       .mld-notation .tn {
@@ -1457,19 +1334,22 @@
         font-weight: 700;
       }
 
-      /* Item list */
+      /* ==============================================
+     ITEM LIST (MPD)
+     ============================================== */
       .item-list {
         background: var(--card);
         border: 1px solid var(--border);
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
+        max-width: 900px;
       }
 
       .item-list .item {
         display: grid;
-        grid-template-columns: 170px 1fr;
-        padding: 9px 16px;
-        font-size: 11px;
+        grid-template-columns: 220px 1fr;
+        padding: 14px 20px;
+        font-size: 14px;
         border-bottom: 1px solid var(--border-soft);
         align-items: center;
       }
@@ -1483,30 +1363,248 @@
         font-weight: 600;
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
       }
 
       .item-list .item .k::before {
         content: '▸';
         color: var(--accent);
-        font-size: 10px;
+        font-size: 11px;
       }
 
       .item-list .item .v {
         color: var(--text);
         font-family: var(--mono);
-        font-size: 10px;
+        font-size: 12.5px;
       }
 
-      /* Erreurs */
-      .error-block {
+      /* ==============================================
+     UML
+     ============================================== */
+      .vis-legend {
         display: grid;
-        grid-template-columns: 65px 1fr;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
         background: var(--card);
         border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 14px 0;
+        max-width: 900px;
+      }
+
+      .vis-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .vis-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--card-2);
+        border: 1.5px solid var(--accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 19px;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .vis-circle.success {
+        border-color: var(--success);
+        color: var(--success);
+      }
+      .vis-circle.danger {
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+      .vis-circle.info {
+        border-color: var(--info);
+        color: var(--info);
+      }
+
+      .vis-text .vn {
+        color: var(--white);
+        font-weight: 600;
+        font-size: 14px;
+        display: block;
+      }
+
+      .vis-text .vd {
+        color: var(--muted);
+        font-size: 11.5px;
+        font-style: italic;
+      }
+
+      .rel-legend {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 14px 0;
+        max-width: 900px;
+      }
+
+      .rel-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+      }
+
+      .rel-item {
+        padding: 8px 0;
+      }
+
+      .rel-item .rel-name {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--white);
+        margin-bottom: 8px;
+      }
+
+      .rel-visual {
+        margin: 10px 0;
+        color: var(--text);
+        font-size: 18px;
+        font-family: var(--mono);
+      }
+
+      .rel-item .rel-desc {
+        font-size: 12px;
+        color: var(--muted);
+        font-style: italic;
+        line-height: 1.4;
+      }
+
+      /* UML Diagramme */
+      .uml-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 70px 100px;
+        padding: 40px 20px 20px;
+        position: relative;
+      }
+
+      .uml-abstract-parent {
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin-bottom: -24px;
+        z-index: 2;
+      }
+
+      .uml-class {
+        background: var(--card-2);
+        border: 1px solid var(--border);
         border-radius: 10px;
-        margin-bottom: 9px;
         overflow: hidden;
+        width: 100%;
+        max-width: 280px;
+        font-size: 13px;
+        z-index: 2;
+        position: relative;
+      }
+
+      .uml-class.abstract {
+        border-color: var(--violet);
+        background: linear-gradient(180deg, rgba(192, 132, 252, 0.05), rgba(192, 132, 252, 0.02));
+      }
+
+      .uml-class .uml-head {
+        background: var(--card-3);
+        padding: 10px 14px;
+        text-align: center;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .uml-class.abstract .uml-head {
+        background: rgba(192, 132, 252, 0.1);
+        border-bottom-color: var(--violet);
+      }
+
+      .uml-class .uml-head .cname {
+        font-weight: 700;
+        color: var(--white);
+        font-size: 15px;
+        font-family: var(--sans);
+      }
+
+      .uml-class.abstract .uml-head .cname {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--violet);
+        font-weight: 400;
+        font-size: 20px;
+      }
+
+      .uml-class.abstract .uml-head .stereo {
+        color: var(--muted);
+        font-size: 11px;
+        font-style: italic;
+        margin-top: 2px;
+      }
+
+      .uml-class .uml-attrs,
+      .uml-class .uml-methods {
+        padding: 8px 14px;
+        font-family: var(--mono);
+      }
+
+      .uml-class .uml-attrs div,
+      .uml-class .uml-methods div {
+        padding: 3px 0;
+        font-size: 12px;
+        color: var(--text);
+        line-height: 1.4;
+      }
+
+      .uml-class .uml-methods div {
+        color: var(--success);
+      }
+
+      .uml-class .uml-divider {
+        height: 1px;
+        background: var(--border-soft);
+        margin: 0 14px;
+      }
+
+      .uml-class.abstract .uml-divider {
+        background: rgba(192, 132, 252, 0.2);
+      }
+
+      .vis-prot {
+        color: var(--accent) !important;
+      }
+      .vis-priv {
+        color: var(--danger);
+      }
+      .vis-pub {
+        color: var(--success);
+      }
+
+      /* ==============================================
+     ERREURS
+     ============================================== */
+      .error-block {
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        margin-bottom: 14px;
+        overflow: hidden;
+        max-width: 900px;
+        transition: border-color 0.2s;
+      }
+
+      .error-block:hover {
+        border-color: var(--accent);
       }
 
       .error-block .err-num {
@@ -1517,219 +1615,211 @@
         justify-content: center;
         font-family: var(--serif);
         font-style: italic;
-        font-size: 36px;
+        font-size: 48px;
         color: var(--accent);
       }
 
       .error-block .err-body {
-        padding: 12px 16px;
+        padding: 18px 24px;
       }
 
       .error-block .err-title {
-        font-size: 12.5px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--white);
-        margin-bottom: 4px;
+        margin-bottom: 6px;
       }
 
       .error-block .err-desc {
-        font-size: 10.5px;
-        color: var(--text);
-        line-height: 1.55;
-      }
-
-      /* Decor */
-      .deco-rule {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin: 20px 0;
-      }
-
-      .deco-rule::before,
-      .deco-rule::after {
-        content: '';
-        flex: 1;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--border), transparent);
-      }
-
-      .deco-rule .diamond {
-        width: 8px;
-        height: 8px;
-        background: var(--accent);
-        transform: rotate(45deg);
-        box-shadow: 0 0 12px var(--accent-glow);
-      }
-
-      .end-note {
-        text-align: center;
-        margin-top: 26px;
-      }
-
-      .end-title {
-        font-family: var(--serif);
-        font-style: italic;
-        font-size: 26px;
-        color: var(--accent);
-        margin-bottom: 10px;
-      }
-
-      .end-sub {
-        color: var(--muted);
-        font-size: 12px;
-        line-height: 1.6;
-        max-width: 500px;
-        margin: 0 auto;
-      }
-
-      /* Impression */
-      @media print {
-        @page {
-          size: A4;
-          margin: 0;
-        }
-        body,
-        html {
-          background: var(--bg);
-        }
-        .page {
-          margin: 0;
-          width: 210mm;
-          height: 297mm;
-          page-break-after: always;
-        }
-        .no-print {
-          display: none !important;
-        }
-      }
-
-      .print-btn {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: var(--accent);
-        color: var(--bg);
-        border: none;
-        padding: 14px 22px;
-        border-radius: 999px;
-        font-family: var(--sans);
-        font-weight: 700;
         font-size: 13px;
-        cursor: pointer;
-        box-shadow: 0 8px 30px rgba(251, 191, 36, 0.4);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .info-banner {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: var(--card-2);
-        border: 1px solid var(--accent);
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-size: 11px;
         color: var(--text);
-        z-index: 1000;
-        max-width: 500px;
-        text-align: center;
+        line-height: 1.6;
       }
 
-      .info-banner strong {
+      /* ==============================================
+     FOOTER
+     ============================================== */
+      .footer {
+        max-width: var(--container);
+        margin: 80px auto 0;
+        padding: 40px 32px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+        color: var(--dim);
+      }
+
+      .footer .f-brand {
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+      }
+
+      .footer a {
         color: var(--accent);
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* ==============================================
+     RESPONSIVE
+     ============================================== */
+      @media (max-width: 900px) {
+        .hero-title {
+          font-size: 64px;
+        }
+        .hero-title-big {
+          font-size: 128px;
+        }
+        .section-title {
+          font-size: 36px;
+        }
+        .section-num {
+          font-size: 80px;
+        }
+        .section-header {
+          gap: 16px;
+        }
+
+        .merise-livrables,
+        .analogy-grid,
+        .tools-grid,
+        .vis-legend,
+        .rel-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .uml-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .uml-abstract-parent {
+          grid-column: 1;
+        }
+
+        .mcd-layout,
+        .mld-layout {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .mcd-connector,
+        .mld-connector {
+          width: 100%;
+          height: 50px;
+          flex: 0 0 50px;
+        }
+
+        .topnav nav {
+          display: none;
+        }
+
+        .item-list .item {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+
+        .error-block {
+          grid-template-columns: 60px 1fr;
+        }
+
+        .error-block .err-num {
+          font-size: 32px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .section {
+          padding: 40px 20px 20px;
+        }
+        .hero {
+          padding: 60px 20px 40px;
+        }
+        .topnav {
+          padding: 12px 20px;
+        }
+        .hero-title {
+          font-size: 44px;
+        }
+        .hero-title-big {
+          font-size: 88px;
+        }
+        .section-title {
+          font-size: 28px;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- ============================================
-     PAGE 1 — COUVERTURE
-     ============================================ -->
-    <div class="page cover">
-      <div class="cover-inner">
-        <div class="cover-bg-letters">CDA</div>
-
-        <div class="cover-kicker">Dossier professionnel · Révisions</div>
-        <div class="cover-rule"></div>
-
-        <div class="cover-meta"><span class="num">N° 01</span> &nbsp;·&nbsp; Édition 2026 &nbsp;·&nbsp; Vol. I</div>
-
-        <h1 class="cover-title">Anti-Sèche</h1>
-        <div class="cover-title-big">CDA</div>
-
-        <div class="cover-tags">
-          <span class="tag accent">MCD</span>
-          <span class="tag">MLD</span>
-          <span class="tag">MPD</span>
-          <span class="tag">UML</span>
-          <span class="tag">SQL</span>
-        </div>
-
-        <div class="cover-split"></div>
-
-        <p class="cover-intro">
-          <strong>Fiche de synthèse pour le titre Concepteur Développeur d'Applications.</strong>
-          L'ensemble des schémas est décliné autour d'un unique cas d'école : la gestion d'une bibliothèque. Chaque
-          section contient la théorie, un exemple travaillé, les pièges à éviter, et
-          <strong>les outils recommandés pour construire ton schéma</strong>.
-        </p>
-
-        <div class="toc-block">
-          <div class="toc-title">Sommaire</div>
-          <div class="toc">
-            <div class="toc-row head">
-              <span>§</span>
-              <span>Chapitre</span>
-              <span class="page-n">Page</span>
-            </div>
-            <div class="toc-row">
-              <span class="num">—</span><span class="title">Introduction — MERISE et ses livrables</span
-              ><span class="page-n">02</span>
-            </div>
-            <div class="toc-row">
-              <span class="num">01</span><span class="title">MCD — Modèle Conceptuel de Données</span
-              ><span class="page-n">03</span>
-            </div>
-            <div class="toc-row">
-              <span class="num">02</span><span class="title">MLD — Modèle Logique de Données</span
-              ><span class="page-n">05</span>
-            </div>
-            <div class="toc-row">
-              <span class="num">03</span><span class="title">MPD — Modèle Physique de Données</span
-              ><span class="page-n">07</span>
-            </div>
-            <div class="toc-row">
-              <span class="num">04</span><span class="title">UML — Diagramme de classes</span
-              ><span class="page-n">09</span>
-            </div>
-            <div class="toc-row">
-              <span class="num">05</span><span class="title">Les 5 erreurs à éviter</span><span class="page-n">12</span>
-            </div>
-          </div>
+    <!-- ==============================================
+     NAV
+     ============================================== -->
+    <header class="topnav">
+      <div class="brand">
+        <div class="logo">§</div>
+        <div class="title-group">
+          <span>Anti-sèche CDA</span>
+          <span class="subtitle">MERISE &amp; UML</span>
         </div>
       </div>
-    </div>
+      <nav>
+        <a href="#intro">Intro</a>
+        <a href="#mcd">MCD</a>
+        <a href="#mld">MLD</a>
+        <a href="#mpd">MPD</a>
+        <a href="#uml">UML</a>
+        <a href="#erreurs">Erreurs</a>
+      </nav>
+    </header>
 
-    <!-- ============================================
-     PAGE 2 — INTRODUCTION : MERISE
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
+    <!-- ==============================================
+     HERO
+     ============================================== -->
+    <section class="hero">
+      <div class="hero-bg-letters">CDA</div>
 
-      <div class="chapter-header">
-        <div class="chapter-num">§</div>
-        <div class="chapter-titles">
-          <div class="chapter-kicker">Introduction</div>
-          <h1 class="chapter-title">MERISE</h1>
-          <div class="chapter-subtitle">La méthode et ses livrables</div>
+      <div class="hero-kicker">Dossier professionnel · Révisions</div>
+
+      <h1 class="hero-title">Anti-Sèche</h1>
+      <div class="hero-title-big">CDA</div>
+
+      <div class="hero-tags">
+        <span class="tag accent">MCD</span>
+        <span class="tag">MLD</span>
+        <span class="tag">MPD</span>
+        <span class="tag">UML</span>
+        <span class="tag">SQL</span>
+      </div>
+
+      <p class="hero-intro">
+        <strong>Fiche de synthèse pour le titre Concepteur Développeur d'Applications.</strong>
+        L'ensemble des schémas est décliné autour d'un unique cas d'école : la gestion d'une bibliothèque. Chaque
+        section contient la théorie, un exemple travaillé, les pièges à éviter, et
+        <strong>les outils recommandés pour construire ton schéma</strong>.
+      </p>
+
+      <div class="hero-cta">
+        <a href="#intro" class="btn primary">Commencer →</a>
+        <a href="#erreurs" class="btn secondary">Voir les pièges à éviter</a>
+      </div>
+    </section>
+
+    <!-- ==============================================
+     INTRO MERISE
+     ============================================== -->
+    <section class="section" id="intro">
+      <div class="section-header">
+        <div class="section-num">§</div>
+        <div class="section-titles">
+          <div class="section-kicker">Introduction</div>
+          <h1 class="section-title">MERISE</h1>
+          <div class="section-subtitle">La méthode et ses livrables</div>
         </div>
       </div>
 
@@ -1809,43 +1899,31 @@
           le MPD pour l'implémenter en MySQL. »
         </div>
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 02 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 3 — MCD (partie 1 : théorie)
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
-      <div class="chapter-header">
-        <div class="chapter-num">01</div>
-        <div class="chapter-titles">
-          <div class="chapter-kicker">Chapitre I</div>
-          <h1 class="chapter-title">MCD</h1>
-          <div class="chapter-subtitle">Modèle Conceptuel de Données · Méthode MERISE</div>
+    <!-- ==============================================
+     MCD
+     ============================================== -->
+    <section class="section" id="mcd">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-titles">
+          <div class="section-kicker">Chapitre I</div>
+          <h1 class="section-title">MCD</h1>
+          <div class="section-subtitle">Modèle Conceptuel de Données</div>
         </div>
       </div>
 
       <p class="lead">
         Le MCD représente les données métier <strong>sans aucune considération technique</strong>. Il décrit
-        <em>ce qu'est</em> l'information dans l'organisation, indépendamment de tout SGBD. C'est la
-        <strong>première étape</strong> de la méthode MERISE : MCD → MLD → MPD.
+        <em>ce qu'est</em> l'information dans l'organisation, indépendamment de tout SGBD.
       </p>
 
       <h2>Éléments fondamentaux</h2>
       <table>
         <thead>
           <tr>
-            <th style="width: 110px">Élément</th>
+            <th>Élément</th>
             <th>Définition</th>
             <th>Représentation</th>
           </tr>
@@ -1883,7 +1961,7 @@
       <table>
         <thead>
           <tr>
-            <th style="width: 80px">Notation</th>
+            <th>Notation</th>
             <th>Signification</th>
             <th>Exemple</th>
           </tr>
@@ -1921,31 +1999,6 @@
         </div>
       </div>
 
-      <h2>Checklist MCD</h2>
-      <ul class="checklist">
-        <li>Toutes les entités ont un identifiant <strong>souligné</strong></li>
-        <li>Associations = <strong>verbes</strong>, entités = <strong>noms</strong></li>
-        <li>Cardinalités sur les <strong>deux côtés</strong> de chaque relation</li>
-        <li><strong>Aucune clé étrangère</strong> au MCD (FK = MLD)</li>
-        <li>Pas de doublons d'information (normalisation)</li>
-      </ul>
-
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 03 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 3 — MCD (exemple + outils)
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
       <h2>Exemple : bibliothèque</h2>
       <p>
         Des <strong>lecteurs</strong> empruntent des <strong>livres</strong>. L'historique doit être conservé, donc la
@@ -1955,7 +2008,7 @@
       <div class="schema">
         <div class="schema-label"><span class="fig">Fig. 01</span> MCD / Emprunt en bibliothèque</div>
 
-        <div class="schema-row">
+        <div class="mcd-layout">
           <div class="entity livre">
             <div class="ent-head">LIVRE</div>
             <div class="ent-body">
@@ -1968,14 +2021,14 @@
             </div>
           </div>
 
-          <div class="connector"><div class="card-badge">0,N</div></div>
+          <div class="mcd-connector"><div class="card-badge">0,N</div></div>
 
           <div class="assoc-ellipse">
             <div class="name">emprunter</div>
             <div class="attr">dateEmprunt</div>
           </div>
 
-          <div class="connector"><div class="card-badge">0,N</div></div>
+          <div class="mcd-connector"><div class="card-badge">0,N</div></div>
 
           <div class="entity lecteur">
             <div class="ent-head">LECTEUR</div>
@@ -1994,18 +2047,26 @@
           <div class="leg-row">
             <span class="leg-label">Lecture</span>
             <span
-              >Un livre peut être emprunté 0 ou N fois ; un lecteur emprunte 0 ou N livres.<br />« dateEmprunt » est
-              portée par l'association (on ne sait pas à quelle entité la rattacher).</span
+              >Un livre peut être emprunté 0 ou N fois ; un lecteur emprunte 0 ou N livres. « dateEmprunt » est portée
+              par l'association.</span
             >
           </div>
         </div>
       </div>
 
-      <!-- SECTION OUTILS -->
+      <h2>Checklist MCD</h2>
+      <ul class="checklist">
+        <li>Toutes les entités ont un identifiant <strong>souligné</strong></li>
+        <li>Associations = <strong>verbes</strong>, entités = <strong>noms</strong></li>
+        <li>Cardinalités sur les <strong>deux côtés</strong> de chaque relation</li>
+        <li><strong>Aucune clé étrangère</strong> au MCD (FK = MLD)</li>
+        <li>Pas de doublons d'information (normalisation)</li>
+      </ul>
+
       <div class="tools-section">
         <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour ton MCD</div>
         <div class="tools-grid">
-          <div class="tool-card recommended">
+          <a href="https://drawdb.app" target="_blank" rel="noopener" class="tool-card recommended">
             <div class="tool-head">
               <div class="tool-name">drawDB</div>
               <div class="tool-badge top">Recommandé</div>
@@ -2015,9 +2076,9 @@
               100% gratuit, open source, aucun compte requis. Interface moderne en glisser-déposer, export SQL / PNG /
               PDF. Parfait pour construire MCD et MLD dans la foulée.
             </div>
-          </div>
+          </a>
 
-          <div class="tool-card">
+          <a href="https://dbdiagram.io" target="_blank" rel="noopener" class="tool-card">
             <div class="tool-head">
               <div class="tool-name">dbdiagram.io</div>
               <div class="tool-badge free">Free</div>
@@ -2027,32 +2088,21 @@
               Tu écris tes tables en DBML (un langage super simple), le schéma se dessine tout seul. Rapide, version «
               dev ». Gratuit jusqu'à 10 diagrammes.
             </div>
-          </div>
+          </a>
         </div>
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 04 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 4 — MLD (théorie + exemple)
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
-      <div class="chapter-header">
-        <div class="chapter-num">02</div>
-        <div class="chapter-titles">
-          <div class="chapter-kicker">Chapitre II</div>
-          <h1 class="chapter-title">MLD</h1>
-          <div class="chapter-subtitle">Modèle Logique de Données</div>
+    <!-- ==============================================
+     MLD
+     ============================================== -->
+    <section class="section" id="mld">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-titles">
+          <div class="section-kicker">Chapitre II</div>
+          <h1 class="section-title">MLD</h1>
+          <div class="section-subtitle">Modèle Logique de Données</div>
         </div>
       </div>
 
@@ -2062,12 +2112,11 @@
       </p>
 
       <h2>Règles de passage MCD → MLD</h2>
-
       <table>
         <thead>
           <tr>
-            <th style="width: 40px">N°</th>
-            <th style="width: 150px">Règle</th>
+            <th style="width: 50px">N°</th>
+            <th style="width: 180px">Règle</th>
             <th>Transformation</th>
           </tr>
         </thead>
@@ -2111,7 +2160,7 @@
       <div class="schema">
         <div class="schema-label"><span class="fig">Fig. 02</span> MLD / Tables relationnelles</div>
 
-        <div class="mld-row">
+        <div class="mld-layout">
           <div class="entity livre">
             <div class="ent-head">LIVRE</div>
             <div class="ent-body">
@@ -2125,12 +2174,14 @@
           </div>
 
           <div class="mld-connector">
-            <div class="line"></div>
-            <div class="bubble blue left">1</div>
-            <div class="bubble right">N</div>
+            <div class="crow-right"></div>
+            <div class="bubbles">
+              <span class="bubble blue">1</span>
+              <span class="bubble">N</span>
+            </div>
           </div>
 
-          <div class="entity assoc" style="width: 195px">
+          <div class="entity assoc" style="width: 240px">
             <div class="ent-head">EMPRUNTER</div>
             <div class="ent-body">
               <div class="ent-row fk"><span class="tag-k fk">PK/FK</span><span class="field">idLivre</span></div>
@@ -2142,9 +2193,11 @@
           </div>
 
           <div class="mld-connector">
-            <div class="line"></div>
-            <div class="bubble left">N</div>
-            <div class="bubble blue right">1</div>
+            <div class="crow-right"></div>
+            <div class="bubbles">
+              <span class="bubble">N</span>
+              <span class="bubble blue">1</span>
+            </div>
           </div>
 
           <div class="entity lecteur">
@@ -2178,22 +2231,6 @@
         </div>
       </div>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 05 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 5 — MLD notation + outils
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
       <h2>Notation textuelle normalisée</h2>
       <div class="small-label">Format souvent demandé en complément du schéma visuel.</div>
 
@@ -2226,11 +2263,10 @@
         <li>PK et FK clairement identifiées dans la notation</li>
       </ul>
 
-      <!-- OUTILS MLD -->
       <div class="tools-section">
         <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour ton MLD</div>
         <div class="tools-grid">
-          <div class="tool-card recommended">
+          <a href="https://drawdb.app" target="_blank" rel="noopener" class="tool-card recommended">
             <div class="tool-head">
               <div class="tool-name">drawDB</div>
               <div class="tool-badge top">Recommandé</div>
@@ -2240,9 +2276,9 @@
               Le même outil que pour le MCD — mais ici tu passes en mode tables relationnelles avec clés étrangères.
               Export SQL direct (MySQL, PostgreSQL, SQLite...). Tout-en-un.
             </div>
-          </div>
+          </a>
 
-          <div class="tool-card">
+          <a href="https://chartdb.io" target="_blank" rel="noopener" class="tool-card">
             <div class="tool-head">
               <div class="tool-name">ChartDB</div>
               <div class="tool-badge free">Free + AI</div>
@@ -2252,32 +2288,21 @@
               Outil moderne 2025, éditeur visuel très soigné. Génération de schémas par IA, éditeur DBML, export SQL.
               Peut importer une base existante en 1 clic.
             </div>
-          </div>
+          </a>
         </div>
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 06 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 6 — MPD (théorie + SQL 1)
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
-      <div class="chapter-header">
-        <div class="chapter-num">03</div>
-        <div class="chapter-titles">
-          <div class="chapter-kicker">Chapitre III</div>
-          <h1 class="chapter-title">MPD</h1>
-          <div class="chapter-subtitle">Modèle Physique de Données</div>
+    <!-- ==============================================
+     MPD
+     ============================================== -->
+    <section class="section" id="mpd">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-titles">
+          <div class="section-kicker">Chapitre III</div>
+          <h1 class="section-title">MPD</h1>
+          <div class="section-subtitle">Modèle Physique de Données</div>
         </div>
       </div>
 
@@ -2359,22 +2384,6 @@
         </div>
       </div>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 07 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 7 — MPD outils + checklist
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
       <div class="callout">
         <div class="callout-label">💡 &nbsp; À commenter au jury</div>
         <div class="callout-title">Justifie tes choix techniques</div>
@@ -2394,11 +2403,10 @@
         <li>Actions ON DELETE / ON UPDATE réfléchies, pas par défaut</li>
       </ul>
 
-      <!-- OUTILS MPD -->
       <div class="tools-section">
         <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour tester ton SQL</div>
         <div class="tools-grid">
-          <div class="tool-card recommended">
+          <a href="https://db-fiddle.com" target="_blank" rel="noopener" class="tool-card recommended">
             <div class="tool-head">
               <div class="tool-name">DB Fiddle</div>
               <div class="tool-badge top">Recommandé</div>
@@ -2408,9 +2416,9 @@
               Teste ton script SQL en ligne en 10 secondes. MySQL, PostgreSQL, SQLite. Idéal pour valider ton MPD avant
               le dossier et générer un lien partageable au jury.
             </div>
-          </div>
+          </a>
 
-          <div class="tool-card">
+          <a href="https://sqliteonline.com" target="_blank" rel="noopener" class="tool-card">
             <div class="tool-head">
               <div class="tool-name">SQLite Online</div>
               <div class="tool-badge free">Free</div>
@@ -2420,32 +2428,21 @@
               Base SQL directement dans le navigateur. Tu colles ton script, tu lances des SELECT, tu vérifies tes
               contraintes. Zéro config, zéro install.
             </div>
-          </div>
+          </a>
         </div>
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 08 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 8 — UML (théorie)
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
-      <div class="chapter-header">
-        <div class="chapter-num">04</div>
-        <div class="chapter-titles">
-          <div class="chapter-kicker">Chapitre IV</div>
-          <h1 class="chapter-title">UML</h1>
-          <div class="chapter-subtitle">Diagramme de classes</div>
+    <!-- ==============================================
+     UML
+     ============================================== -->
+    <section class="section" id="uml">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-titles">
+          <div class="section-kicker">Chapitre IV</div>
+          <h1 class="section-title">UML</h1>
+          <div class="section-subtitle">Diagramme de classes</div>
         </div>
       </div>
 
@@ -2521,10 +2518,12 @@
       </div>
 
       <h2>Cardinalités UML</h2>
+      <div class="small-label">Attention, le sens de lecture est l'opposé de MERISE.</div>
+
       <table>
         <thead>
           <tr>
-            <th style="width: 160px">Notation</th>
+            <th style="width: 200px">Notation</th>
             <th>Signification</th>
           </tr>
         </thead>
@@ -2561,22 +2560,6 @@
         </div>
       </div>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 09 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 9 — UML (diagramme)
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
       <h2>Exemple : bibliothèque en UML</h2>
       <p>
         Le même domaine, mais modélisé pour une application orientée objet. On voit apparaître l'<strong
@@ -2591,7 +2574,7 @@
 
         <div class="uml-grid">
           <div class="uml-abstract-parent">
-            <div class="uml-class abstract" style="width: 220px">
+            <div class="uml-class abstract" style="width: 280px">
               <div class="uml-head">
                 <div class="cname">Personne</div>
                 <div class="stereo">«abstract»</div>
@@ -2693,27 +2676,10 @@
         <li>Classes abstraites en <em>italique</em> ou avec «abstract»</li>
       </ul>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 10 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 10 — UML outils
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
-      <!-- OUTILS UML -->
       <div class="tools-section">
         <div class="tools-title"><span class="ico">🛠️</span>Outils en ligne pour ton diagramme UML</div>
         <div class="tools-grid">
-          <div class="tool-card recommended">
+          <a href="https://mermaid.live" target="_blank" rel="noopener" class="tool-card recommended">
             <div class="tool-head">
               <div class="tool-name">Mermaid Live</div>
               <div class="tool-badge top">Recommandé</div>
@@ -2723,9 +2689,9 @@
               100% gratuit, aucun compte. Tu écris ton diagramme en quelques lignes de code, rendu instantané. Supporte
               classes, héritage, composition, cardinalités. Export PNG/SVG.
             </div>
-          </div>
+          </a>
 
-          <div class="tool-card">
+          <a href="https://www.eraser.io/ai/uml-diagram-generator" target="_blank" rel="noopener" class="tool-card">
             <div class="tool-head">
               <div class="tool-name">Eraser · DiagramGPT</div>
               <div class="tool-badge free">Free + AI</div>
@@ -2735,14 +2701,14 @@
               Tu décris ton système en français, l'IA génère le diagramme UML. Parfait pour démarrer vite. Résultat
               éditable ensuite. Ultra moderne.
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
       <div class="callout">
         <div class="callout-label">💡 &nbsp; Le snippet Mermaid à connaître</div>
         <div class="callout-title">Diagramme de classes en 6 lignes</div>
-        <div class="callout-text" style="font-family: var(--mono); font-size: 10px; line-height: 1.7">
+        <div class="callout-text" style="font-family: var(--mono); font-size: 12.5px; line-height: 1.9">
           <span style="color: var(--accent)">classDiagram</span><br />
           &nbsp;&nbsp;<span style="color: var(--muted)">class</span> Personne { &lt;&lt;abstract&gt;&gt; <br />
           &nbsp;&nbsp;&nbsp;&nbsp;-nom : String <br />
@@ -2752,29 +2718,18 @@
           &nbsp;&nbsp;Lecteur <span style="color: var(--accent)">"0..5" -- "0..*"</span> Livre : emprunte
         </div>
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 11 —</span>
-      </footer>
-    </div>
-
-    <!-- ============================================
-     PAGE 11 — LES 5 ERREURS
-     ============================================ -->
-    <div class="page">
-      <header class="page-header">
-        <span class="brand">Anti-sèche CDA</span>
-        <span class="chapter">MCD · MLD · MPD · UML</span>
-        <span class="edition">Édition 2026</span>
-      </header>
-
-      <div class="chapter-header">
-        <div class="chapter-num">05</div>
-        <div class="chapter-titles">
-          <div class="chapter-kicker">Chapitre V</div>
-          <h1 class="chapter-title">Les 5 erreurs</h1>
-          <div class="chapter-subtitle">Ce qui fait tiquer le jury</div>
+    <!-- ==============================================
+     ERREURS
+     ============================================== -->
+    <section class="section" id="erreurs">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-titles">
+          <div class="section-kicker">Chapitre V</div>
+          <h1 class="section-title">Les 5 erreurs</h1>
+          <div class="section-subtitle">Ce qui fait tiquer le jury</div>
         </div>
       </div>
 
@@ -2837,18 +2792,33 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <footer class="page-footer">
-        <span>Dossier professionnel · CDA</span>
-        <span class="pnum">— 12 —</span>
-      </footer>
-    </div>
+    <footer class="footer">
+      <span class="f-brand">Anti-sèche CDA · MERISE &amp; UML</span>
+      <span>Dossier professionnel · Concepteur Développeur d'Applications</span>
+    </footer>
 
     <script>
-      setTimeout(() => {
-        const banner = document.querySelector('.info-banner')
-        if (banner) banner.style.opacity = '0.6'
-      }, 5000)
+      // Nav active selon la section visible
+      const sections = document.querySelectorAll('section[id]')
+      const navLinks = document.querySelectorAll('.topnav nav a')
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id')
+              navLinks.forEach((link) => {
+                link.classList.toggle('active', link.getAttribute('href') === `#${id}`)
+              })
+            }
+          })
+        },
+        { rootMargin: '-40% 0px -55% 0px' }
+      )
+
+      sections.forEach((s) => observer.observe(s))
     </script>
   </body>
 </html>
