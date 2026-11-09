@@ -133,6 +133,7 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
                 description={project.description}
                 url={project.url}
                 onClickOnImage={(urlImage) => setUrlImageToShow(urlImage)}
+                device={project.device}
               />
             ))}
           </article>

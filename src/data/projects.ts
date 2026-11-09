@@ -3,6 +3,7 @@ export type Project = {
   description: string
   images: string[]
   url?: string
+  device: 'desktop' | 'mobile'
 }
 
 export type Experience = {
@@ -52,7 +53,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/ornikar/mobile/ornikar2.png',
           '/projects/ornikar/mobile/ornikar3.png',
           '/projects/ornikar/mobile/ornikar4.png'
-        ]
+        ],
+        device: 'mobile'
       },
       {
         title: 'Ornikar on web',
@@ -64,7 +66,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/ornikar/web/ornikar2.jpeg',
           '/projects/ornikar/web/ornikar3.jpeg',
           '/projects/ornikar/web/ornikar4.jpeg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   },
@@ -87,7 +90,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/ds/projects/free/free1.png',
           '/projects/ds/projects/free/free2.jpg',
           '/projects/ds/projects/free/free3.jpg'
-        ]
+        ],
+        device: 'desktop'
       },
       {
         title: 'MentorGoal’s Simple Design System',
@@ -97,7 +101,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/ds/projects/mg/mg1.jpg',
           '/projects/ds/projects/mg/mg2.jpg',
           '/projects/ds/projects/mg/mg3.jpg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   },
@@ -121,7 +126,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/free/projects/freebox/freebox1.jpg',
           '/projects/free/projects/freebox/freebox2.jpg',
           '/projects/free/projects/freebox/freebox3.jpg'
-        ]
+        ],
+        device: 'desktop'
       },
       {
         title: 'Free Mobile',
@@ -132,7 +138,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/free/projects/freemobile/freemobile1.jpg',
           '/projects/free/projects/freemobile/freemobile2.jpg',
           '/projects/free/projects/freemobile/freemobile3.jpg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   },
@@ -156,7 +163,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/iliadGroup/projects/landing/iliad1.jpg',
           '/projects/iliadGroup/projects/landing/iliad2.jpg',
           '/projects/iliadGroup/projects/landing/iliad3.jpg'
-        ]
+        ],
+        device: 'desktop'
       },
       {
         title: 'Intranet',
@@ -166,7 +174,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/iliadGroup/projects/intranet/intranet1.jpg',
           '/projects/iliadGroup/projects/intranet/intranet2.jpg',
           '/projects/iliadGroup/projects/intranet/intranet3.jpg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   },
@@ -190,7 +199,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/pepiswap/pepiswap1.jpg',
           '/projects/pepiswap/pepiswap2.jpg',
           '/projects/pepiswap/pepiswap3.jpg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   },
@@ -214,7 +224,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/bellintone/bellintone1.jpg',
           '/projects/bellintone/bellintone2.jpg',
           '/projects/bellintone/bellintone3.jpg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   },
@@ -238,7 +249,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/mentorgoal/projects/platform/platform1.jpg',
           '/projects/mentorgoal/projects/platform/platform2.jpg',
           '/projects/mentorgoal/projects/platform/platform3.jpg'
-        ]
+        ],
+        device: 'desktop'
       },
       {
         title: '1 Click Extension',
@@ -249,7 +261,8 @@ export const EXPERIENCES: Experience[] = [
           '/projects/mentorgoal/projects/extension/extension1.jpeg',
           '/projects/mentorgoal/projects/extension/extension2.jpeg',
           '/projects/mentorgoal/projects/extension/extension3.jpeg'
-        ]
+        ],
+        device: 'desktop'
       }
     ]
   }

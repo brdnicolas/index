@@ -6,18 +6,29 @@ type PresentationTemplatePropsType = {
   url?: string
   description: string
   images: string[]
-  isReversed: boolean
+  isReversed?: boolean
+  device?: 'desktop' | 'mobile'
   onClickOnImage: (urlImage: string) => void
 }
+
 export const PresentationTemplate = ({
   title,
   url,
   description,
   images,
   isReversed = false,
+  device = 'desktop',
   onClickOnImage
 }: PresentationTemplatePropsType) => {
   const containerRef = useRef<HTMLDivElement>(null)
+
+  const galleryClassName = [
+    'projects-gallery',
+    device === 'mobile' ? 'mobile' : '',
+    device === 'desktop' && isReversed ? 'reversed' : ''
+  ]
+    .filter(Boolean)
+    .join(' ')
 
   return (
     <section ref={containerRef} className="font-manrope">
@@ -35,10 +46,16 @@ export const PresentationTemplate = ({
       </div>
       <p className="subtitle-description">{description}</p>
 
-      <div className={`projects-gallery ${isReversed ? 'reversed' : ''}`}>
+      <div className={galleryClassName}>
         {images.map((image) => (
           <div key={image} className="project_gallery_wrapper skeleton">
-            <Image onClick={() => onClickOnImage(image)} fill src={image} alt={`${title} view`} />
+            <Image
+              onClick={() => onClickOnImage(image)}
+              fill
+              sizes={device === 'mobile' ? '(max-width: 990px) 70vw, 320px' : '(max-width: 990px) 100vw, 50vw'}
+              src={image}
+              alt={`${title} view`}
+            />
           </div>
         ))}
       </div>

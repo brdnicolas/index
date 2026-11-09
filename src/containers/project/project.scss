@@ -1,4 +1,29 @@
 @media screen and (max-width: 990px) {
+  .projects-gallery {
+    // la grille desktop sur petit écran : on empile
+    &:not(.mobile) {
+      grid-template-columns: 1fr !important;
+      grid-template-rows: none !important;
+
+      .project_gallery_wrapper {
+        grid-area: auto !important;
+        aspect-ratio: 16 / 9;
+      }
+    }
+
+    // les captures mobile défilent horizontalement
+    &.mobile {
+      justify-content: flex-start;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+
+      .project_gallery_wrapper {
+        flex: 0 0 70%;
+        scroll-snap-align: center;
+      }
+    }
+  }
+
   main {
     padding-top: 100px !important;
     .techs {
@@ -200,6 +225,21 @@ main {
     section {
       padding-top: 15vw;
 
+      .projects-gallery.mobile {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        border-radius: 0;
+        overflow: visible;
+
+        .project_gallery_wrapper {
+          flex: 1 1 0;
+          max-width: 320px;
+          aspect-ratio: 9 / 19.5; // ratio d'une capture iPhone, à ajuster si besoin
+          border-radius: 20px;
+        }
+      }
+
       .subtitle {
         display: flex;
         align-items: center;
@@ -295,19 +335,27 @@ main {
     opacity: 0.9;
   }
   .img-container {
-    overflow: hidden;
-    border-radius: 20px;
+    --ratio: 1.5; // valeur par défaut avant chargement
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    position: relative;
-    aspect-ratio: 18/12;
-    max-width: 80vw;
-    max-height: 80vh;
+    overflow: hidden;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+
+    // la boîte prend le ratio de l'image, bornée à 90% de la largeur et 80% de la hauteur
+    aspect-ratio: var(--ratio);
+    width: min(90vw, calc(80dvh * var(--ratio)));
+
+    &.ready {
+      opacity: 1;
+    }
+
     img {
       border-radius: 20px !important;
-      object-fit: cover;
-      object-position: top;
+      object-fit: contain;
     }
   }
 }

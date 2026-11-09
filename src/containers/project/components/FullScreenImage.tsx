@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { CSSProperties, SyntheticEvent, useEffect, useState } from 'react'
 
 type FullScreenImagePropsType = {
   imageUrl: string
@@ -7,6 +7,8 @@ type FullScreenImagePropsType = {
 }
 
 export const FullScreenImage = ({ imageUrl, onClickOutside }: FullScreenImagePropsType) => {
+  const [ratio, setRatio] = useState<number | null>(null)
+
   useEffect(() => {
     const html = document.querySelector('html')
     if (!html) {
@@ -18,11 +20,21 @@ export const FullScreenImage = ({ imageUrl, onClickOutside }: FullScreenImagePro
     }
   }, [])
 
+  const handleLoad = (e: SyntheticEvent<HTMLImageElement>) => {
+    const { naturalWidth, naturalHeight } = e.currentTarget
+    if (naturalWidth && naturalHeight) {
+      setRatio(naturalWidth / naturalHeight)
+    }
+  }
+
   return (
     <div className="fullscreen-image z-50">
       <div onClick={onClickOutside} className="backdrop" />
-      <div className="img-container">
-        <Image fill src={imageUrl} alt="" />
+      <div
+        className={`img-container ${ratio ? 'ready' : ''}`}
+        style={ratio ? ({ '--ratio': ratio } as CSSProperties) : undefined}
+      >
+        <Image fill src={imageUrl} alt="" onLoad={handleLoad} />
       </div>
     </div>
   )
