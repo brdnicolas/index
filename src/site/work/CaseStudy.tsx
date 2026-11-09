@@ -92,7 +92,6 @@ export const CaseStudy = ({ project, index, total, next }: CaseStudyProps) => {
           scrollTrigger: { trigger: head, start: 'top 85%' }
         })
       })
-
     },
     { scope: root }
   )
@@ -197,7 +196,13 @@ export const CaseStudy = ({ project, index, total, next }: CaseStudyProps) => {
             <span className={styles.subIndex}>{pad(subIndex + 1)}</span>
             <h2 className={styles.subTitle}>{subProject.title}</h2>
             {subProject.url ? (
-              <a href={subProject.url} target="_blank" rel="noopener noreferrer" className={styles.live} data-cursor="Visit">
+              <a
+                href={subProject.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.live}
+                data-cursor="Visit"
+              >
                 <span className={styles.liveDot} />
                 Live ↗
               </a>

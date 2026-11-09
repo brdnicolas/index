@@ -50,7 +50,13 @@ export const TIMELINE: TimelineItem[] = [
     tag: 'Freelance'
   },
   { period: '2021 — 2023', role: 'FullStack Engineer', company: 'Free', link: 'https://free.fr' },
-  { period: '2021', role: 'Front-End Engineer', company: 'Bell Intone', link: 'https://bellintone.com/', tag: 'Freelance' },
+  {
+    period: '2021',
+    role: 'Front-End Engineer',
+    company: 'Bell Intone',
+    link: 'https://bellintone.com/',
+    tag: 'Freelance'
+  },
   { period: '2021 — 2022', role: 'Front-End Engineer', company: 'Mentor Goal', link: 'https://mentorgoal.com/' }
 ]
 

@@ -131,7 +131,12 @@ export const About = () => {
             <a href={LINKS.x} target="_blank" rel="noopener noreferrer" className={styles.pill}>
               X
             </a>
-            <a href={LINKS.resume} target="_blank" rel="noopener noreferrer" className={`${styles.pill} ${styles.pillLight}`}>
+            <a
+              href={LINKS.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${styles.pill} ${styles.pillLight}`}
+            >
               Resume <Arrow />
             </a>
           </div>
@@ -170,7 +175,9 @@ export const About = () => {
                   {item.role}
                 </span>
                 <span className={styles.jobCompany}>{item.company}</span>
-                <span className={styles.jobTag}>{item.tag ? <span className={styles.tag}>{item.tag}</span> : null}</span>
+                <span className={styles.jobTag}>
+                  {item.tag ? <span className={styles.tag}>{item.tag}</span> : null}
+                </span>
                 <Arrow />
               </a>
             </li>

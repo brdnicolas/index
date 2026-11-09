@@ -85,7 +85,11 @@ export const Cursor = () => {
         aria-hidden="true"
       />
       <div ref={dotRef} className={`${styles.dot} ${label || isHidden ? styles.hidden : ''}`} aria-hidden="true" />
-      <div ref={labelRef} className={`${styles.label} ${isBig ? styles.big : ''} ${label && !isHidden ? styles.labelVisible : ''}`} aria-hidden="true">
+      <div
+        ref={labelRef}
+        className={`${styles.label} ${isBig ? styles.big : ''} ${label && !isHidden ? styles.labelVisible : ''}`}
+        aria-hidden="true"
+      >
         {label}
       </div>
     </>

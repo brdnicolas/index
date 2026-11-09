@@ -106,7 +106,13 @@ export const Hero = () => {
         y: () => -window.innerHeight * 0.22,
         autoAlpha: 0,
         ease: 'none',
-        scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom top', scrub: true, invalidateOnRefresh: true }
+        scrollTrigger: {
+          trigger: root.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+          invalidateOnRefresh: true
+        }
       })
     },
     { scope: root }
@@ -182,7 +188,13 @@ export const Hero = () => {
             <Split text="I'm just a" mask charClassName="js-char" />
           </span>
           <span className={styles.line}>
-            <button type="button" className={styles.swap} onClick={swapWord} data-cursor="Click me" aria-label="Change the word">
+            <button
+              type="button"
+              className={styles.swap}
+              onClick={swapWord}
+              data-cursor="Click me"
+              aria-label="Change the word"
+            >
               <Split key={word} text={word} mask charClassName="js-char" />
             </button>{' '}
             <Split text="Engineer" mask charClassName="js-char" />

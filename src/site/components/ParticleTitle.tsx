@@ -211,7 +211,12 @@ export const ParticleTitle = ({ titleRef, className }: ParticleTitleProps) => {
         next,
         sampled.split
       )
-      const oldLines = byLine((i) => ty[i], (i) => tx[i], count, split)
+      const oldLines = byLine(
+        (i) => ty[i],
+        (i) => tx[i],
+        count,
+        split
+      )
 
       const nx = new Float32Array(next)
       const ny = new Float32Array(next)

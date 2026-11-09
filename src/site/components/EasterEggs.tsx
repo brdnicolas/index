@@ -11,7 +11,18 @@ import { LINKS } from '../data/content'
 import { toast } from './Toast'
 import { unlock } from '../lib/achievements'
 
-const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
+const KONAMI = [
+  'ArrowUp',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'b',
+  'a'
+]
 
 /*
  * 🥚 Global easter eggs (the others live next to their component):
@@ -39,7 +50,7 @@ export const EasterEggs = () => {
     const win = window as typeof window & { hire?: () => string }
     win.hire = () => {
       // eslint-disable-next-line no-console
-      console.log('%c📬 Great taste. Let\'s talk:', 'font-size:16px;font-weight:700;', `\n${LINKS.email}\n${LINKS.cal}`)
+      console.log("%c📬 Great taste. Let's talk:", 'font-size:16px;font-weight:700;', `\n${LINKS.email}\n${LINKS.cal}`)
       new JSConfetti().addConfetti({ emojis: ['💼', '🚀', '✨'], confettiNumber: 60 })
       unlock('hire')
       return 'Nico has been notified (not really, but please email him).'
@@ -71,7 +82,8 @@ export const EasterEggs = () => {
         inset: '0',
         zIndex: '140',
         pointerEvents: 'none',
-        background: 'radial-gradient(circle 170px at var(--x, 50%) var(--y, 50%), transparent 0%, transparent 55%, rgba(0,0,0,0.97) 100%)',
+        background:
+          'radial-gradient(circle 170px at var(--x, 50%) var(--y, 50%), transparent 0%, transparent 55%, rgba(0,0,0,0.97) 100%)',
         opacity: '0'
       })
       document.body.appendChild(torch)

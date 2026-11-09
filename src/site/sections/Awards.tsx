@@ -70,7 +70,11 @@ export const Awards = () => {
       if (isExpanded) return
       const fresh = root.current?.querySelectorAll(`.${styles.row}:nth-child(n+${DEFAULT_COUNT + 1})`)
       if (fresh) {
-        gsap.fromTo(fresh, { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.06, duration: 0.8, ease: 'expo.out' })
+        gsap.fromTo(
+          fresh,
+          { y: 30, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, stagger: 0.06, duration: 0.8, ease: 'expo.out' }
+        )
       }
     })
   }
@@ -106,7 +110,6 @@ export const Awards = () => {
           {isExpanded ? 'Hide, too much for me' : `Wanna see more? (+${AWARDS.length - DEFAULT_COUNT})`}
         </button>
       </div>
-
     </section>
   )
 }

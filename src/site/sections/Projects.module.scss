@@ -287,9 +287,7 @@
   place-items: center;
   border-style: dashed;
   border-color: var(--line-strong);
-  background:
-    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.06), transparent 50%),
-    var(--bg-2);
+  background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.06), transparent 50%), var(--bg-2);
 }
 
 .nextBig {

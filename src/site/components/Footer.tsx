@@ -60,7 +60,9 @@ export const Footer = () => {
 
           <div className={styles.meta}>
             <p>© {new Date().getFullYear()} — Designed with taste, shipped with a shader.</p>
-            <p>Pair-programmed with Claude — it wrote the shaders, I typed &ldquo;make it more wahou&rdquo; 47 times 🤖</p>
+            <p>
+              Pair-programmed with Claude — it wrote the shaders, I typed &ldquo;make it more wahou&rdquo; 47 times 🤖
+            </p>
             <div className={styles.metaRight}>{isHome ? <EggHunt /> : null}</div>
           </div>
 

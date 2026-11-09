@@ -25,8 +25,17 @@ export const AchievementPopup = () => {
       const element = ref.current
       gsap
         .timeline({ onComplete: showNext })
-        .fromTo(element, { x: -40, autoAlpha: 0, scale: 0.92 }, { x: 0, autoAlpha: 1, scale: 1, duration: 0.6, ease: 'back.out(1.6)' })
-        .fromTo(`.${styles.bar}`, { scaleX: (next.count - 1) / next.total }, { scaleX: next.count / next.total, duration: 0.8, ease: 'power2.out' }, '<0.3')
+        .fromTo(
+          element,
+          { x: -40, autoAlpha: 0, scale: 0.92 },
+          { x: 0, autoAlpha: 1, scale: 1, duration: 0.6, ease: 'back.out(1.6)' }
+        )
+        .fromTo(
+          `.${styles.bar}`,
+          { scaleX: (next.count - 1) / next.total },
+          { scaleX: next.count / next.total, duration: 0.8, ease: 'power2.out' },
+          '<0.3'
+        )
         .to(element, { x: -40, autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, '+=2.6')
 
       if (next.completed) {

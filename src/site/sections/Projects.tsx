@@ -20,7 +20,12 @@ export const Projects = () => {
   const router = useRouter()
 
   // Hover: the image tilts towards the cursor, a glare follows, and a round "view case" badge rides the cursor.
-  const hoverState = useRef(new WeakMap<HTMLElement, { tiltX: gsap.QuickToFunc; tiltY: gsap.QuickToFunc; badgeX: gsap.QuickToFunc; badgeY: gsap.QuickToFunc }>())
+  const hoverState = useRef(
+    new WeakMap<
+      HTMLElement,
+      { tiltX: gsap.QuickToFunc; tiltY: gsap.QuickToFunc; badgeX: gsap.QuickToFunc; badgeY: gsap.QuickToFunc }
+    >()
+  )
   const getHover = (card: HTMLElement) => {
     let state = hoverState.current.get(card)
     if (!state) {
@@ -45,8 +50,8 @@ export const Projects = () => {
     const x = event.clientX - rect.left
     const y = event.clientY - rect.top
     const state = getHover(event.currentTarget)
-    state.tiltX(((x / rect.width) - 0.5) * 10)
-    state.tiltY(((y / rect.height) - 0.5) * -10)
+    state.tiltX((x / rect.width - 0.5) * 10)
+    state.tiltY((y / rect.height - 0.5) * -10)
     state.badgeX(x)
     state.badgeY(y)
     media.style.setProperty('--gx', `${(x / rect.width) * 100}%`)
@@ -90,7 +95,12 @@ export const Projects = () => {
     const state = getHover(event.currentTarget)
     state.tiltX(0)
     state.tiltY(0)
-    gsap.to(event.currentTarget.querySelector(`.${styles.badge}`), { scale: 0, duration: 0.4, ease: 'power3.in', overwrite: 'auto' })
+    gsap.to(event.currentTarget.querySelector(`.${styles.badge}`), {
+      scale: 0,
+      duration: 0.4,
+      ease: 'power3.in',
+      overwrite: 'auto'
+    })
   }
 
   const openCase = (event: React.MouseEvent<HTMLAnchorElement>, slug: string) => {
@@ -241,7 +251,13 @@ export const Projects = () => {
           </a>
         ))}
 
-        <a href={LINKS.cal} target="_blank" rel="noopener noreferrer" className={`${styles.card} ${styles.next}`} data-cursor="Let's talk">
+        <a
+          href={LINKS.cal}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${styles.card} ${styles.next}`}
+          data-cursor="Let's talk"
+        >
           <div className={`${styles.media} ${styles.nextMedia}`}>
             <span className={styles.nextBig}>
               Your

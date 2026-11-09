@@ -40,12 +40,15 @@ export const Marquee = () => {
 
       // a little skew based on scroll velocity
       const skewTo = gsap.quickTo(rows, 'skewX', { duration: 0.4, ease: 'power3' })
-      gsap.to({}, {
-        scrollTrigger: {
-          ...trigger,
-          onUpdate: (self) => skewTo(gsap.utils.clamp(-12, 12, self.getVelocity() / -250))
+      gsap.to(
+        {},
+        {
+          scrollTrigger: {
+            ...trigger,
+            onUpdate: (self) => skewTo(gsap.utils.clamp(-12, 12, self.getVelocity() / -250))
+          }
         }
-      })
+      )
     },
     { scope: root }
   )

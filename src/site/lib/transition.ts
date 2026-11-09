@@ -75,15 +75,19 @@ export const transitionTo = (
 
   Object.assign(element.style, { inset: '0' })
   document.body.appendChild(element)
-  gsap.fromTo(element, { yPercent: 100 }, {
-    yPercent: 0,
-    duration: 0.7,
-    ease: 'expo.inOut',
-    onComplete: () => {
-      router.push(href, { scroll: false })
-      fallback = setTimeout(() => endTransition(true), 2500)
+  gsap.fromTo(
+    element,
+    { yPercent: 100 },
+    {
+      yPercent: 0,
+      duration: 0.7,
+      ease: 'expo.inOut',
+      onComplete: () => {
+        router.push(href, { scroll: false })
+        fallback = setTimeout(() => endTransition(true), 2500)
+      }
     }
-  })
+  )
 }
 
 /** Called by the next page once it's painted (and its hero image loaded, if any). */
