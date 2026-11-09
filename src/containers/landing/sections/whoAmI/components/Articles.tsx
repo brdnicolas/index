@@ -1,5 +1,5 @@
 import { TransitionLink } from '@/components/atoms/TransitionLink'
-import { Icon } from '@iconify/react/dist/iconify.mjs'
+import { Icon } from '@iconify/react'
 
 export const Articles = () => {
   return (

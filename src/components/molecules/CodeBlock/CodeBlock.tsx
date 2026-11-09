@@ -1,7 +1,7 @@
 import { BundledLanguage, codeToHtml } from 'shiki'
 import './codeblock.scss'
 import { CopyButton } from '../../atoms/CopyButton'
-import { Icon } from '@iconify/react/dist/iconify.mjs'
+import { Icon } from '@iconify/react'
 
 interface CodeBlockProps {
   children: string

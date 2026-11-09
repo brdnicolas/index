@@ -1,4 +1,4 @@
-import { Icon } from '@iconify/react/dist/iconify.mjs'
+import { Icon } from '@iconify/react'
 import { Tag } from './Tag'
 
 const EXPERIENCES = [

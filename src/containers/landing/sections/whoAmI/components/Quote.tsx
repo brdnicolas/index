@@ -1,5 +1,5 @@
 import { Button } from '@/components/atoms/Button'
-import { Icon } from '@iconify/react/dist/iconify.mjs'
+import { Icon } from '@iconify/react'
 
 export const Quote = () => {
   return (
