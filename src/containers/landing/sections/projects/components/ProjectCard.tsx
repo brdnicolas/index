@@ -2,16 +2,16 @@ import { TransitionLink } from '@/components/atoms/TransitionLink'
 import 'atropos/css'
 import clsx from 'clsx'
 
-interface ProjectCard {
+interface ProjectCardProps {
   date: string
-  role: string
+  job: string
   company: string
   tinyDescription: string
   thumbnailUrl: string
   slug: string
 }
 
-export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl, slug }: ProjectCard) => {
+export const ProjectCard = ({ date, job, company, tinyDescription, thumbnailUrl, slug }: ProjectCardProps) => {
   const isLastProject = slug === ''
 
   return (
@@ -42,7 +42,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
 
       <div className="flex-1">
         <p className="text-3 text-dark-500">{date}</p>
-        <p className="text-white font-bold text-6 mt-1">{role}</p>
+        <p className="text-white font-bold text-6 mt-1">{job}</p>
         <p className="text-4 text-dark-500 mt-1">@{company}</p>
         <p className={clsx('text-4 text-dark-300 mt-6 text-justify break-words', isLastProject ? '' : 'line-clamp-4')}>
           {tinyDescription}

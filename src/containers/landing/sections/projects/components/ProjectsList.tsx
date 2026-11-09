@@ -64,7 +64,7 @@ export const ProjectsList = () => {
             date={project.date}
             tinyDescription={project.description}
             company={project.company}
-            role={project.role}
+            job={project.job}
             thumbnailUrl={project.thumbnail}
             slug={project.slug}
           />
@@ -74,7 +74,7 @@ export const ProjectsList = () => {
           tinyDescription="This could be the beginning of something amazing...
           Imagine a world where your brilliant ideas meet my creativity. The possibilities? Endless. The results? Legendary."
           company="Your company"
-          role="Our futur project"
+          job="Our futur project"
           thumbnailUrl="/projects/placeholder.svg"
           slug=""
         />

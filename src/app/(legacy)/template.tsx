@@ -1,7 +1,7 @@
 'use client'
 
 import { animatePageIn } from '@/shared/utils/animations'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { ReactNode, useEffect } from 'react'
 
 export default function Template({ children }: { children: ReactNode }) {

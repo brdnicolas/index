@@ -30,7 +30,7 @@ export const Presentation = () => {
   return (
     <SectionLayout className="flex flex-col items-center justify-center h-dvh">
       <h1 className="flex items-center text-6 gap-1 text-dark-300 font-manrope font-medium">
-        Hi! <img src="/emoji/victory.png" ref={emojiRef} className="h-6" /> I'm Nicolas Brouard
+        Hi! <img alt="Victory" src="/emoji/victory.png" ref={emojiRef} className="h-6" /> I'm Nicolas Brouard
       </h1>
       <h2 ref={bigTitle} id="my-text" className="text-12 tablet:text-[92px] font-bold text-center">
         I'm just a <br />

@@ -6,7 +6,6 @@ const Logos = ({ hidden = false }: { hidden?: boolean }) => (
     {COLLABS.map((collab) => (
       <li key={collab.name} className={styles.item}>
         {collab.logo ? (
-          // eslint-disable-next-line @next/next/no-img-element
           <img src={collab.logo} alt={hidden ? '' : collab.name} style={{ height: collab.height }} />
         ) : (
           <span className={styles.wordmark}>{collab.name}</span>

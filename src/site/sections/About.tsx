@@ -223,7 +223,6 @@ export const About = () => {
           <ul className={styles.stack}>
             {STACK.map((tool) => (
               <li key={tool.name} className={styles.tool} data-tooltip={tool.name}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={tool.icon} alt={tool.name} width={44} height={44} loading="lazy" />
               </li>
             ))}

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { CSSProperties, ReactNode } from 'react'
 
-interface SectionLayout {
+interface SectionLayoutProps {
   children: ReactNode
   className?: string
   isFullScreen?: boolean
@@ -17,7 +17,7 @@ export const SectionLayout = ({
   style,
   isFullWidth,
   hidePaddingX
-}: SectionLayout) => {
+}: SectionLayoutProps) => {
   return (
     <section
       style={style}

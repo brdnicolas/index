@@ -10,7 +10,7 @@ export type Experience = {
   company: string
   slug: string
   date: string
-  role: string
+  job: string
   preview: string
   description: string
   thumbnail: string
@@ -22,7 +22,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Ornikar',
     date: '2024.04.11 - Now',
-    role: 'Frontend Engineer',
+    job: 'Frontend Engineer',
     slug: 'ornikar',
     preview: '/projects/ornikar/preview.png',
     thumbnail: '/projects/ornikar/thumbnail.png',
@@ -74,7 +74,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Design Systems',
     date: '2023.06.01',
-    role: 'Frontend Engineer',
+    job: 'Frontend Engineer',
     slug: 'design-systems',
     preview: '/projects/ds/preview.jpg',
     thumbnail: '/projects/ds/thumbnail.png',
@@ -109,7 +109,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Free',
     date: '2022.10.10',
-    role: 'FullStack Engineer',
+    job: 'FullStack Engineer',
     slug: 'free',
     preview: '/projects/free/preview.jpg',
     thumbnail: '/projects/free/thumbnail.jpg',
@@ -146,7 +146,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Iliad Group',
     date: '2022.10.10',
-    role: 'FullStack Engineer',
+    job: 'FullStack Engineer',
     slug: 'iliad-group',
     preview: '/projects/iliadGroup/preview.jpg',
     thumbnail: '/projects/iliadGroup/thumbnail.jpg',
@@ -182,7 +182,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Pepiswap',
     date: '2023.09.01',
-    role: 'Front-End Engineer',
+    job: 'Front-End Engineer',
     slug: 'pepiswap',
     preview: '/projects/pepiswap/preview.jpg',
     thumbnail: '/projects/pepiswap/thumbnail.jpg',
@@ -207,7 +207,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Bell Intone',
     date: '2021.10.10',
-    role: 'FullStack Engineer',
+    job: 'FullStack Engineer',
     slug: 'bellintone',
     preview: '/projects/bellintone/preview.jpg',
     thumbnail: '/projects/bellintone/thumbnail.jpg',
@@ -232,7 +232,7 @@ export const EXPERIENCES: Experience[] = [
   {
     company: 'Mentor Goal',
     date: '2021.10.10',
-    role: 'Front-End Engineer',
+    job: 'Front-End Engineer',
     slug: 'mentor-goal',
     preview: '/projects/mentorgoal/preview.jpg',
     thumbnail: '/projects/mentorgoal/thumbnail.jpg',

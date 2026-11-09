@@ -11,6 +11,7 @@ export const MyTopSongs = () => {
             height="80"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
+            title="Samayusi"
           />
           <iframe
             style={{ borderRadius: 12 }}
@@ -19,6 +20,7 @@ export const MyTopSongs = () => {
             height="80"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
+            title="Luther"
           />
           <iframe
             style={{ borderRadius: 12 }}
@@ -27,6 +29,7 @@ export const MyTopSongs = () => {
             height="80"
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
             loading="lazy"
+            title="Angus and Julia Stone"
           />
         </div>
       </div>

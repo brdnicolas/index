@@ -98,7 +98,7 @@ export const ProjectContainer = ({ project }: ProjectContainerProps) => {
       <div ref={containerRef}>
         <SectionLayout className="relative">
           <ul className="techs hide-scrollbar">
-            {project.techs.map((stack, i) => (
+            {project.techs.map((stack) => (
               <Tag className="text-3 py-2 px-3" key={stack}>
                 {stack}
               </Tag>
