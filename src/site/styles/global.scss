@@ -1,0 +1,157 @@
+@use 'tokens' as *;
+
+:root {
+  --bg: #050505;
+  --bg-2: #0c0c0c;
+  --card: #0f0f0f;
+  --fg: #f3f2ee;
+  --muted: #8b8a86;
+  --dim: #4a4a48;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.16);
+  --green: #3ddc84;
+  --header-h: 72px;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg);
+
+  &.lenis,
+  &.lenis body {
+    height: auto;
+  }
+
+  &.lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  &.is-intro {
+    overflow: hidden;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+img,
+svg,
+canvas,
+iframe {
+  display: block;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+@include hover {
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none !important;
+  }
+}
+
+// Split text helpers (used by <Split />)
+.split-line {
+  display: block;
+  overflow: hidden;
+  // room for descenders (j, g, p) so the mask doesn't crop them
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+
+.split-word {
+  display: inline-block;
+  white-space: nowrap;
+
+  // italic (Instrument Serif) and tight letter-spacing make glyphs overflow their box:
+  // give the mask some room on every side, then cancel it with negative margins
+  &.is-masked {
+    overflow: hidden;
+    vertical-align: top;
+    padding: 0.04em 0.12em 0.16em;
+    margin: -0.04em -0.12em -0.16em;
+  }
+}
+
+.split-char {
+  display: inline-block;
+  will-change: transform;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+// 🥚 Cmd/Ctrl + P
+@media print {
+  body > * {
+    display: none !important;
+  }
+
+  body::after {
+    content: 'Printing a website in 2026? Bold move. 🌳 Save a tree, email me instead: brdnicolas.pro@gmail.com';
+    display: block;
+    padding: 64px;
+    font: 600 28px/1.4 system-ui, sans-serif;
+    color: #000;
+  }
+}

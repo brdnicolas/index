@@ -1,0 +1,344 @@
+@use '../styles/tokens' as *;
+
+.case {
+  position: relative;
+}
+
+// --- Hero
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.heroMedia {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImage {
+  object-fit: cover;
+  will-change: transform;
+}
+
+.heroShade {
+  position: absolute;
+  inset: 0;
+  // strong enough to keep white text readable on light screenshots (hello, Design Systems)
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 5, 0.97) 0%,
+    rgba(5, 5, 5, 0.7) 38%,
+    rgba(5, 5, 5, 0.45) 65%,
+    rgba(5, 5, 5, 0.8) 100%
+  );
+}
+
+.heroContent {
+  position: absolute;
+  inset: 0;
+  @include container;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: calc(var(--header-h) + 24px);
+  padding-bottom: 40px;
+}
+
+.back {
+  @include mono;
+  font-size: 12px;
+  color: var(--fg);
+  position: absolute;
+  top: calc(var(--header-h) + 24px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--line-strong);
+  transition:
+    background 0.3s,
+    color 0.3s;
+
+  @include hover {
+    &:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+  }
+}
+
+.caseIndex {
+  @include mono;
+  font-size: 12px;
+  color: #c9c8c4;
+  margin-bottom: 12px;
+}
+
+.title {
+  font-size: clamp(64px, 13vw, 220px);
+  font-weight: 600;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+}
+
+.heroMeta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  dt {
+    @include mono;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  dd {
+    font-size: 15px;
+    font-weight: 500;
+  }
+}
+
+// --- Intro
+.intro {
+  @include container;
+  padding-block: 120px 80px;
+}
+
+.eyebrow {
+  @include eyebrow;
+  margin-bottom: 28px;
+}
+
+.description {
+  font-size: clamp(24px, 3.4vw, 46px);
+  line-height: 1.18;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  max-width: 1100px;
+}
+
+.techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 40px;
+
+  li {
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line-strong);
+    color: #c9c8c4;
+  }
+}
+
+// --- Sub projects
+.sub {
+  @include container;
+  padding-block: 80px;
+  border-top: 1px solid var(--line);
+}
+
+.subHead {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 12px 20px;
+  margin-bottom: 48px;
+}
+
+.subIndex {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.subTitle {
+  font-size: clamp(32px, 4.6vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    background 0.3s,
+    color 0.3s;
+
+  @include hover {
+    &:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+  }
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+
+.subDescription {
+  grid-column: 2 / -1;
+  color: #b5b4b0;
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 720px;
+
+  @media (max-width: #{$bp-tablet - 1px}) {
+    grid-column: 1 / -1;
+  }
+}
+
+.gallery {
+  display: grid;
+  gap: 16px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.shot {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--card);
+
+  img {
+    object-fit: cover;
+  }
+}
+
+// first image is wide; if the rest is an odd count, the last one goes wide too (no orphan)
+.shotWide,
+.shot:last-child:nth-child(even) {
+  @include tablet {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.phones {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 8px;
+
+  @include tablet {
+    justify-content: center;
+    gap: 24px;
+  }
+}
+
+.phone {
+  position: relative;
+  flex: 0 0 60vw;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 6px solid #1c1c1c;
+  background: var(--card);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+
+  @include tablet {
+    flex: 0 0 min(22vw, 260px);
+  }
+
+  &:nth-child(even) {
+    @include tablet {
+      margin-top: 64px;
+    }
+  }
+
+  img {
+    object-fit: cover;
+  }
+}
+
+// --- Next case
+.next {
+  position: relative;
+  display: grid;
+  @include container;
+  padding-block: 120px 160px;
+  border-top: 1px solid var(--line);
+  gap: 12px;
+  overflow: hidden;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+  }
+}
+
+.nextLabel {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.nextName {
+  font-size: clamp(56px, 10vw, 150px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+  grid-column: 1;
+  transition: transform 0.7s $ease-out;
+}
+
+.nextRole {
+  color: var(--muted);
+  grid-column: 1;
+}
+
+.nextMedia {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 24px;
+
+  @include desktop {
+    grid-column: 2;
+    grid-row: 1 / span 3;
+    margin-top: 0;
+  }
+
+  img {
+    object-fit: cover;
+    transition: scale 1.2s $ease-out;
+  }
+}
+
+.next:hover {
+  .nextName {
+    transform: translateX(16px);
+  }
+  .nextMedia img {
+    scale: 1.06;
+  }
+}

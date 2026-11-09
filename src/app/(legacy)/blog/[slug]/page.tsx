@@ -15,8 +15,8 @@ export async function generateStaticParams() {
   return await getAllSlugs()
 }
 
-export default async function PostPage({ params }: { params: { slug: string } }) {
-  const slug = params.slug
+export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
   const post = await getPostBySlug(slug)
 
   if (!post) return

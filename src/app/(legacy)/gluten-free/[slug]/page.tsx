@@ -8,8 +8,8 @@ export async function generateStaticParams() {
   return EXPERIENCES.map((experience) => ({ slug: experience.slug }))
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const pathName = params.slug
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug: pathName } = await params
   const project = EXPERIENCES.find(({ slug }) => slug === pathName)!
 
   return (
@@ -18,7 +18,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         description={`Find out what we've done together!`}
         title={`${project.company} x Nicolas B.`}
         previewUrl={`${project.thumbnail}`}
-        url={`https://brdnicolas.com/${project.slug}`}
+        url={`https://brdnicolas.com/gluten-free/${project.slug}`}
       />
       <ProjectContainer project={project} />
     </main>

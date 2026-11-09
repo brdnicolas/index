@@ -1,0 +1,66 @@
+// Design tokens for the AI-made version of brdnicolas.com
+$bp-tablet: 768px;
+$bp-desktop: 1100px;
+$layout: 1320px;
+
+$ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+$ease-in-out: cubic-bezier(0.83, 0, 0.17, 1);
+
+@mixin tablet {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $layout;
+  margin-inline: auto;
+  padding-inline: 16px;
+
+  @include tablet {
+    padding-inline: 32px;
+  }
+}
+
+@mixin mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+@mixin serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+@mixin eyebrow {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--fg);
+  }
+}

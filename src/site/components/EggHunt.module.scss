@@ -1,0 +1,132 @@
+@use '../styles/tokens' as *;
+
+.hunt {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  @include mono;
+  font-size: 11px;
+  color: var(--dim);
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition:
+    color 0.3s,
+    border-color 0.3s;
+
+  @include hover {
+    &:hover {
+      color: var(--fg);
+      border-color: var(--line-strong);
+    }
+  }
+
+  &[aria-expanded='true'] {
+    color: var(--fg);
+    border-color: var(--line-strong);
+  }
+}
+
+.panel {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+  z-index: 5;
+  width: min(320px, calc(100vw - 32px));
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(16, 16, 16, 0.96);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  text-align: left;
+  animation: pop 0.35s $ease-out;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.count {
+  @include mono;
+  font-size: 10px;
+  color: var(--green);
+}
+
+.progress {
+  height: 2px;
+  margin: 10px 0 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: var(--green);
+    transform-origin: left;
+    transition: transform 0.6s $ease-out;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    font-size: 12px;
+    color: var(--dim);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+.emoji {
+  width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.unlocked {
+  color: var(--fg) !important;
+}
+
+.reward {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--fg);
+}
+
+.reset {
+  @include mono;
+  font-size: 9px;
+  color: var(--dim);
+  margin-top: 10px;
+
+  @include hover {
+    &:hover {
+      color: var(--fg);
+    }
+  }
+}

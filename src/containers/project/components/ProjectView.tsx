@@ -16,12 +16,12 @@ export const ProjectView = ({ title, previewUrl, slug }: ProjectPropsType) => {
   return (
     <div className="project">
       {isMobile ? (
-        <TransitionLink href={`/${slug}`} className="project__img__wrapper skeleton">
+        <TransitionLink href={`/gluten-free/${slug}`} className="project__img__wrapper skeleton">
           <img src={previewUrl} alt={title} />
         </TransitionLink>
       ) : (
         <Atropos shadowScale={0.9}>
-          <TransitionLink href={`/${slug}`} className="project__img__wrapper skeleton">
+          <TransitionLink href={`/gluten-free/${slug}`} className="project__img__wrapper skeleton">
             <Image fill src={previewUrl} alt={title} />
           </TransitionLink>
         </Atropos>

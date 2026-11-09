@@ -1,0 +1,103 @@
+@use '../styles/tokens' as *;
+
+.collabs {
+  position: relative;
+  padding: 56px 0 200px;
+  overflow: hidden;
+}
+
+.label {
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.label,
+.marquee {
+  position: relative;
+  z-index: 1;
+}
+
+.marquee {
+  display: flex;
+  width: 100%;
+
+  // edge fades as overlays (a mask-image on an animated layer repaints every frame)
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 18%;
+    z-index: 1;
+    pointer-events: none;
+  }
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+  }
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+  }
+
+  &:hover .track {
+    animation-play-state: paused;
+  }
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 72px;
+  padding-right: 72px;
+  animation: marquee 32s linear infinite;
+  will-change: transform;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  opacity: 0.55;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  img {
+    width: auto;
+  }
+}
+
+.wordmark {
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+// the glowing horizon from v1: a flat ellipse sitting under the logos
+.arc {
+  position: absolute;
+  left: -15%;
+  right: -15%;
+  bottom: -180px;
+  height: 300px;
+  border-radius: 50%;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--bg);
+  box-shadow: 0 -24px 60px -24px rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+}

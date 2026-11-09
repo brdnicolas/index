@@ -1,7 +1,7 @@
 export const AWARDS = [
   {
     delivredBy: 'dev.to',
-    title: '**Top React Auhtor** on dev.to',
+    title: '**Top React Author** on dev.to',
     year: 2023
   },
   {
@@ -11,27 +11,27 @@ export const AWARDS = [
   },
   {
     delivredBy: 'etna',
-    title: '**Winner** of the innovation hackaton',
+    title: '**Winner** of the innovation hackathon',
     year: 2021
   },
   {
     delivredBy: 'etna',
-    title: '**Winner** of the data hackaton',
+    title: '**Winner** of the data hackathon',
     year: 2020
   },
   {
     delivredBy: 'etna',
-    title: '**Winner** of the linux hackaton',
+    title: '**Winner** of the linux hackathon',
     year: 2020
   },
   {
     delivredBy: 'etna',
-    title: '**Winner** of the Microsoft hackaton',
+    title: '**Winner** of the Microsoft hackathon',
     year: 2020
   },
   {
     delivredBy: 'etna',
-    title: '**Winner** of the mobile hackaton',
+    title: '**Winner** of the mobile hackathon',
     year: 2020
   },
   {
@@ -41,12 +41,12 @@ export const AWARDS = [
   },
   {
     delivredBy: 'etna',
-    title: '**Winner** of the ai hackaton',
+    title: '**Winner** of the ai hackathon',
     year: 2020
   },
   {
     delivredBy: 'etna',
-    title: '**Second place** of the web hackaton',
+    title: '**Second place** of the web hackathon',
     year: 2020
   }
 ] as const

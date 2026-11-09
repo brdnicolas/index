@@ -16,7 +16,7 @@ export default function Home() {
         title={`Nicolas Brouard - React Engineer | Innovative Web Project Creation`}
         description={`Nicolas Brouard, a creative frontend developer with over 4 years of freelance experience. Let's turn your ideas into exceptional websites.`}
         previewUrl="/seo/preview.png"
-        url={`https://brdnicolas.com/`}
+        url={`https://brdnicolas.com/gluten-free`}
       />
       <Loader />
       <Presentation />

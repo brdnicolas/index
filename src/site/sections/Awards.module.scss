@@ -1,0 +1,174 @@
+@use '../styles/tokens' as *;
+
+.awards {
+  @include container;
+  padding-block: 160px 120px;
+  display: grid;
+  gap: 48px;
+
+  @include desktop {
+    grid-template-columns: 5fr 7fr;
+    gap: 64px;
+  }
+}
+
+.sticky {
+  @include desktop {
+    position: sticky;
+    top: calc(var(--header-h) + 40px);
+  }
+}
+
+.title {
+  font-size: clamp(56px, 9vw, 140px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+}
+
+.count {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.countValue {
+  @include serif;
+  font-size: clamp(64px, 7vw, 112px);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.countLabel {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.subtitle {
+  color: var(--muted);
+  max-width: 340px;
+  margin-top: 16px;
+}
+
+.list {
+  border-top: 1px solid var(--line);
+}
+
+// Rows fill up with white from the bottom on hover, text flips to black
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  grid-template-areas:
+    'index name name'
+    'index by year';
+  gap: 6px 16px;
+  padding: 22px 12px;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.4s $ease-out;
+
+  @include tablet {
+    grid-template-columns: 40px 1fr 90px 56px;
+    grid-template-areas: 'index name by year';
+    align-items: center;
+    padding: 26px 16px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--fg);
+    z-index: -1;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.5s $ease-out;
+  }
+
+  @include hover {
+    &:hover {
+      color: var(--bg);
+
+      &::before {
+        transform: scaleY(1);
+      }
+
+      .highlight {
+        -webkit-text-stroke-color: var(--bg);
+      }
+
+      .by,
+      .year,
+      .index {
+        color: var(--bg);
+      }
+
+      .name {
+        transform: translateX(10px);
+      }
+    }
+  }
+}
+
+.index,
+.by,
+.year {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+  transition: color 0.4s;
+}
+
+.index {
+  grid-area: index;
+}
+
+.by {
+  grid-area: by;
+}
+
+.year {
+  grid-area: year;
+  text-align: right;
+}
+
+.name {
+  grid-area: name;
+  font-size: clamp(18px, 1.9vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+  transition: transform 0.5s $ease-out;
+}
+
+.highlight {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--fg);
+  margin-right: 0.15em;
+  transition: -webkit-text-stroke-color 0.4s;
+}
+
+.more {
+  display: block;
+  margin: 40px auto 0;
+  font-size: 15px;
+  font-weight: 500;
+  padding-bottom: 2px;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s $ease-out;
+
+  @include hover {
+    &:hover {
+      background-size: 0 1px;
+      background-position: 100% 100%;
+    }
+  }
+}
+

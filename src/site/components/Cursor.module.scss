@@ -1,0 +1,110 @@
+@use '../styles/tokens' as *;
+
+.dot,
+.ring,
+.label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.dot,
+.ring {
+  opacity: 0;
+  visibility: hidden;
+  border-radius: 50%;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
+}
+
+.ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+
+  // the visual is a child-like pseudo so we can scale it without fighting gsap's transform
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    transition:
+      transform 0.5s $ease-out,
+      background 0.3s,
+      border-color 0.3s;
+  }
+
+  &.hover::before {
+    transform: scale(1.6);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+
+  // the ring "becomes" the label
+  &.morph::before {
+    transform: scale(2.4);
+    background: var(--fg);
+    border-color: var(--fg);
+    opacity: 0;
+    transition:
+      transform 0.5s $ease-out,
+      opacity 0.3s 0.1s;
+  }
+
+  &.hidden::before {
+    transform: scale(0);
+  }
+}
+
+.dot {
+  transition: scale 0.3s $ease-out;
+
+  &.hidden {
+    scale: 0;
+  }
+}
+
+.label {
+  @include mono;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 10px 16px;
+  translate: -50% -50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  white-space: nowrap;
+  opacity: 0;
+  scale: 0.6;
+  transform-origin: center;
+  transition:
+    opacity 0.25s,
+    scale 0.4s $ease-out;
+}
+
+.labelVisible {
+  opacity: 1;
+  scale: 1;
+}
+
+// XL label: short punchline in big serif italic
+.big {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  font-size: 34px;
+  line-height: 1;
+  padding: 16px 26px 18px;
+}

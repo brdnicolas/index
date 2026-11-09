@@ -1,0 +1,38 @@
+@use '../styles/tokens' as *;
+
+.marquee {
+  padding-block: 40px 120px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+  width: max-content;
+  will-change: transform;
+  font-size: clamp(64px, 10vw, 160px);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+}
+
+.solid {
+  color: var(--fg);
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--fg);
+}
+
+.star {
+  width: 0.3em;
+  height: 0.3em;
+  fill: var(--fg);
+  flex-shrink: 0;
+}

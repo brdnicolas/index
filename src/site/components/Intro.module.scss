@@ -1,0 +1,101 @@
+@use '../styles/tokens' as *;
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.panel {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50.5%;
+  background: var(--bg);
+  pointer-events: auto;
+}
+
+.top {
+  top: 0;
+}
+
+.bottom {
+  bottom: 0;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+
+  @include tablet {
+    padding: 32px;
+  }
+}
+
+.metaRow,
+.footerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  overflow: hidden;
+  gap: 16px;
+}
+
+.meta {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-flex;
+}
+
+.dots::after {
+  content: '';
+  animation: dots 1.2s steps(4) infinite;
+}
+
+@keyframes dots {
+  0% {
+    content: '';
+  }
+  25% {
+    content: '.';
+  }
+  50% {
+    content: '..';
+  }
+  75% {
+    content: '...';
+  }
+}
+
+.counterMask {
+  overflow: hidden;
+  display: block;
+  line-height: 0.82;
+}
+
+.counter {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-weight: 500;
+  font-size: clamp(88px, 22vw, 320px);
+  letter-spacing: -0.06em;
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background: var(--fg);
+  transform: scaleX(0);
+  transform-origin: left;
+}

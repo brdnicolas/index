@@ -29,7 +29,7 @@ export const ProjectCard = ({ date, role, company, tinyDescription, thumbnailUrl
           />
         </div>
       ) : (
-        <TransitionLink href={`/${slug}`} className="flex-[2] w-full">
+        <TransitionLink href={`/gluten-free/${slug}`} className="flex-[2] w-full">
           <div className="group w-full aspect-[14/9] object-cover rounded-6 overflow-hidden relative">
             <img
               className="w-full h-full object-cover absolute top-0 left-0 group-hover:scale-110 duration-150"

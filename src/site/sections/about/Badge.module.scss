@@ -1,0 +1,345 @@
+@use '../../styles/tokens' as *;
+
+.stage {
+  position: relative;
+  height: 720px;
+  perspective: 1400px;
+  touch-action: pan-y;
+
+  @media (max-width: #{$bp-tablet - 1px}) {
+    height: 640px;
+  }
+
+  // nothing shows until the badge drops in (no badge peeking over the previous section)
+  .lanyard,
+  .badge {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  &[data-ready='true'] {
+    .lanyard,
+    .badge {
+      opacity: 1;
+    }
+  }
+}
+
+.lanyard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.strap {
+  fill: none;
+  stroke: url(#strap);
+  stroke-width: 18;
+  stroke-linecap: butt;
+}
+
+.ropeGuide {
+  fill: none;
+  stroke: none;
+}
+
+.strapText {
+  @include mono;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  fill: rgba(255, 255, 255, 0.5);
+  dominant-baseline: middle;
+}
+
+.badge {
+  --shine: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 310px;
+  aspect-ratio: 5 / 8;
+  transform-origin: 50% 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+
+  &[data-dragging='true'] {
+    cursor: grabbing;
+  }
+
+  @media (max-width: #{$bp-tablet - 1px}) {
+    width: 270px;
+  }
+}
+
+// metal clip between strap and badge
+.clip {
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  width: 30px;
+  height: 26px;
+  transform: translateX(-50%) translateZ(1px);
+  border-radius: 6px 6px 4px 4px;
+  background: linear-gradient(180deg, #e2e2e2, #8a8a8a 60%, #b8b8b8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background:
+    radial-gradient(120% 60% at 50% 0%, #1d1d1d, transparent 70%),
+    linear-gradient(180deg, #131313, #0a0a0a);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 60px 90px -30px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  color: var(--fg);
+}
+
+.slot {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  z-index: 3;
+  width: 48px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+// ---------- front
+.front {
+  padding: 32px 16px 16px;
+  gap: 14px;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #111;
+
+  img {
+    object-fit: cover;
+    object-position: 50% 25%;
+  }
+
+  // subtle fade so the status chip reads on any photo
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 55% 0 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+  }
+}
+
+.status {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: rgba(5, 5, 5, 0.7);
+  backdrop-filter: blur(6px);
+  @include mono;
+  font-size: 9px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+
+.identity {
+  padding-inline: 4px;
+}
+
+.name {
+  font-size: 26px;
+  font-weight: 650;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.role {
+  @include serif;
+  font-size: 18px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.field {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 9px 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  dt {
+    @include mono;
+    font-size: 9px;
+    color: var(--dim);
+  }
+
+  dd {
+    font-size: 13px;
+    font-weight: 600;
+    text-align: right;
+  }
+}
+
+.company {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  &::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--fg);
+  }
+}
+
+.counter {
+  @include mono;
+  font-size: 11px !important;
+  font-variant-numeric: tabular-nums;
+  color: var(--green);
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-inline: 4px;
+}
+
+.barcode {
+  flex: 1;
+  height: 22px;
+  opacity: 0.55;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--fg) 0 2px,
+    transparent 2px 4px,
+    var(--fg) 4px 5px,
+    transparent 5px 8px,
+    var(--fg) 8px 11px,
+    transparent 11px 12px
+  );
+}
+
+.idNumber {
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+// light sweeping across the card when it moves
+.shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent calc(var(--shine) - 25%),
+    rgba(255, 255, 255, 0.09) var(--shine),
+    transparent calc(var(--shine) + 25%)
+  );
+}
+
+// ---------- back
+.back {
+  transform: rotateY(180deg);
+  padding: 40px 22px 22px;
+}
+
+.backTitle {
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.backName {
+  @include serif;
+  font-size: 38px;
+  line-height: 1;
+  margin: 8px 0 20px;
+}
+
+.backList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+
+  li::before {
+    content: '→ ';
+    color: var(--dim);
+  }
+}
+
+.backLinks {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  a {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 14px;
+    border-radius: 12px;
+    background: var(--fg);
+    color: var(--bg);
+    font-weight: 600;
+    font-size: 13px;
+    transition: transform 0.4s $ease-out;
+
+    @include hover {
+      &:hover {
+        transform: translateX(6px);
+      }
+    }
+  }
+}

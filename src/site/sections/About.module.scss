@@ -1,0 +1,505 @@
+@use '../styles/tokens' as *;
+
+.about {
+  @include container;
+  padding-block: 40px 160px;
+}
+
+.title {
+  font-size: clamp(56px, 11vw, 168px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.95;
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.4s $ease-out;
+}
+
+.live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 10px var(--green);
+  flex-shrink: 0;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #1f1f1f;
+  color: #a5a4a0;
+  white-space: nowrap;
+}
+
+// ---------- intro
+.intro {
+  display: grid;
+  gap: 40px;
+  margin-bottom: 120px;
+
+  @include desktop {
+    grid-template-columns: 5fr 7fr;
+    gap: 72px;
+    align-items: start;
+  }
+}
+
+.eyebrow {
+  @include eyebrow;
+  margin-bottom: 24px;
+}
+
+.lead {
+  font-size: clamp(36px, 4.4vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  margin-bottom: 24px;
+
+  em {
+    @include serif;
+    color: var(--muted);
+  }
+}
+
+.bio {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #c9c8c4;
+  max-width: 620px;
+
+  em {
+    @include serif;
+    color: var(--fg);
+    font-size: 1.12em;
+  }
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    background 0.3s,
+    color 0.3s;
+
+  @include hover {
+    &:hover {
+      background: var(--fg);
+      color: var(--bg);
+
+      .arrow {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.pillLight {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+
+  @include tablet {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.statValue {
+  font-size: clamp(40px, 4vw, 60px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+// ---------- experience
+.section {
+  margin-bottom: 120px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.sectionTitle {
+  font-size: clamp(32px, 3.4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.sectionCount {
+  @include mono;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.job {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'role arrow'
+    'company company'
+    'period period';
+  gap: 4px 16px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+
+  @include tablet {
+    grid-template-columns: 130px 1.3fr 1fr 110px 24px;
+    grid-template-areas: 'period role company tag arrow';
+    align-items: center;
+    padding: 26px 0;
+  }
+
+  // a soft highlight sweeping in from the left
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 -16px;
+    z-index: -1;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s $ease-out;
+  }
+
+  .arrow {
+    grid-area: arrow;
+    font-size: 20px;
+    opacity: 0.4;
+    transition:
+      opacity 0.3s,
+      transform 0.4s $ease-out;
+  }
+
+  @include hover {
+    &:hover {
+      &::before {
+        transform: scaleX(1);
+      }
+      .jobRole {
+        transform: translateX(10px);
+      }
+      .arrow {
+        opacity: 1;
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.period {
+  grid-area: period;
+  font-size: 13px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.jobRole {
+  grid-area: role;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(20px, 2vw, 28px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  transition: transform 0.5s $ease-out;
+}
+
+.jobCompany {
+  grid-area: company;
+  font-size: 16px;
+  color: #c9c8c4;
+}
+
+.jobTag {
+  grid-area: tag;
+  display: none;
+
+  @include tablet {
+    display: block;
+  }
+}
+
+// ---------- three columns
+.columns {
+  display: grid;
+  gap: 56px;
+  margin-bottom: 120px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+}
+
+.column {
+  position: relative;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.columnTitle {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+
+.education {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.eduTitle {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 4px 0 6px;
+}
+
+.eduMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.major {
+  cursor: pointer;
+  background: linear-gradient(90deg, #e9db4e, #d58799, #809fca);
+  color: #111;
+  font-weight: 600;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tool {
+  position: relative;
+  transition: transform 0.4s $ease-out;
+
+  &::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 8px);
+    transform: translate(-50%, 6px);
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--fg);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.25s,
+      transform 0.4s $ease-out;
+    z-index: 3;
+  }
+
+  @include hover {
+    &:hover {
+      transform: translateY(-4px) rotate(-6deg);
+
+      &::after {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+  }
+}
+
+.player {
+  border: 0;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: #181818;
+}
+
+.tracks {
+  list-style: none;
+}
+
+.track {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: baseline;
+  text-align: left;
+  padding: 10px 10px;
+  margin-inline: -10px;
+  border-radius: 12px;
+  transition: background 0.3s;
+
+  > span:last-child {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include hover {
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+}
+
+.trackActive .trackTitle {
+  color: var(--green);
+}
+
+.trackIndex {
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.trackTitle {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.trackArtist {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+// ---------- links
+.ctas {
+  display: grid;
+  gap: 12px;
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cta {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'title arrow'
+    'text arrow';
+  align-items: center;
+  gap: 6px 16px;
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color 0.4s,
+    border-color 0.4s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--fg);
+    transform: translateY(101%);
+    transition: transform 0.6s $ease-out;
+  }
+
+  .arrow {
+    grid-area: arrow;
+    font-size: 26px;
+  }
+
+  @include hover {
+    &:hover {
+      color: var(--bg);
+      border-color: var(--fg);
+
+      &::before {
+        transform: translateY(0);
+      }
+      .ctaText {
+        color: #3a3a38;
+      }
+      .arrow {
+        transform: rotate(45deg);
+      }
+    }
+  }
+}
+
+.ctaTitle {
+  grid-area: title;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.ctaText {
+  grid-area: text;
+  color: var(--muted);
+  font-size: 14px;
+  transition: color 0.4s;
+}

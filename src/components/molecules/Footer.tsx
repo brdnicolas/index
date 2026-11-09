@@ -13,6 +13,12 @@ export const Footer = () => {
               <p className="text-3 text-dark-500">Thanks to Melanie J. for the extra sprinkle of magic!</p>
               <img className="h-3 w-3" src="/emoji/sparkles.png" alt="sparkles" />
             </div>
+            <p className="text-3 text-dark-500 mt-1">
+              100% hand-typed, zero AI. Curious what the robots did?{' '}
+              <a href="/" className="underline underline-offset-2 hover:text-white transition-all">
+                See the AI version
+              </a>
+            </p>
           </div>
           <div>
             <div className="grid grid-cols-2 gap-x-18 gap-y-4 mt-10 tablet:mt-0">
