@@ -1,13 +1,14 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { CSSProperties, PointerEvent, useEffect, useRef, useState } from 'react'
 import { gsap, useGSAP } from '../lib/gsap'
 import { EDUCATION, LINKS, SONGS, STACK, TIMELINE } from '../data/content'
 import { AWARDS } from '@/data/awards'
 import { popConfetti } from '../lib/goats'
 import { Split } from '../components/Split'
-import { Badge } from './about/Badge'
 import { unlock } from '../lib/achievements'
+import { COMPANY, formatSeniority } from '../lib/seniority'
+import { ParticlePortrait } from './about/ParticlePortrait'
 import styles from './About.module.scss'
 
 const YEARS_OF_XP = new Date().getFullYear() - 2021
@@ -19,7 +20,50 @@ const STATS = [
   { value: 0, suffix: '0', label: 'coffees · water only 💧' }
 ]
 
+// brand color of each company: the glow under its row on hover
+const BRAND: Record<string, string> = {
+  Shotgun: '#a3a3a3',
+  ETNA: '#7b5cff',
+  Ornikar: '#8e44ff',
+  'Big Mamma': '#d2643a',
+  Free: '#e30613',
+  'Bell Intone': '#d0021b',
+  'Mentor Goal': '#4a78b0'
+}
+
+const CURRENT = TIMELINE.find((item) => item.company === COMPANY)
+
+const LEDE =
+  "Self-taught software engineer from Paris. I've been shipping web & mobile products since 2021, and teaching it on the side."
+
+// each word lights up as you scroll through the paragraph
+const Words = ({ text }: { text: string }) => (
+  <>
+    {text.split(' ').map((word, index) => (
+      <span key={`${word}-${index}`} className={`${styles.word} js-word`}>
+        {word}{' '}
+      </span>
+    ))}
+  </>
+)
+
+const Line = () => <span className={`${styles.line} js-line`} aria-hidden="true" />
+
 const Arrow = () => <span className={styles.arrow}>↗</span>
+
+const LiveTenure = () => {
+  const [value, setValue] = useState('')
+  useEffect(() => {
+    const tick = () => {
+      const next = formatSeniority(new Date())
+      setValue(next.started ? `for ${next.value}` : next.value)
+    }
+    tick()
+    const interval = setInterval(tick, 1000)
+    return () => clearInterval(interval)
+  }, [])
+  return <span className={styles.nowTimer}>{value || ' '}</span>
+}
 
 const Songs = () => {
   const [playing, setPlaying] = useState<string | null>(null)
@@ -57,6 +101,13 @@ const Songs = () => {
   )
 }
 
+// the brand glow follows the cursor inside a row
+const onRowMove = (event: PointerEvent<HTMLAnchorElement>) => {
+  const rect = event.currentTarget.getBoundingClientRect()
+  event.currentTarget.style.setProperty('--x', `${event.clientX - rect.left}px`)
+  event.currentTarget.style.setProperty('--y', `${event.clientY - rect.top}px`)
+}
+
 export const About = () => {
   const root = useRef<HTMLElement>(null)
   const confettiRef = useRef<HTMLCanvasElement>(null)
@@ -75,13 +126,39 @@ export const About = () => {
         }
       )
 
+      // the intro paragraph lights up word by word, tied to the scroll
+      gsap.fromTo(
+        '.js-word',
+        { opacity: 0.14 },
+        {
+          opacity: 1,
+          ease: 'none',
+          stagger: 0.1,
+          scrollTrigger: { trigger: `.${styles.lede}`, start: 'top 85%', end: 'bottom 40%', scrub: true }
+        }
+      )
+
+      // hairlines draw themselves
+      gsap.utils.toArray<HTMLElement>('.js-line').forEach((line) => {
+        gsap.fromTo(
+          line,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            duration: 1.4,
+            ease: 'expo.inOut',
+            scrollTrigger: { trigger: line, start: 'top 92%', once: true }
+          }
+        )
+      })
+
       gsap.utils.toArray<HTMLElement>('.js-reveal').forEach((element) => {
         gsap.from(element, {
-          y: 50,
+          y: 40,
           autoAlpha: 0,
           duration: 1.1,
           ease: 'expo.out',
-          scrollTrigger: { trigger: element, start: 'top 88%' }
+          scrollTrigger: { trigger: element, start: 'top 88%', once: true }
         })
       })
 
@@ -101,49 +178,36 @@ export const About = () => {
     { scope: root }
   )
 
+  const master = EDUCATION[0]
+
   return (
     <section id="about" ref={root} className={styles.about}>
       <h2 className={styles.title}>
         <Split text="Who am I" mask />
       </h2>
 
-      {/* ---------- intro */}
-      <div className={styles.intro}>
-        <Badge />
+      {/* ---------- me */}
+      <div className={styles.me}>
+        <div className={styles.portraitWrap}>
+          <ParticlePortrait />
+        </div>
 
-        <div className={`${styles.introText} js-reveal`}>
-          <p className={styles.eyebrow}>Hello, world</p>
-          <p className={styles.lead}>
-            I&apos;m Nicolas, <em>but Nico works just fine.</em>
+        <div className={styles.meText}>
+          <p className={`${styles.hello} js-reveal`}>Hey, I&apos;m Nico.</p>
+          <p className={styles.lede}>
+            <Words text={LEDE} />
           </p>
-          <p className={styles.bio}>
-            Software engineer shipping web & mobile apps since 2021. I build interfaces that make users go{' '}
-            <em>&ldquo;oh, nice&rdquo;</em>. Currently building at Shotgun, and teaching the next generation of devs at
-            ETNA on the side.
+          <p className={`${styles.now} js-reveal`}>
+            <span className={styles.live} />
+            <span>
+              Now at <strong>{COMPANY}</strong> · {CURRENT?.role}
+            </span>
+            <LiveTenure />
           </p>
-          <div className={styles.pills}>
-            <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" className={styles.pill}>
-              LinkedIn
-            </a>
-            <a href={`mailto:${LINKS.email}`} className={styles.pill}>
-              Email
-            </a>
-            <a href={LINKS.x} target="_blank" rel="noopener noreferrer" className={styles.pill}>
-              X
-            </a>
-            <a
-              href={LINKS.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.pill} ${styles.pillLight}`}
-            >
-              Resume <Arrow />
-            </a>
-          </div>
-
           <div className={styles.stats}>
+            <Line />
             {STATS.map((stat) => (
-              <div key={stat.label} className={styles.stat}>
+              <div key={stat.label} className="js-reveal">
                 <p className={styles.statValue}>
                   {stat.value ? (
                     <span className="js-count" data-value={stat.value}>
@@ -160,67 +224,70 @@ export const About = () => {
       </div>
 
       {/* ---------- experience */}
-      <div className={`${styles.section} js-reveal`}>
-        <div className={styles.sectionHead}>
-          <h3 className={styles.sectionTitle}>Experience</h3>
-          <span className={styles.sectionCount}>{String(TIMELINE.length).padStart(2, '0')}</span>
+      <div className={styles.xpBlock}>
+        <div className={`${styles.xpHead} js-reveal`}>
+          <p className={styles.eyebrow}>Experience</p>
+          <p className={styles.eyebrow}>{String(TIMELINE.length).padStart(2, '0')}</p>
         </div>
-        <ul className={styles.experience}>
+        <ol className={styles.xp}>
           {TIMELINE.map((item) => (
-            <li key={item.company}>
-              <a href={item.link} target="_blank" rel="noopener noreferrer" className={styles.job}>
-                <span className={styles.period}>{item.period}</span>
-                <span className={styles.jobRole}>
-                  {item.current ? <span className={styles.live} /> : null}
-                  {item.role}
+            <li key={item.company} className={styles.xpItem}>
+              <Line />
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${styles.xpRow} js-reveal`}
+                style={{ '--brand': BRAND[item.company] ?? '#fff' } as CSSProperties}
+                onPointerMove={onRowMove}
+                data-cursor="Visit ↗"
+              >
+                <span className={styles.xpCompany}>
+                  <span className={styles.xpDot} />
+                  {item.company}
+                  {item.tags?.map((tag) => (
+                    <span key={tag} className={`${styles.xpTag} ${item.current ? styles.xpCurrent : ''}`}>
+                      {tag}
+                    </span>
+                  ))}
                 </span>
-                <span className={styles.jobCompany}>{item.company}</span>
-                <span className={styles.jobTag}>
-                  {item.tag ? <span className={styles.tag}>{item.tag}</span> : null}
-                </span>
-                <Arrow />
+                <span className={styles.xpRole}>{item.role}</span>
+                <span className={styles.xpYears}>{item.period}</span>
               </a>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
 
       {/* ---------- 3 columns */}
       <div className={styles.columns}>
-        <div className={`${styles.column} js-reveal`}>
+        <div className={styles.column}>
+          <Line />
           <canvas ref={confettiRef} className={styles.confetti} aria-hidden="true" />
-          <h3 className={styles.columnTitle}>Education</h3>
-          <ul className={styles.education}>
-            {EDUCATION.map((item) => (
-              <li key={item.school}>
-                <span className={styles.period}>{item.period}</span>
-                <p className={styles.eduTitle}>{item.title}</p>
-                <div className={styles.eduMeta}>
-                  <span className={styles.muted}>@{item.school}</span>
-                  <span
-                    className={`${styles.tag} ${item.honor === 'Major' ? styles.major : ''}`}
-                    onPointerEnter={
-                      item.honor === 'Major'
-                        ? () => {
-                            popConfetti(confettiRef.current)
-                            unlock('major')
-                          }
-                        : undefined
-                    }
-                    data-cursor={item.honor === 'Major' ? 'N°1 😎' : 'Not bad 👌'}
-                    data-cursor-big
-                  >
-                    {item.honor}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <p className={`${styles.eyebrow} ${styles.columnTitle}`}>Education</p>
+          <div className="js-reveal">
+            <span
+              className={styles.major}
+              onPointerEnter={() => {
+                popConfetti(confettiRef.current)
+                unlock('major')
+              }}
+              data-cursor="N°1 😎"
+              data-cursor-big
+            >
+              {master.honor}
+            </span>
+            <p className={styles.eduTitle}>{master.title}</p>
+            <p className={styles.muted}>
+              @{master.school} · {master.period}
+            </p>
+          </div>
         </div>
 
-        <div className={`${styles.column} js-reveal`}>
-          <h3 className={styles.columnTitle}>Daily drivers</h3>
-          <ul className={styles.stack}>
+        <div className={styles.column}>
+          <Line />
+          <p className={`${styles.eyebrow} ${styles.columnTitle}`}>Daily drivers</p>
+          <ul className={`${styles.stack} js-reveal`}>
             {STACK.map((tool) => (
               <li key={tool.name} className={styles.tool} data-tooltip={tool.name}>
                 <img src={tool.icon} alt={tool.name} width={44} height={44} loading="lazy" />
@@ -229,9 +296,12 @@ export const About = () => {
           </ul>
         </div>
 
-        <div className={`${styles.column} js-reveal`}>
-          <h3 className={styles.columnTitle}>On repeat</h3>
-          <Songs />
+        <div className={styles.column}>
+          <Line />
+          <p className={`${styles.eyebrow} ${styles.columnTitle}`}>On repeat</p>
+          <div className="js-reveal">
+            <Songs />
+          </div>
         </div>
       </div>
 

@@ -214,7 +214,7 @@ export const Hero = () => {
 
       <div className={styles.bottom}>
         <p className={styles.meta}>Paris, FR — 48.85°N 2.35°E</p>
-        <button type="button" className={`${styles.meta} ${styles.scrollCue}`} onClick={() => scrollToTarget('#intro')}>
+        <button type="button" className={`${styles.meta} ${styles.scrollCue}`} onClick={() => scrollToTarget('#about')}>
           <span className={styles.scrollLine} />
           Scroll, it&apos;s worth it
         </button>

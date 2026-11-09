@@ -37,7 +37,7 @@ export const Award = ({ delivredBy, title, year }: AwardProps) => {
               </p>
             )
           }
-          return <></>
+          return null
         })}
       </div>
       {isMobile ? <div className="w-[50px] mx-auto mt-4 h-[1px] bg-dark-400 " /> : null}

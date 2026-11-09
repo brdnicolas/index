@@ -1,6 +1,5 @@
 import './globals.scss'
 import 'atropos/css'
-import 'tippy.js/dist/tippy.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/molecules/Footer'
 import Script from 'next/script'

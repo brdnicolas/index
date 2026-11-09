@@ -1,6 +1,4 @@
-import 'tippy.js/dist/tippy.css'
-import Tippy from '@tippyjs/react'
-import 'tippy.js/animations/scale.css'
+import { Tooltip } from '@/components/atoms/Tooltip'
 
 export const Stacks = () => {
   return (
@@ -8,33 +6,33 @@ export const Stacks = () => {
       <div className="card-content bg-[#171717] font-manrope border-[1px] border-[#232323] p-7 text-5 overflow-hidden h-fit">
         <p>My favorite stacks & tools</p>
         <div className="mt-4 w-full flex items-center gap-3 flex-wrap">
-          <Tippy content="Next.js" animation="scale">
+          <Tooltip content="Next.js">
             <img id="next" src="/icons/next.svg" alt="nextjs" />
-          </Tippy>
-          <Tippy content="React.js & React Native" animation="scale">
+          </Tooltip>
+          <Tooltip content="React.js & React Native">
             <img src="/icons/react.svg" alt="reactjs" />
-          </Tippy>
-          <Tippy content="Javascript" animation="scale">
+          </Tooltip>
+          <Tooltip content="Javascript">
             <img src="/icons/js.svg" alt="javascript" />
-          </Tippy>
-          <Tippy content="Typescript" animation="scale">
+          </Tooltip>
+          <Tooltip content="Typescript">
             <img src="/icons/ts.svg" alt="typescript" />
-          </Tippy>
-          <Tippy content="Nest.js" animation="scale">
+          </Tooltip>
+          <Tooltip content="Nest.js">
             <img src="/icons/nest.svg" alt="nestjs" />
-          </Tippy>
-          <Tippy content="Figma" animation="scale">
+          </Tooltip>
+          <Tooltip content="Figma">
             <img src="/icons/figma.svg" alt="figma" />
-          </Tippy>
-          <Tippy content="Github" animation="scale">
+          </Tooltip>
+          <Tooltip content="Github">
             <img src="/icons/github.svg" alt="github" />
-          </Tippy>
-          <Tippy content="Docker" animation="scale">
+          </Tooltip>
+          <Tooltip content="Docker">
             <img src="/icons/docker.svg" alt="docker" />
-          </Tippy>
-          <Tippy content="Fastlane" animation="scale">
+          </Tooltip>
+          <Tooltip content="Fastlane">
             <img src="/icons/fastlane.svg" alt="fastlane" />
-          </Tippy>
+          </Tooltip>
         </div>
       </div>
     </div>

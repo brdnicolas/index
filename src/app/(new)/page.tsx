@@ -1,6 +1,5 @@
 import { Hero } from '@/site/sections/Hero'
 import { Collabs } from '@/site/sections/Collabs'
-import { Manifesto } from '@/site/sections/Manifesto'
 import { About } from '@/site/sections/About'
 import { Marquee } from '@/site/sections/Marquee'
 import { Projects } from '@/site/sections/Projects'
@@ -12,7 +11,6 @@ export default function Home() {
     <main>
       <Hero />
       <Collabs />
-      <Manifesto />
       <About />
       <Marquee />
       <Projects />

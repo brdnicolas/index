@@ -12,15 +12,12 @@ export const LINKS = {
   handmade: '/gluten-free'
 } as const
 
-export const MANIFESTO =
-  "Self-taught since forever. I break things, then I make them prettier. I'm hooked on the web, new tech and the tiny details nobody notices — until they're gone. Give me an idea, a glass of water and a bit of time: I'll turn it into something people actually enjoy using."
-
 export type TimelineItem = {
   period: string
   role: string
   company: string
   link: string
-  tag?: string
+  tags?: string[]
   current?: boolean
 }
 
@@ -30,7 +27,7 @@ export const TIMELINE: TimelineItem[] = [
     role: 'Software Engineer',
     company: 'Shotgun',
     link: 'https://shotgun.live',
-    tag: 'New gig',
+    tags: ['New gig'],
     current: true
   },
   {
@@ -38,7 +35,7 @@ export const TIMELINE: TimelineItem[] = [
     role: 'Instructor & Mentor',
     company: 'ETNA',
     link: 'https://etna.io',
-    tag: 'Side quest',
+    tags: ['Freelance', 'Side quest'],
     current: true
   },
   { period: '2024 — 2026', role: 'Front-End Engineer', company: 'Ornikar', link: 'https://ornikar.com' },
@@ -47,7 +44,7 @@ export const TIMELINE: TimelineItem[] = [
     role: 'FullStack Engineer',
     company: 'Big Mamma',
     link: 'https://www.bigmammagroup.com/',
-    tag: 'Freelance'
+    tags: ['Freelance']
   },
   { period: '2021 — 2023', role: 'FullStack Engineer', company: 'Free', link: 'https://free.fr' },
   {
@@ -55,7 +52,7 @@ export const TIMELINE: TimelineItem[] = [
     role: 'Front-End Engineer',
     company: 'Bell Intone',
     link: 'https://bellintone.com/',
-    tag: 'Freelance'
+    tags: ['Freelance']
   },
   { period: '2021 — 2022', role: 'Front-End Engineer', company: 'Mentor Goal', link: 'https://mentorgoal.com/' }
 ]

@@ -1,0 +1,28 @@
+// the dots fade into the page: no frame, no background
+.portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  cursor: pointer;
+  touch-action: pan-y;
+  opacity: 0;
+  transition: opacity 0.6s;
+
+  &[data-ready='true'] {
+    opacity: 1;
+  }
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// no WebGL: the plain photo
+.fallback {
+  object-fit: cover;
+  object-position: 56% 42%;
+  border-radius: 24px;
+}

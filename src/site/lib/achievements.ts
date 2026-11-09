@@ -7,7 +7,7 @@ export type Achievement = { id: string; emoji: string; name: string; hint: strin
 export const ACHIEVEMENTS: Achievement[] = [
   { id: 'black-hole', emoji: '🕳️', name: 'Event horizon', hint: 'Press and hold the void' },
   { id: 'word-swap', emoji: '🔁', name: 'Shapeshifter', hint: "The title isn't set in stone" },
-  { id: 'goat-photo', emoji: '🐐', name: 'Badge flipper', hint: 'Flip the badge. Then keep flipping.' },
+  { id: 'goat-photo', emoji: '🐐', name: 'Face of a GOAT', hint: 'Ten clicks on a familiar face' },
   { id: 'major', emoji: '🎓', name: 'Top of the class', hint: 'Hover the best grade' },
   { id: 'goat-typed', emoji: '⌨️', name: 'Greatest of all time', hint: 'Type the four-letter legend' },
   { id: 'matrix', emoji: '🐇', name: 'Red pill', hint: 'Type where Neo lives' },

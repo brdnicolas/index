@@ -15,7 +15,6 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@gsap/react": "^2.1.2",
     "@rehype-pretty/transformers": "^0.13.2",
-    "@tippyjs/react": "^4.2.6",
     "@typescript-eslint/eslint-plugin": "^7.10.0",
     "atropos": "^2.0.2",
     "class-variance-authority": "^0.7.1",

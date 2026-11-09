@@ -24,6 +24,27 @@
   transition: transform 0.4s $ease-out;
 }
 
+// ---------- hairlines: drawn on scroll (js-line)
+.line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+}
+
 .live {
   width: 6px;
   height: 6px;
@@ -33,103 +54,80 @@
   flex-shrink: 0;
 }
 
-.tag {
-  font-size: 11px;
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: #1f1f1f;
-  color: #a5a4a0;
-  white-space: nowrap;
-}
-
-// ---------- intro
-.intro {
+// ---------- me: particle portrait + who I am
+.me {
   display: grid;
   gap: 40px;
+  align-items: center;
   margin-bottom: 120px;
 
-  @include desktop {
+  @include tablet {
     grid-template-columns: 5fr 7fr;
-    gap: 72px;
-    align-items: start;
+    gap: 48px;
+  }
+
+  @include desktop {
+    gap: 80px;
   }
 }
 
-.eyebrow {
-  @include eyebrow;
-  margin-bottom: 24px;
+.portraitWrap {
+  max-width: 460px;
+  width: 100%;
+  margin-inline: auto;
 }
 
-.lead {
-  font-size: clamp(36px, 4.4vw, 64px);
-  font-weight: 600;
-  letter-spacing: -0.045em;
-  line-height: 1;
-  margin-bottom: 24px;
-
-  em {
-    @include serif;
-    color: var(--muted);
-  }
-}
-
-.bio {
-  font-size: 18px;
-  line-height: 1.6;
-  color: #c9c8c4;
-  max-width: 620px;
-
-  em {
-    @include serif;
-    color: var(--fg);
-    font-size: 1.12em;
-  }
-}
-
-.pills {
+.meText {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 28px;
+  flex-direction: column;
+  gap: 28px;
 }
 
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 16px;
-  border-radius: 999px;
-  border: 1px solid var(--line-strong);
-  font-size: 13px;
+.hello {
+  font-size: clamp(48px, 6.4vw, 104px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.lede {
+  max-width: 640px;
+  font-size: clamp(22px, 2.2vw, 32px);
   font-weight: 500;
-  transition:
-    background 0.3s,
-    color 0.3s;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
 
-  @include hover {
-    &:hover {
-      background: var(--fg);
-      color: var(--bg);
+.word {
+  display: inline;
+}
 
-      .arrow {
-        transform: rotate(45deg);
-      }
-    }
+.now {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 15px;
+
+  strong {
+    font-weight: 600;
   }
 }
 
-.pillLight {
-  background: var(--fg);
-  color: var(--bg);
+.nowTimer {
+  @include mono;
+  font-size: 10px;
+  color: var(--green);
+  font-variant-numeric: tabular-nums;
 }
 
 .stats {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px 16px;
-  margin-top: 48px;
-  padding-top: 32px;
-  border-top: 1px solid var(--line);
+  padding-top: 28px;
+  margin-top: 8px;
 
   @include tablet {
     grid-template-columns: repeat(4, 1fr);
@@ -137,7 +135,7 @@
 }
 
 .statValue {
-  font-size: clamp(40px, 4vw, 60px);
+  font-size: clamp(36px, 3.6vw, 56px);
   font-weight: 600;
   letter-spacing: -0.05em;
   line-height: 1;
@@ -151,120 +149,142 @@
   margin-top: 10px;
 }
 
-// ---------- experience
-.section {
-  margin-bottom: 120px;
+// ---------- experience: big rows, brand glow following the cursor (like the projects)
+.xpBlock {
+  margin-bottom: 88px;
 }
 
-.sectionHead {
+.xpHead {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--line);
+  margin-bottom: 12px;
 }
 
-.sectionTitle {
-  font-size: clamp(32px, 3.4vw, 48px);
-  font-weight: 600;
-  letter-spacing: -0.04em;
+.xp {
+  list-style: none;
 }
 
-.sectionCount {
-  @include mono;
-  font-size: 12px;
-  color: var(--muted);
+.xpItem {
+  position: relative;
+
+  &:last-child::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
+  }
 }
 
-.job {
+.xpRow {
+  --brand: #fff;
+  --x: 50%;
+  --y: 50%;
   position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas:
-    'role arrow'
-    'company company'
-    'period period';
-  gap: 4px 16px;
-  padding: 22px 0;
-  border-bottom: 1px solid var(--line);
+    'company years'
+    'role    years';
+  align-items: center;
+  gap: 2px 24px;
+  padding: 14px 4px;
   isolation: isolate;
 
-  @include tablet {
-    grid-template-columns: 130px 1.3fr 1fr 110px 24px;
-    grid-template-areas: 'period role company tag arrow';
-    align-items: center;
-    padding: 26px 0;
-  }
-
-  // a soft highlight sweeping in from the left
   &::before {
     content: '';
     position: absolute;
-    inset: 0 -16px;
+    inset: 0;
     z-index: -1;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.04);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.6s $ease-out;
+    background: radial-gradient(
+      40% 120% at var(--x) var(--y),
+      color-mix(in srgb, var(--brand) 32%, transparent),
+      color-mix(in srgb, var(--brand) 6%, transparent) 55%,
+      transparent 80%
+    );
+    opacity: 0;
+    transition: opacity 0.5s;
   }
 
-  .arrow {
-    grid-area: arrow;
-    font-size: 20px;
-    opacity: 0.4;
-    transition:
-      opacity 0.3s,
-      transform 0.4s $ease-out;
+  @include tablet {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) 140px;
+    grid-template-areas: 'company role years';
+    padding: 13px 8px;
   }
 
   @include hover {
     &:hover {
       &::before {
-        transform: scaleX(1);
-      }
-      .jobRole {
-        transform: translateX(10px);
-      }
-      .arrow {
         opacity: 1;
-        transform: rotate(45deg);
+      }
+      .xpCompany {
+        transform: translateX(14px);
+      }
+      .xpDot {
+        transform: scale(1);
+      }
+      .xpYears {
+        color: var(--fg);
       }
     }
   }
 }
 
-.period {
-  grid-area: period;
-  font-size: 13px;
-  color: var(--muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.jobRole {
-  grid-area: role;
+.xpCompany {
+  grid-area: company;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
   font-size: clamp(20px, 2vw, 28px);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  transition: transform 0.6s $ease-out;
+}
+
+.xpDot {
+  width: 8px;
+  height: 8px;
+  margin-left: -22px;
+  border-radius: 50%;
+  background: var(--brand);
+  box-shadow: 0 0 16px var(--brand);
+  transform: scale(0);
   transition: transform 0.5s $ease-out;
 }
 
-.jobCompany {
-  grid-area: company;
-  font-size: 16px;
-  color: #c9c8c4;
+.xpTag {
+  @include mono;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
 }
 
-.jobTag {
-  grid-area: tag;
-  display: none;
+// current jobs: the tag takes the company color
+.xpCurrent {
+  border-color: color-mix(in srgb, var(--brand) 45%, transparent);
+  color: var(--brand);
+}
 
-  @include tablet {
-    display: block;
-  }
+.xpRole {
+  grid-area: role;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.xpYears {
+  grid-area: years;
+  justify-self: end;
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+  transition: color 0.3s;
 }
 
 // ---------- three columns
@@ -286,41 +306,40 @@
 .column {
   position: relative;
   padding-top: 24px;
-  border-top: 1px solid var(--line);
 }
 
 .columnTitle {
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.03em;
   margin-bottom: 24px;
 }
 
-.education {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+.eduTitle {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin: 14px 0 6px;
   position: relative;
   z-index: 1;
 }
 
-.eduTitle {
-  font-weight: 600;
-  font-size: 16px;
-  margin: 4px 0 6px;
-}
-
-.eduMeta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
 .major {
-  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
   background: linear-gradient(90deg, #e9db4e, #d58799, #809fca);
   color: #111;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.4s $ease-out;
+
+  @include hover {
+    &:hover {
+      transform: rotate(-6deg) scale(1.1);
+    }
+  }
 }
 
 .confetti {
@@ -392,7 +411,7 @@
   grid-template-columns: 28px 1fr;
   align-items: baseline;
   text-align: left;
-  padding: 10px 10px;
+  padding: 10px;
   margin-inline: -10px;
   border-radius: 12px;
   transition: background 0.3s;

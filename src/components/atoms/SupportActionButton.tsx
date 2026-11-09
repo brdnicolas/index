@@ -1,7 +1,7 @@
 'use client'
 import JSConfetti from 'js-confetti'
 import { useEffect, useRef } from 'react'
-import Tippy from '@tippyjs/react'
+import { Tooltip } from './Tooltip'
 
 export const SupportActionButton = () => {
   const buttonRef = useRef<HTMLAnchorElement | null>(null)
@@ -32,7 +32,7 @@ export const SupportActionButton = () => {
   return (
     <>
       <canvas id="support-cookie-canvas" className="z-10 fixed pointer-events-none top-0 left-0 w-full h-full" />
-      <Tippy content="I can't code without cookies. Help me survive" animation="scale">
+      <Tooltip content="I can't code without cookies. Help me survive">
         <a
           ref={buttonRef}
           id="cookie-support"
@@ -41,7 +41,7 @@ export const SupportActionButton = () => {
         >
           🍪
         </a>
-      </Tippy>
+      </Tooltip>
     </>
   )
 }
