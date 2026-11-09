@@ -42,7 +42,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       project={{ ...project, subProjects }}
       index={index}
       total={PROJECTS.length}
-      next={{ slug: next.slug, company: next.company, thumbnail: next.thumbnail, role: next.role }}
+      next={{ slug: next.slug, company: next.company, thumbnail: next.thumbnail, role: next.job }}
     />
   )
 }
