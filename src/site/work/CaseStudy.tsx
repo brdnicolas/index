@@ -164,7 +164,7 @@ export const CaseStudy = ({ project, index, total, next }: CaseStudyProps) => {
           <dl className={styles.heroMeta}>
             <div>
               <dt>Role</dt>
-              <dd>{project.role}</dd>
+              <dd>{project.job}</dd>
             </div>
             <div>
               <dt>When</dt>

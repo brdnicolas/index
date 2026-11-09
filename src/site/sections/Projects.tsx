@@ -237,7 +237,7 @@ export const Projects = () => {
               <div>
                 <p className={styles.date}>{project.displayDate}</p>
                 <h3 className={styles.company}>{project.company}</h3>
-                <p className={styles.role}>{project.role}</p>
+                <p className={styles.role}>{project.job}</p>
               </div>
               <div>
                 <p className={styles.description}>{project.description}</p>
