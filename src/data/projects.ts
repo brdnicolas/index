@@ -19,9 +19,59 @@ export type Experience = {
 
 export const EXPERIENCES: Experience[] = [
   {
+    company: 'Ornikar',
+    date: '2024.04.11 - Now',
+    role: 'Frontend Engineer',
+    slug: 'ornikar',
+    preview: '/projects/ornikar/preview.png',
+    thumbnail: '/projects/ornikar/thumbnail.png',
+    description:
+      "Worked within a SCRUM environment in the Purchase team, on Ornikar's shop. Developed new features around the shop (AB Testing, business rules, performance optimization), complete checkout redesign (Stripe, Dalenys, Alma, Purchasely), internal CRM for support, in-app advertising system, sign-up and onboarding redesign, CI/CD automation with Fastlane, tracking and error management setup (Sentry, Datadog), unit/integration/visual regression testing, and process automation using n8n, Ollama and Claude.",
+    techs: [
+      'React native',
+      'Typescript',
+      'Universal codebase',
+      'Jest',
+      'Zustand',
+      'React Testing Library',
+      'Feature Flags',
+      'Fastlane',
+      'Storybook',
+      'Chromatic',
+      'n8n',
+      'Ollama'
+    ],
+    subProjects: [
+      {
+        title: 'Ornikar on app',
+        description:
+          'Ornikar is primarily a web-based platform, but we recently undertook a major migration to native applications.',
+        url: 'https://apps.apple.com/fr/app/ornikar-code-et-permis/id1612432450',
+        images: [
+          '/projects/ornikar/mobile/ornikar1.png',
+          '/projects/ornikar/mobile/ornikar2.png',
+          '/projects/ornikar/mobile/ornikar3.png',
+          '/projects/ornikar/mobile/ornikar4.png'
+        ]
+      },
+      {
+        title: 'Ornikar on web',
+        description:
+          'Ornikar started as a web-first project, and thanks to our universal codebase, our platform now runs seamlessly on both web and mobile.',
+        url: 'https://ornikar.com/',
+        images: [
+          '/projects/ornikar/web/ornikar1.jpeg',
+          '/projects/ornikar/web/ornikar2.jpeg',
+          '/projects/ornikar/web/ornikar3.jpeg',
+          '/projects/ornikar/web/ornikar4.jpeg'
+        ]
+      }
+    ]
+  },
+  {
     company: 'Design Systems',
     date: '2023.06.01',
-    role: 'FullStack Engineer',
+    role: 'Frontend Engineer',
     slug: 'design-systems',
     preview: '/projects/ds/preview.jpg',
     thumbnail: '/projects/ds/thumbnail.png',
@@ -32,7 +82,7 @@ export const EXPERIENCES: Experience[] = [
       {
         title: 'Free’s Atomic Design System',
         description:
-          'A collaborative project designed with Free’s tech and design teams, focusing on modularity and reusability. This system supports cohesive branding across platforms with a flexible yet structured component library. Special thanks to Thomas Vimare, Clovis Derouck, and other key contributors.',
+          "A collaborative project designed with Free's tech and design teams, focusing on modularity and reusability. This system supports cohesive branding across platforms with a flexible yet structured component library. Special thanks to Thomas Vimare, Clovis Derouck, and other key contributors.",
         images: [
           '/projects/ds/projects/free/free1.png',
           '/projects/ds/projects/free/free2.jpg',
@@ -52,25 +102,36 @@ export const EXPERIENCES: Experience[] = [
     ]
   },
   {
-    company: 'Pepiswap',
-    date: '2023.09.01',
-    role: 'Front-End Engineer',
-    slug: 'pepiswap',
-    preview: '/projects/pepiswap/preview.jpg',
-    thumbnail: '/projects/pepiswap/thumbnail.jpg',
+    company: 'Free',
+    date: '2022.10.10',
+    role: 'FullStack Engineer',
+    slug: 'free',
+    preview: '/projects/free/preview.jpg',
+    thumbnail: '/projects/free/thumbnail.jpg',
     description:
-      'Pepiswap is a user-friendly decentralized exchange (DEX) tailored for the French market, bridging the gap between crypto enthusiasts and beginners. The platform focuses on simplicity, with intuitive interfaces and accessible learning resources.',
-    techs: ['NextJS', 'Typescript', 'Strapi', 'Solidity', 'Tailwind'],
+      'Free is a French company that revolutionized the industry with its disruptive offerings. Known for affordable and innovative services, Free Mobile and Freebox provide customers with cutting-edge mobile, broadband, and TV solutions. With a customer-centric approach, Free continues to challenge traditional norms and reshape the telecom landscape in France.',
+    techs: ['NextJS', 'Typescript', 'Leaflet', 'Strapi', 'TailwindCSS', 'Material UI'],
     subProjects: [
       {
-        title: 'Decentralized Exchange',
-        url: 'https://pepiswap.vercel.app/',
+        title: 'Freebox',
         description:
-          'The main goal is to provide a platform where users can easily learn about and trade cryptocurrencies. The design is modern and accessible, with functionalities that are simple and well-explained.',
+          "Revamped Free's online presence with a modern landing page showcasing their innovative telecom services. The 'Coverage Map' page empowers users with real-time network information, reinforcing Free's commitment to transparency and customer satisfaction.",
+        url: 'https://free.fr/freebox',
         images: [
-          '/projects/pepiswap/pepiswap1.jpg',
-          '/projects/pepiswap/pepiswap2.jpg',
-          '/projects/pepiswap/pepiswap3.jpg'
+          '/projects/free/projects/freebox/freebox1.jpg',
+          '/projects/free/projects/freebox/freebox2.jpg',
+          '/projects/free/projects/freebox/freebox3.jpg'
+        ]
+      },
+      {
+        title: 'Free Mobile',
+        description:
+          'Designed a captivating landing page for Free Mobile, elevating its online image with a sleek and user-friendly interface. The design effectively communicates Free Mobile’s affordable and innovative services, enticing visitors to explore further.',
+        url: 'https://mobile.free.fr/',
+        images: [
+          '/projects/free/projects/freemobile/freemobile1.jpg',
+          '/projects/free/projects/freemobile/freemobile2.jpg',
+          '/projects/free/projects/freemobile/freemobile3.jpg'
         ]
       }
     ]
@@ -110,36 +171,25 @@ export const EXPERIENCES: Experience[] = [
     ]
   },
   {
-    company: 'Free',
-    date: '2022.10.10',
-    role: 'FullStack Engineer',
-    slug: 'free',
-    preview: '/projects/free/preview.jpg',
-    thumbnail: '/projects/free/thumbnail.jpg',
+    company: 'Pepiswap',
+    date: '2023.09.01',
+    role: 'Front-End Engineer',
+    slug: 'pepiswap',
+    preview: '/projects/pepiswap/preview.jpg',
+    thumbnail: '/projects/pepiswap/thumbnail.jpg',
     description:
-      'Free is a French company that revolutionized the industry with its disruptive offerings. Known for affordable and innovative services, Free Mobile and Freebox provide customers with cutting-edge mobile, broadband, and TV solutions. With a customer-centric approach, Free continues to challenge traditional norms and reshape the telecom landscape in France.',
-    techs: ['NextJS', 'Typescript', 'Leaflet', 'Strapi', 'TailwindCSS', 'Material UI'],
+      'Pepiswap is a user-friendly decentralized exchange (DEX) tailored for the French market, bridging the gap between crypto enthusiasts and beginners. The platform focuses on simplicity, with intuitive interfaces and accessible learning resources.',
+    techs: ['NextJS', 'Typescript', 'Strapi', 'Solidity', 'Tailwind'],
     subProjects: [
       {
-        title: 'Freebox',
+        title: 'Decentralized Exchange',
+        url: 'https://pepiswap.vercel.app/',
         description:
-          "Revamped Free's online presence with a modern landing page showcasing their innovative telecom services. The 'Coverage Map' page empowers users with real-time network information, reinforcing Free's commitment to transparency and customer satisfaction.",
-        url: 'https://free.fr/freebox',
+          'The main goal is to provide a platform where users can easily learn about and trade cryptocurrencies. The design is modern and accessible, with functionalities that are simple and well-explained.',
         images: [
-          '/projects/free/projects/freebox/freebox1.jpg',
-          '/projects/free/projects/freebox/freebox2.jpg',
-          '/projects/free/projects/freebox/freebox3.jpg'
-        ]
-      },
-      {
-        title: 'Free Mobile',
-        description:
-          'Designed a captivating landing page for Free Mobile, elevating its online image with a sleek and user-friendly interface. The design effectively communicates Free Mobile’s affordable and innovative services, enticing visitors to explore further.',
-        url: 'https://mobile.free.fr/',
-        images: [
-          '/projects/free/projects/freemobile/freemobile1.jpg',
-          '/projects/free/projects/freemobile/freemobile2.jpg',
-          '/projects/free/projects/freemobile/freemobile3.jpg'
+          '/projects/pepiswap/pepiswap1.jpg',
+          '/projects/pepiswap/pepiswap2.jpg',
+          '/projects/pepiswap/pepiswap3.jpg'
         ]
       }
     ]
