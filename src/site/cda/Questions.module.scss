@@ -1,0 +1,229 @@
+@use '../styles/tokens' as *;
+
+$amber: #f5b94a;
+
+.game {
+  max-width: 760px;
+  margin: 0 auto 120px;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 12px;
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.score {
+  display: flex;
+  gap: 14px;
+
+  b {
+    font-weight: 400;
+  }
+}
+
+.known {
+  color: var(--green);
+}
+
+.review {
+  color: $amber;
+}
+
+.track {
+  height: 3px;
+  margin-bottom: 40px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+
+  span {
+    display: block;
+    height: 100%;
+    background: var(--green);
+    transform-origin: left;
+    transition: transform 0.6s $ease-out;
+  }
+}
+
+// ---------- the table: the card on top of the rest of the deck
+.table {
+  position: relative;
+  perspective: 1600px;
+}
+
+.ghost {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: #0e0e0e;
+}
+
+.ghost1 {
+  transform: translate(10px, 12px) rotate(1.5deg);
+}
+
+.ghost2 {
+  transform: translate(20px, 24px) rotate(3deg);
+  opacity: 0.6;
+}
+
+.cardWrap {
+  position: relative;
+}
+
+.card {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: 340px;
+  text-align: left;
+  transform-style: preserve-3d;
+  transition: transform 0.8s $ease-out;
+
+  &[data-flipped='true'] {
+    transform: rotateY(180deg);
+  }
+
+  &:focus-visible .face {
+    outline: 2px solid var(--fg);
+    outline-offset: 4px;
+  }
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  border-radius: 28px;
+  border: 1px solid var(--line-strong);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: 0 40px 90px -40px rgba(0, 0, 0, 0.9);
+
+  @include tablet {
+    padding: 44px 48px;
+  }
+}
+
+.front {
+  background: radial-gradient(80% 90% at 90% 0%, rgba(167, 139, 250, 0.16), transparent 60%), #111;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background: radial-gradient(80% 90% at 10% 100%, rgba(61, 220, 132, 0.12), transparent 60%), #111;
+}
+
+.faceLabel {
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.question {
+  margin: auto 0;
+  font-size: clamp(24px, 3.4vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
+.answer {
+  margin: auto 0;
+  font-size: clamp(16px, 1.6vw, 19px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hint {
+  @include mono;
+  font-size: 10px;
+  color: var(--dim);
+}
+
+// ---------- actions
+.actions,
+.endActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 40px;
+
+  button {
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    transition:
+      transform 0.4s $ease-out,
+      background 0.3s,
+      color 0.3s;
+
+    @include hover {
+      &:hover {
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+.primary {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.secondary {
+  border: 1px solid var(--line-strong);
+}
+
+.knownButton {
+  background: var(--green);
+  color: #04140b;
+}
+
+.reviewButton {
+  border: 1px solid rgba(245, 185, 74, 0.5);
+  color: $amber;
+}
+
+// ---------- end of the round
+.end {
+  padding: 56px 24px;
+  border-radius: 28px;
+  border: 1px solid var(--line-strong);
+  background: radial-gradient(60% 80% at 50% 0%, rgba(61, 220, 132, 0.12), transparent 70%), #0e0e0e;
+  text-align: center;
+
+  .endActions {
+    margin-top: 28px;
+  }
+}
+
+.endScore {
+  font-size: clamp(72px, 10vw, 128px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+
+  span {
+    color: var(--dim);
+  }
+}
+
+.endText {
+  max-width: 440px;
+  margin: 16px auto 0;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--muted);
+}

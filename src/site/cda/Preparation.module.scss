@@ -1,0 +1,621 @@
+@use '../styles/tokens' as *;
+
+$amber: #f5b94a;
+$red: #ff6b6b;
+
+.note {
+  max-width: 760px;
+  margin-top: 24px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.subhead {
+  margin: 56px 0 20px;
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.lead {
+  max-width: 760px;
+  margin-bottom: 40px;
+  font-size: clamp(19px, 1.8vw, 24px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.source {
+  margin-top: 64px;
+  @include mono;
+  font-size: 10px;
+  color: var(--dim);
+}
+
+// ---------- exam: proportional timeline + steps
+.timeline {
+  display: flex;
+  gap: 4px;
+  height: 44px;
+  margin-bottom: 40px;
+
+  span {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    border-radius: 10px;
+    @include mono;
+    font-size: 10px;
+    color: #050505;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+}
+
+// one color per part of the exam
+.bar0 {
+  background: #a78bfa;
+}
+
+.dot0 {
+  background: #a78bfa;
+  box-shadow: 0 0 12px #a78bfa;
+}
+
+.bar1 {
+  background: #3ddc84;
+}
+
+.dot1 {
+  background: #3ddc84;
+  box-shadow: 0 0 12px #3ddc84;
+}
+
+.bar2 {
+  background: #22d3ee;
+}
+
+.dot2 {
+  background: #22d3ee;
+  box-shadow: 0 0 12px #22d3ee;
+}
+
+.bar3 {
+  background: #f5b94a;
+}
+
+.dot3 {
+  background: #f5b94a;
+  box-shadow: 0 0 12px #f5b94a;
+}
+
+.exam {
+  list-style: none;
+  display: grid;
+  gap: 32px 40px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.examStep {
+  position: relative;
+  padding-top: 24px;
+}
+
+.examDot {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.examHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.examWhen {
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.examName {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+}
+
+.examTime {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.examPoints {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+
+  li {
+    position: relative;
+    padding-left: 16px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 6px;
+      height: 1px;
+      background: var(--muted);
+    }
+  }
+}
+
+// ---------- deliverables
+.deliverables {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0d0d0d;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted);
+
+    strong {
+      font-size: 20px;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+    }
+  }
+}
+
+.bigValue {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: var(--fg);
+
+  small {
+    @include mono;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--green);
+  }
+}
+
+// ---------- skills, with their plain-language translation
+.intro {
+  max-width: 720px;
+  margin-bottom: 48px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.skillBlock {
+  margin-bottom: 48px;
+}
+
+.skillHead {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+
+.skillIndex {
+  @include mono;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--green);
+}
+
+.skillList {
+  list-style: none;
+
+  li {
+    position: relative;
+    display: grid;
+    gap: 12px;
+    padding: 24px 4px;
+
+    @include desktop {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+      gap: 40px;
+    }
+  }
+}
+
+.skillName {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+}
+
+.skillTag {
+  display: block;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 185, 74, 0.4);
+  @include mono;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: $amber;
+}
+
+.skillExplain {
+  display: grid;
+  gap: 14px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  em {
+    display: block;
+    margin-bottom: 4px;
+    font-style: normal;
+    @include mono;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  p:first-child em {
+    color: var(--green);
+  }
+}
+
+// ---------- dossier outline
+.dossier {
+  list-style: none;
+  display: grid;
+  column-gap: 40px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    padding: 18px 4px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.82);
+  }
+}
+
+// ---------- jury
+.juryFacts {
+  list-style: none;
+  display: grid;
+  gap: 16px;
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 28px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0d0d0d;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--muted);
+
+    strong {
+      font-size: 20px;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--fg);
+    }
+  }
+}
+
+.criteria {
+  display: grid;
+  gap: 32px 40px;
+
+  @include desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.criteriaGroup {
+  position: relative;
+  padding-top: 24px;
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  li {
+    position: relative;
+    padding-left: 16px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.65em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+  }
+}
+
+.criteriaTitle {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+// ---------- don'ts
+.donts {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 107, 107, 0.18);
+    background: linear-gradient(120deg, rgba(255, 107, 107, 0.06), transparent 70%);
+    font-size: 16px;
+    line-height: 1.45;
+  }
+}
+
+.cross {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 107, 107, 0.15);
+  color: $red;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 1px;
+}
+
+// ---------- AI
+.warning {
+  display: flex;
+  gap: 18px;
+  max-width: 880px;
+  margin-bottom: 32px;
+  padding: 26px 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(245, 185, 74, 0.35);
+  background: linear-gradient(120deg, rgba(245, 185, 74, 0.1), transparent 70%);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.5;
+}
+
+.warningIcon {
+  flex-shrink: 0;
+  font-size: 24px;
+  line-height: 1.1;
+  color: $amber;
+}
+
+.doDont {
+  display: grid;
+  gap: 16px;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  li {
+    position: relative;
+    padding-left: 26px;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: 700;
+    }
+  }
+}
+
+.doCol,
+.dontCol {
+  padding: 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0d0d0d;
+}
+
+.doCol li::before {
+  content: '✓';
+  color: var(--green);
+}
+
+.dontCol li::before {
+  content: '✕';
+  color: $red;
+}
+
+.colTitle {
+  margin-bottom: 18px;
+  @include mono;
+  font-size: 11px;
+
+  .doCol & {
+    color: var(--green);
+  }
+  .dontCol & {
+    color: $red;
+  }
+}
+
+// ---------- bias
+.biasPoints {
+  list-style: none;
+  display: grid;
+  gap: 32px 40px;
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 24px;
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.75);
+
+    strong {
+      font-size: 20px;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+    }
+  }
+}
+
+.prompts {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+
+  li {
+    display: grid;
+    gap: 10px;
+    align-items: center;
+
+    @include tablet {
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+    }
+  }
+
+  em {
+    display: block;
+    margin-bottom: 6px;
+    font-style: normal;
+    @include mono;
+    font-size: 10px;
+  }
+}
+
+.biased,
+.better {
+  padding: 18px 20px;
+  border-radius: 16px;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.biased {
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+
+  em {
+    color: $red;
+  }
+}
+
+.better {
+  border: 1px solid rgba(61, 220, 132, 0.3);
+  background: rgba(61, 220, 132, 0.05);
+
+  em {
+    color: var(--green);
+  }
+}
+
+.arrow {
+  justify-self: center;
+  color: var(--muted);
+  font-size: 18px;
+}

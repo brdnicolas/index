@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { Caveat, Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
+import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google'
 import '@/site/styles/global.scss'
 import { SmoothScroll } from '@/site/components/SmoothScroll'
 import { Cursor } from '@/site/components/Cursor'
@@ -14,8 +14,6 @@ import { AchievementPopup } from '@/site/components/AchievementPopup'
 
 const sans = Geist({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
 const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-mono', display: 'swap' })
-// handwriting, for the notes on the desk
-const hand = Caveat({ subsets: ['latin'], weight: ['500', '700'], variable: '--font-hand', display: 'swap' })
 const serif = Instrument_Serif({
   subsets: ['latin'],
   weight: '400',
@@ -62,7 +60,7 @@ export const viewport: Viewport = {
 
 export default function SiteLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`is-intro ${sans.variable} ${mono.variable} ${serif.variable} ${hand.variable}`}>
+    <html lang="en" className={`is-intro ${sans.variable} ${mono.variable} ${serif.variable}`}>
       <body>
         <Script strategy="lazyOnload" src="https://www.googletagmanager.com/gtag/js?id=G-ZCEH1819G3" />
         <Script id="gtag" strategy="lazyOnload">

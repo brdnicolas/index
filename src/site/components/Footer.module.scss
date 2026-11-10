@@ -53,6 +53,13 @@ $footer-h: min(100svh, 640px);
   }
 }
 
+// no AI block (CDA toolbox): the links keep their place on the right
+.topSolo {
+  @include tablet {
+    grid-template-columns: 1fr;
+  }
+}
+
 .ai {
   max-width: 560px;
 }

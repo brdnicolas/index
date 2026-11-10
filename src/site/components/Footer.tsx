@@ -17,31 +17,36 @@ const FOOTER_LINKS = [
 // Curtain reveal: the page scrolls away and uncovers a fixed footer underneath.
 // (clip-path on the wrapper + position: fixed inside = zero JS, zero scroll listeners)
 export const Footer = () => {
+  const pathname = usePathname()
   // easter eggs only live on the home page
-  const isHome = usePathname() === '/'
+  const isHome = pathname === '/'
+  // the CDA toolbox is for students: no "built with AI" joke there
+  const isCda = pathname === '/cda' || pathname?.startsWith('/cda/')
 
   return (
     <div className={styles.reveal}>
       <footer className={styles.footer}>
         <div className={styles.inner}>
-          <div className={styles.top}>
-            <div className={styles.ai}>
-              <p className={styles.aiTitle}>
-                This site was built <em>with AI</em>.
-              </p>
-              <p className={styles.aiText}>
-                Allergic to robots? The organic, hand-typed, gluten-free version is one click away.
-              </p>
-              <div className={styles.switch} role="group" aria-label="Choose your version">
-                <span className={`${styles.option} ${styles.current}`} aria-current="page">
-                  AI-made
-                </span>
-                <a href={LINKS.handmade} className={styles.option} data-cursor="100% human, 0% robot">
-                  Hand-made
-                </a>
-                <span className={styles.knob} aria-hidden="true" />
+          <div className={`${styles.top} ${isCda ? styles.topSolo : ''}`}>
+            {isCda ? null : (
+              <div className={styles.ai}>
+                <p className={styles.aiTitle}>
+                  This site was built <em>with AI</em>.
+                </p>
+                <p className={styles.aiText}>
+                  Allergic to robots? The organic, hand-typed, gluten-free version is one click away.
+                </p>
+                <div className={styles.switch} role="group" aria-label="Choose your version">
+                  <span className={`${styles.option} ${styles.current}`} aria-current="page">
+                    AI-made
+                  </span>
+                  <a href={LINKS.handmade} className={styles.option} data-cursor="100% human, 0% robot">
+                    Hand-made
+                  </a>
+                  <span className={styles.knob} aria-hidden="true" />
+                </div>
               </div>
-            </div>
+            )}
 
             <ul className={styles.links}>
               {FOOTER_LINKS.map((link) => (
@@ -60,9 +65,11 @@ export const Footer = () => {
 
           <div className={styles.meta}>
             <p>© {new Date().getFullYear()} — Designed with taste, shipped with a shader.</p>
-            <p>
-              Pair-programmed with Claude — it wrote the shaders, I typed &ldquo;make it more wahou&rdquo; 47 times 🤖
-            </p>
+            {isCda ? null : (
+              <p>
+                Pair-programmed with Claude — it wrote the shaders, I typed &ldquo;make it more wahou&rdquo; 47 times 🤖
+              </p>
+            )}
             <div className={styles.metaRight}>{isHome ? <EggHunt /> : null}</div>
           </div>
 

@@ -1,11 +1,15 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { gsap, useGSAP } from '../lib/gsap'
 import { markIntroDone, prefersReducedMotion } from '../lib/intro'
 import styles from './Intro.module.scss'
 
 const SESSION_KEY = 'brd:intro-seen'
+
+// pages people open to get something done (the CDA toolbox): no loading curtain
+const SKIP_PREFIXES = ['/cda']
 
 const LINES = [
   'Warming up the GPU',
@@ -20,12 +24,14 @@ export const Intro = () => {
   const counterRef = useRef<HTMLSpanElement>(null)
   const lineRef = useRef<HTMLSpanElement>(null)
   const [isGone, setIsGone] = useState(false)
+  const pathname = usePathname()
+  const skip = SKIP_PREFIXES.some((prefix) => pathname === prefix || pathname?.startsWith(`${prefix}/`))
 
   useGSAP(
     () => {
       const finish = () => setIsGone(true)
 
-      if (prefersReducedMotion()) {
+      if (skip || prefersReducedMotion()) {
         markIntroDone()
         finish()
         return
@@ -88,7 +94,7 @@ export const Intro = () => {
     { scope: root }
   )
 
-  if (isGone) return null
+  if (isGone || skip) return null
 
   return (
     <div ref={root} className={styles.intro} aria-hidden="true">

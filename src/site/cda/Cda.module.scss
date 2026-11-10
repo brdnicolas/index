@@ -1,0 +1,172 @@
+@use '../styles/tokens' as *;
+
+.page {
+  @include container;
+  padding-top: calc(var(--header-h) + 72px);
+  padding-bottom: 160px;
+}
+
+.eyebrow {
+  @include mono;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--line-strong);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+// ---------- hero
+.hero {
+  margin-bottom: 96px;
+}
+
+.heroCentered {
+  text-align: center;
+  margin-bottom: 56px;
+
+  .lede {
+    margin-inline: auto;
+  }
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 40px;
+  @include mono;
+  font-size: 11px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  color: var(--muted);
+  transition:
+    background 0.3s,
+    color 0.3s;
+
+  @include hover {
+    &:hover {
+      background: var(--fg);
+      color: var(--bg);
+    }
+  }
+}
+
+.title {
+  margin: 20px 0 28px;
+  font-size: clamp(56px, 10vw, 152px);
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.lede {
+  max-width: 680px;
+  font-size: clamp(19px, 1.8vw, 24px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.facts {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px 16px;
+  padding-top: 28px;
+  margin-bottom: 96px;
+
+  @include tablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.factValue {
+  font-size: clamp(30px, 3.4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.factLabel {
+  margin-top: 10px;
+  max-width: 220px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+// ---------- sections
+.section {
+  margin-bottom: 120px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+
+.list {
+  list-style: none;
+}
+
+.item {
+  position: relative;
+
+  &:last-child::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--line);
+  }
+}
+
+// ---------- numbered rows
+.stepIndex {
+  @include mono;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+// ---------- tips
+.tips {
+  list-style: none;
+}
+
+.tip {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 16px;
+  padding: 18px 4px;
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.45;
+
+  @include tablet {
+    grid-template-columns: 56px 1fr;
+    padding: 20px 8px;
+  }
+
+  .stepIndex {
+    padding-top: 5px;
+  }
+}

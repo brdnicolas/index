@@ -15,14 +15,6 @@ const nextConfig = {
   // lets a second dev server / build run without touching the main .next folder
   // (e.g. NEXT_DIST_DIR=.next-claude next dev)
   distDir: process.env.NEXT_DIST_DIR || '.next',
-  async rewrites() {
-    return [
-      {
-        source: '/cda/schemas',
-        destination: '/cda/schemas.html'
-      }
-    ]
-  },
   async redirects() {
     return [
       // old project URLs (brdnicolas.com/<slug>) → the hand-made version
