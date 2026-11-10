@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { gsap, ScrollTrigger, useGSAP } from '../lib/gsap'
+import { playOnEnter } from '../lib/playOnEnter'
 import { AWARDS } from '@/data/awards'
 import { Split } from '../components/Split'
 import styles from './Awards.module.scss'
@@ -27,38 +28,41 @@ export const Awards = () => {
 
   useGSAP(
     () => {
-      gsap.fromTo(
+      const find = (selector: string) => root.current?.querySelector(selector) ?? null
+
+      const title = gsap.fromTo(
         `.${styles.title} .split-char`,
         { yPercent: 115 },
-        {
-          yPercent: 0,
-          duration: 1.2,
-          ease: 'expo.out',
-          stagger: 0.03,
-          scrollTrigger: { trigger: `.${styles.title}`, start: 'top 85%' }
-        }
+        { yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.03, paused: true }
       )
 
       const counter = { value: 0 }
-      gsap.to(counter, {
+      const count = gsap.to(counter, {
         value: AWARDS.length,
         duration: 2.2,
         ease: 'expo.out',
-        scrollTrigger: { trigger: `.${styles.count}`, start: 'top 85%', once: true },
+        paused: true,
         onUpdate: () => {
-          const element = root.current?.querySelector(`.${styles.countValue}`)
+          const element = find(`.${styles.countValue}`)
           if (element) element.textContent = String(Math.round(counter.value)).padStart(2, '0')
         }
       })
 
-      gsap.from(`.${styles.row}`, {
+      const rows = gsap.from(`.${styles.row}`, {
         y: 40,
         autoAlpha: 0,
         duration: 1,
         ease: 'expo.out',
         stagger: 0.06,
-        scrollTrigger: { trigger: listRef.current, start: 'top 85%' }
+        paused: true
       })
+
+      const cleanups = [
+        playOnEnter(find(`.${styles.title}`), title),
+        playOnEnter(find(`.${styles.count}`), count),
+        playOnEnter(listRef.current, rows)
+      ]
+      return () => cleanups.forEach((cleanup) => cleanup())
     },
     { scope: root }
   )

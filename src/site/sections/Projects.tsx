@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { gsap, useGSAP } from '../lib/gsap'
+import { playOnEnter } from '../lib/playOnEnter'
 import { transitionTo } from '../lib/transition'
 import { LINKS, PROJECTS } from '../data/content'
 import { Split } from '../components/Split'
@@ -121,9 +122,33 @@ export const Projects = () => {
 
       const distance = () => Math.max(0, track.scrollWidth - window.innerWidth)
 
-      const travel = gsap.to(track, {
+      // parallax of each image while the track travels, from positions measured once per refresh
+      // (instead of one containerAnimation ScrollTrigger per card, each measuring the page at load)
+      const images = gsap.utils.toArray<HTMLElement>(`.${styles.imgWrap}`)
+      const setters = images.map((image) => gsap.quickSetter(image, 'xPercent'))
+      let boxes: { left: number; width: number }[] = []
+      const measure = () => {
+        const x = Number(gsap.getProperty(track, 'x')) || 0
+        boxes = images.map((image) => {
+          // the media frame (the image itself is shifted by the parallax), without the current travel
+          const rect = image.parentElement!.getBoundingClientRect()
+          return { left: rect.left - x, width: rect.width }
+        })
+      }
+      const parallax = () => {
+        const x = Number(gsap.getProperty(track, 'x')) || 0
+        const viewport = window.innerWidth
+        boxes.forEach((box, index) => {
+          // 0 when the card enters on the right, 1 when it leaves on the left
+          const progress = gsap.utils.clamp(0, 1, (viewport - (box.left + x)) / (viewport + box.width))
+          setters[index](-8 + progress * 16)
+        })
+      }
+
+      gsap.to(track, {
         x: () => -distance(),
         ease: 'none',
+        onUpdate: parallax,
         scrollTrigger: {
           trigger: root.current,
           start: 'top top',
@@ -132,6 +157,10 @@ export const Projects = () => {
           pin: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onRefresh: () => {
+            measure()
+            parallax()
+          },
           onUpdate: (self) => {
             gsap.set(`.${styles.bar}`, { scaleX: self.progress })
             const index = Math.min(TOTAL, Math.round(self.progress * (TOTAL - 1)) + 1)
@@ -140,44 +169,22 @@ export const Projects = () => {
         }
       })
 
-      gsap.utils.toArray<HTMLElement>(`.${styles.imgWrap}`).forEach((image) => {
-        gsap.fromTo(
-          image,
-          { xPercent: -8 },
-          {
-            xPercent: 8,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: image.parentElement!,
-              containerAnimation: travel,
-              start: 'left right',
-              end: 'right left',
-              scrub: true
-            }
-          }
-        )
-      })
-
-      gsap.fromTo(
+      const title = gsap.fromTo(
         `.${styles.title} .split-char`,
         { yPercent: 115 },
-        {
-          yPercent: 0,
-          duration: 1.2,
-          ease: 'expo.out',
-          stagger: 0.03,
-          scrollTrigger: { trigger: root.current, start: 'top 75%' }
-        }
+        { yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.03, paused: true }
       )
-
-      gsap.from(`.${styles.card}`, {
+      const cards = gsap.from(`.${styles.card}`, {
         x: 200,
         autoAlpha: 0,
         duration: 1.4,
         ease: 'expo.out',
         stagger: 0.12,
-        scrollTrigger: { trigger: root.current, start: 'top 60%' }
+        paused: true
       })
+
+      const cleanups = [playOnEnter(root.current, title, 0.75), playOnEnter(root.current, cards, 0.6)]
+      return () => cleanups.forEach((cleanup) => cleanup())
     },
     { scope: root }
   )

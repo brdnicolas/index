@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { gsap, useGSAP } from '../lib/gsap'
+import { playOnEnter } from '../lib/playOnEnter'
 import { LINKS } from '../data/content'
 import { Magnetic } from '../components/Magnetic'
 import { Split } from '../components/Split'
@@ -13,26 +14,22 @@ export const Contact = () => {
 
   useGSAP(
     () => {
-      gsap.fromTo(
+      const title = gsap.fromTo(
         `.${styles.big} .split-char`,
         { yPercent: 115, rotate: 8 },
-        {
-          yPercent: 0,
-          rotate: 0,
-          duration: 1.4,
-          ease: 'expo.out',
-          stagger: 0.035,
-          scrollTrigger: { trigger: root.current, start: 'top 70%' }
-        }
+        { yPercent: 0, rotate: 0, duration: 1.4, ease: 'expo.out', stagger: 0.035, paused: true }
       )
-      gsap.from(`.${styles.actions} > *`, {
+      const actions = gsap.from(`.${styles.actions} > *`, {
         y: 30,
         autoAlpha: 0,
         duration: 1,
         ease: 'expo.out',
         stagger: 0.1,
-        scrollTrigger: { trigger: root.current, start: 'top 60%' }
+        paused: true
       })
+
+      const cleanups = [playOnEnter(root.current, title, 0.7), playOnEnter(root.current, actions, 0.6)]
+      return () => cleanups.forEach((cleanup) => cleanup())
     },
     { scope: root }
   )

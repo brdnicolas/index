@@ -2,6 +2,7 @@
 
 import { CSSProperties, PointerEvent, useEffect, useRef, useState } from 'react'
 import { gsap, useGSAP } from '../lib/gsap'
+import { playOnEnter } from '../lib/playOnEnter'
 import { EDUCATION, LINKS, SONGS, STACK, TIMELINE } from '../data/content'
 import { AWARDS } from '@/data/awards'
 import { popConfetti } from '../lib/goats'
@@ -114,17 +115,17 @@ export const About = () => {
 
   useGSAP(
     () => {
-      gsap.fromTo(
-        `.${styles.title} .split-char`,
-        { yPercent: 115 },
-        {
-          yPercent: 0,
-          duration: 1.2,
-          ease: 'expo.out',
-          stagger: 0.03,
-          scrollTrigger: { trigger: `.${styles.title}`, start: 'top 85%' }
-        }
-      )
+      const title = root.current?.querySelector(`.${styles.title}`) ?? null
+      const cleanups = [
+        playOnEnter(
+          title,
+          gsap.fromTo(
+            `.${styles.title} .split-char`,
+            { yPercent: 115 },
+            { yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.03, paused: true }
+          )
+        )
+      ]
 
       // the intro paragraph lights up word by word, tied to the scroll
       gsap.fromTo(
@@ -141,16 +142,19 @@ export const About = () => {
 
       gsap.utils.toArray<HTMLElement>('.js-count').forEach((element) => {
         const counter = { value: 0 }
-        gsap.to(counter, {
+        const count = gsap.to(counter, {
           value: Number(element.dataset.value),
           duration: 2,
           ease: 'expo.out',
-          scrollTrigger: { trigger: element, start: 'top 90%', once: true },
+          paused: true,
           onUpdate: () => {
             element.textContent = String(Math.round(counter.value))
           }
         })
+        cleanups.push(playOnEnter(element, count, 0.9))
       })
+
+      return () => cleanups.forEach((cleanup) => cleanup())
     },
     { scope: root }
   )

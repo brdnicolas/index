@@ -32,23 +32,24 @@ export const Marquee = () => {
   useGSAP(
     () => {
       const rows = gsap.utils.toArray<HTMLElement>('.js-row')
-      const trigger = { trigger: root.current, start: 'top bottom', end: 'bottom top', scrub: 0.6 }
-
-      gsap.fromTo(rows[0], { xPercent: -8 }, { xPercent: -24, ease: 'none', scrollTrigger: trigger })
-      gsap.fromTo(rows[1], { xPercent: -24 }, { xPercent: -8, ease: 'none', scrollTrigger: trigger })
-      gsap.to('.js-star', { rotate: 360, ease: 'none', scrollTrigger: trigger })
-
       // a little skew based on scroll velocity
       const skewTo = gsap.quickTo(rows, 'skewX', { duration: 0.4, ease: 'power3' })
-      gsap.to(
-        {},
-        {
+
+      // one timeline, one ScrollTrigger (each trigger measures the page when it is created)
+      gsap
+        .timeline({
+          defaults: { ease: 'none' },
           scrollTrigger: {
-            ...trigger,
+            trigger: root.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 0.6,
             onUpdate: (self) => skewTo(gsap.utils.clamp(-12, 12, self.getVelocity() / -250))
           }
-        }
-      )
+        })
+        .fromTo(rows[0], { xPercent: -8 }, { xPercent: -24 }, 0)
+        .fromTo(rows[1], { xPercent: -24 }, { xPercent: -8 }, 0)
+        .to('.js-star', { rotate: 360 }, 0)
     },
     { scope: root }
   )

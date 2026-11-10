@@ -28,7 +28,8 @@ export const Reveal = () => {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return
+          // also when it is already above the viewport (page reloaded further down)
+          if (!entry.isIntersecting && entry.boundingClientRect.bottom > 0) return
           show(entry.target)
           io.unobserve(entry.target)
         })
