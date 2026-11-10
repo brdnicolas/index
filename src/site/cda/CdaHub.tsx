@@ -38,6 +38,12 @@ const ICONS: Record<ToolIcon, React.ReactNode> = {
       <path d="M10 7.8a2 2 0 1 1 2.6 1.9c-.4.2-.6.5-.6.9v.4M12 13.2h.01" />
     </>
   ),
+  book: (
+    <>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z" />
+      <path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5M8 7.5h8M8 11h5" />
+    </>
+  ),
   badge: (
     <>
       <circle cx="12" cy="9" r="6" />

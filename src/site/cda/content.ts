@@ -10,7 +10,7 @@ export const CATEGORIES = [
 ] as const
 
 export type Category = Exclude<(typeof CATEGORIES)[number]['id'], 'all'>
-export type ToolIcon = 'compass' | 'schema' | 'slides' | 'question' | 'badge' | 'doc'
+export type ToolIcon = 'compass' | 'schema' | 'slides' | 'question' | 'book' | 'badge' | 'doc'
 
 export const TOOLS: {
   title: string
@@ -51,6 +51,14 @@ export const TOOLS: {
     category: 'soutenance',
     icon: 'question',
     color: '#a78bfa'
+  },
+  {
+    title: 'Glossaire CDA',
+    text: 'Les mots du référentiel et du jury expliqués simplement : MCD, ORM, JWT, recette, CI/CD, RGAA…',
+    href: '/cda/glossaire',
+    category: 'conception',
+    icon: 'book',
+    color: '#fb923c'
   },
   {
     title: 'Référentiel officiel',

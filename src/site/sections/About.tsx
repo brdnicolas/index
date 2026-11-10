@@ -129,7 +129,8 @@ export const About = () => {
       // the intro paragraph lights up word by word, tied to the scroll
       gsap.fromTo(
         '.js-word',
-        { opacity: 0.14 },
+        // 0.5 keeps the dimmed words readable (≈ 5:1 contrast on the background, WCAG AA)
+        { opacity: 0.5 },
         {
           opacity: 1,
           ease: 'none',

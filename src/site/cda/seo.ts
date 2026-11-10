@@ -1,9 +1,10 @@
 import { PERSON, SITE_URL, absolute, breadcrumb, graph } from '../lib/seo'
 import { QUESTIONS, TOOLS } from './content'
+import { TERMS, termId } from './glossaryContent'
 
 // schema.org data of the CDA toolbox pages (French)
 
-type Kind = 'hub' | 'preparation' | 'schemas' | 'presentation' | 'questions'
+type Kind = 'hub' | 'preparation' | 'schemas' | 'presentation' | 'questions' | 'glossary'
 type Page = { title: string; description: string; path: string }
 
 const TITLE_PRO = {
@@ -74,6 +75,21 @@ export const cdaStructuredData = (kind: Kind, page: Page) => {
           '@type': 'Question',
           name: question.q,
           acceptedAnswer: { '@type': 'Answer', text: question.a }
+        }))
+      })
+      break
+    case 'glossary':
+      nodes.push({
+        '@type': 'DefinedTermSet',
+        '@id': absolute(`${page.path}#glossaire`),
+        ...base(page),
+        hasDefinedTerm: TERMS.map((item) => ({
+          '@type': 'DefinedTerm',
+          name: item.term,
+          ...(item.aka ? { alternateName: item.aka } : {}),
+          description: item.definition,
+          url: absolute(`${page.path}#${termId(item.term)}`),
+          inDefinedTermSet: absolute(`${page.path}#glossaire`)
         }))
       })
       break

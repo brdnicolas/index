@@ -6,7 +6,13 @@ const Logos = ({ hidden = false }: { hidden?: boolean }) => (
     {COLLABS.map((collab) => (
       <li key={collab.name} className={styles.item}>
         {collab.logo ? (
-          <img src={collab.logo} alt={hidden ? '' : collab.name} style={{ height: collab.height }} />
+          <img
+            src={collab.logo}
+            alt={hidden ? '' : collab.name}
+            width={collab.width}
+            height={collab.height}
+            style={{ height: collab.height, width: 'auto' }}
+          />
         ) : (
           <span className={styles.wordmark}>{collab.name}</span>
         )}

@@ -15,6 +15,8 @@ const nextConfig = {
   // lets a second dev server / build run without touching the main .next folder
   // (e.g. NEXT_DIST_DIR=.next-claude next dev)
   distDir: process.env.NEXT_DIST_DIR || '.next',
+  // the CSS is small (~15 KiB): inline it in the HTML instead of blocking the first paint on 4 requests
+  experimental: { inlineCss: true },
   async redirects() {
     return [
       // old project URLs (brdnicolas.com/<slug>) → the hand-made version

@@ -118,10 +118,10 @@ export const PROJECTS = EXPERIENCES.map((experience) => ({
 
 export const COLLABS = [
   { name: 'Shotgun', logo: null },
-  { name: 'Ornikar', logo: '/logos/ornikar.svg', height: 18 },
-  { name: 'Free', logo: '/logos/free.svg', height: 22 },
-  { name: 'ETNA', logo: '/logos/etna.png', height: 24 },
-  { name: 'Big Mamma', logo: '/logos/big-mamma.svg', height: 16 },
+  { name: 'Ornikar', logo: '/logos/ornikar.svg', height: 18, width: 96 },
+  { name: 'Free', logo: '/logos/free.svg', height: 22, width: 60 },
+  { name: 'ETNA', logo: '/logos/etna.png', height: 24, width: 76 },
+  { name: 'Big Mamma', logo: '/logos/big-mamma.svg', height: 16, width: 116 },
   { name: 'Iliad', logo: null },
   { name: 'Mentor Goal', logo: null },
   { name: 'Bell Intone', logo: null }
