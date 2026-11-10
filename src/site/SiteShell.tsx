@@ -8,6 +8,7 @@ import { Toaster } from './components/Toast'
 import { Intro } from './components/Intro'
 import { RouteListener } from './components/RouteListener'
 import { AchievementPopup } from './components/AchievementPopup'
+import { Reveal } from './components/Reveal'
 
 // Everything around the pages (analytics, header, footer, cursor…), shared by both root layouts.
 export const SiteShell = ({ children }: { children: React.ReactNode }) => (
@@ -30,6 +31,7 @@ export const SiteShell = ({ children }: { children: React.ReactNode }) => (
     <EasterEggs />
     <Toaster />
     <AchievementPopup />
+    <Reveal />
     <Header />
     {children}
     <Footer />

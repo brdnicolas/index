@@ -39,27 +39,6 @@ export const CdaShell = ({
         { yPercent: 115 },
         { yPercent: 0, duration: 1.2, ease: 'expo.out', stagger: 0.025, delay: 0.2 }
       )
-      gsap.utils.toArray<HTMLElement>('.js-line').forEach((line) => {
-        gsap.fromTo(
-          line,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            duration: 1.4,
-            ease: 'expo.inOut',
-            scrollTrigger: { trigger: line, start: 'top 94%', once: true }
-          }
-        )
-      })
-      gsap.utils.toArray<HTMLElement>('.js-reveal').forEach((element) => {
-        gsap.from(element, {
-          y: 32,
-          autoAlpha: 0,
-          duration: 1,
-          ease: 'expo.out',
-          scrollTrigger: { trigger: element, start: 'top 94%', once: true }
-        })
-      })
     },
     { scope: root }
   )

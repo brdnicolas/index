@@ -139,30 +139,6 @@ export const About = () => {
         }
       )
 
-      // hairlines draw themselves
-      gsap.utils.toArray<HTMLElement>('.js-line').forEach((line) => {
-        gsap.fromTo(
-          line,
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            duration: 1.4,
-            ease: 'expo.inOut',
-            scrollTrigger: { trigger: line, start: 'top 92%', once: true }
-          }
-        )
-      })
-
-      gsap.utils.toArray<HTMLElement>('.js-reveal').forEach((element) => {
-        gsap.from(element, {
-          y: 40,
-          autoAlpha: 0,
-          duration: 1.1,
-          ease: 'expo.out',
-          scrollTrigger: { trigger: element, start: 'top 88%', once: true }
-        })
-      })
-
       gsap.utils.toArray<HTMLElement>('.js-count').forEach((element) => {
         const counter = { value: 0 }
         gsap.to(counter, {

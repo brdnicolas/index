@@ -8,7 +8,7 @@
 .trigger {
   @include mono;
   font-size: 11px;
-  color: var(--dim);
+  color: var(--muted); // --dim is too faint to read (WCAG contrast)
   padding: 4px 8px;
   border-radius: 999px;
   border: 1px solid transparent;

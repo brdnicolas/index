@@ -189,7 +189,7 @@ $footer-h: min(100svh, 640px);
 .hint {
   @include mono;
   font-size: 10px;
-  color: var(--dim);
+  color: var(--muted);
 }
 
 .giant {
