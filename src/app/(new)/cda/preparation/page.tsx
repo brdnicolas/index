@@ -1,16 +1,20 @@
-import type { Metadata } from 'next'
 import { Preparation } from '@/site/cda/Preparation'
+import { JsonLd } from '@/site/components/JsonLd'
+import { cdaMetadata } from '@/site/lib/seo'
+import { cdaStructuredData } from '@/site/cda/seo'
 
-export const metadata: Metadata = {
-  title: 'Comment se préparer au titre CDA — Toolbox CDA',
-  description:
-    'Le déroulé de l’épreuve du titre pro CDA, le dossier à rendre, les compétences, les attentes du jury, les erreurs à éviter, l’IA et le biais de confirmation.',
-  alternates: { canonical: '/cda/preparation' }
-}
+const TITLE = 'Préparer l’épreuve du titre pro CDA'
+const DESCRIPTION =
+  'Titre pro CDA : déroulé de l’épreuve, dossier de projet et dossier professionnel, compétences expliquées, attentes du jury et erreurs à éviter.'
+
+export const metadata = cdaMetadata({ title: TITLE, description: DESCRIPTION, path: '/cda/preparation' })
 
 export default function PreparationPage() {
   return (
     <main>
+      <JsonLd
+        data={cdaStructuredData('preparation', { title: TITLE, description: DESCRIPTION, path: '/cda/preparation' })}
+      />
       <Preparation />
     </main>
   )

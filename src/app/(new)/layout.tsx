@@ -22,18 +22,41 @@ const serif = Instrument_Serif({
   display: 'swap'
 })
 
+const DEFAULT_TITLE = "Nicolas Brouard — I'm just a Software Engineer"
+const DESCRIPTION =
+  'Nicolas Brouard, software engineer in Paris at Shotgun and web development teacher. React, React Native, Next.js and a soft spot for tiny details.'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://brdnicolas.com'),
-  title: "Nicolas Brouard — I'm just a Software Engineer",
-  description:
-    'Nicolas Brouard, software engineer at Shotgun and teacher at ETNA. React, React Native, Next.js and a soft spot for tiny details.',
-  alternates: { canonical: '/' },
+  // pages set a short title, the template adds the name
+  title: { default: DEFAULT_TITLE, template: '%s — Nicolas Brouard' },
+  description: DESCRIPTION,
+  applicationName: 'Nicolas Brouard',
+  authors: [{ name: 'Nicolas Brouard', url: 'https://brdnicolas.com' }],
+  creator: 'Nicolas Brouard',
+  publisher: 'Nicolas Brouard',
+  keywords: [
+    'Nicolas Brouard',
+    'brdnicolas',
+    'software engineer',
+    'développeur React',
+    'front-end engineer Paris',
+    'React Native',
+    'Next.js',
+    'TypeScript',
+    'portfolio'
+  ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1, 'max-video-preview': -1 }
+  },
   openGraph: {
-    title: "Nicolas Brouard — I'm just a Software Engineer",
-    description: 'Software engineer at Shotgun, teacher at ETNA. Come for the shader, stay for the goats.',
-    url: 'https://brdnicolas.com',
+    title: DEFAULT_TITLE,
+    description: 'Software engineer in Paris, React & React Native. Come for the shader, stay for the goats.',
+    url: '/',
     siteName: 'Nicolas Brouard',
-    images: [{ url: '/seo/preview.png', width: 1200, height: 630, alt: 'Nicolas Brouard - Portfolio' }],
+    images: [{ url: '/seo/preview.png', width: 4096, height: 2150, alt: 'Nicolas Brouard — Portfolio' }],
     locale: 'en_US',
     type: 'website'
   },
@@ -41,6 +64,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@_brdnicolas',
     creator: '@_brdnicolas',
+    title: DEFAULT_TITLE,
+    description: 'Software engineer in Paris, React & React Native. Come for the shader, stay for the goats.',
     images: ['/seo/preview.png']
   },
   icons: {
@@ -50,7 +75,7 @@ export const metadata: Metadata = {
     ],
     apple: '/seo/180.png'
   },
-  manifest: '/manifest.json'
+  formatDetection: { telephone: false, email: false, address: false }
 }
 
 export const viewport: Viewport = {
