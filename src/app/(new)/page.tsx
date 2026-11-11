@@ -20,7 +20,15 @@ const structuredData = graph(PERSON, WEBSITE, {
   name: "Nicolas Brouard — I'm just a Software Engineer",
   inLanguage: 'en',
   isPartOf: { '@id': `${SITE_URL}/#website` },
-  mainEntity: { '@id': `${SITE_URL}/#person` }
+  mainEntity: { '@id': `${SITE_URL}/#person` },
+  // the image Google should prefer as the result thumbnail (same as the share image)
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: `${SITE_URL}/seo/preview.png`,
+    width: 1200,
+    height: 630
+  },
+  image: `${SITE_URL}/seo/preview.png`
 })
 
 export default function Home() {

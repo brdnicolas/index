@@ -36,7 +36,7 @@ export const siteMetadata: Metadata = {
     description: 'Software engineer in Paris, React & React Native. Come for the shader, stay for the goats.',
     url: '/',
     siteName: 'Nicolas Brouard',
-    images: [{ url: '/seo/preview.png', width: 4096, height: 2150, alt: 'Nicolas Brouard — Portfolio' }],
+    images: [{ url: '/seo/preview.png', width: 1200, height: 630, alt: DEFAULT_TITLE }],
     locale: 'en_US',
     type: 'website'
   },
@@ -49,9 +49,13 @@ export const siteMetadata: Metadata = {
     images: ['/seo/preview.png']
   },
   icons: {
+    // Google shows a favicon of 48px or a multiple of it in search results
     icon: [
       { url: '/seo/16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/seo/32.png', sizes: '32x32', type: 'image/png' }
+      { url: '/seo/32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/seo/48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/seo/96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/seo/192.png', sizes: '192x192', type: 'image/png' }
     ],
     apple: '/seo/180.png'
   },
